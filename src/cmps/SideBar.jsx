@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { logout } from '../store/actions/user.actions'
 
-export function AppHeader() {
+export function SideBar() {
 	const user = useSelector(storeState => storeState.userModule.user)
 	const navigate = useNavigate()
 
@@ -25,7 +25,7 @@ export function AppHeader() {
 					E2E Demo
 				</NavLink>
 				<NavLink to="about">About</NavLink>
-				<NavLink to="car">Cars</NavLink>
+				<NavLink to="story">Stories</NavLink>
 				<NavLink to="chat">Chat</NavLink>
 				<NavLink to="review">Review</NavLink>
 
