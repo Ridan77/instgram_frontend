@@ -14,9 +14,9 @@ export function StoryList({ stories, onRemoveStory, onUpdateStory }) {
     return <section>
         <ul className="story-list">
             {stories.map(story =>
-                <li key={story._id}>
+                <li className="story-li " key={story._id}>
                     <StoryPreview story={story}/>
-                    {shouldShowActionBtns(story) && <div className="actions">
+                    { <div className="actions">
                         <button onClick={() => onUpdateStory(story)}>Edit</button>
                         <button onClick={() => onRemoveStory(story._id)}>x</button>
                     </div>}

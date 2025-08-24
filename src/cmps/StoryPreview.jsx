@@ -1,10 +1,15 @@
-import { Link } from 'react-router-dom'
+import { json, Link } from "react-router-dom";
 
 export function StoryPreview({ story }) {
-    return <article className="story-preview">
-        <header>
-            <Link to={`/story/${story._id}`}>{story.name}</Link>
-        </header>
+  console.log("in preview");
 
+  return (
+    <article className="story-preview">
+      <header>
+        <span>{story.txt}</span>
+        <img src={story.imgUrl} alt="" />
+        <Link to={`/story/${story._id}`}>{story.name}</Link>
+      </header>
     </article>
+  );
 }

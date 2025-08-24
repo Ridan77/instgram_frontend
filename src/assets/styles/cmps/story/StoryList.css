@@ -1,6 +1,7 @@
 .car-list {
     --min-column-size: 220px;
 
+    grid-column: 3;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(var(--min-column-size), 1fr));
     gap: .5em;

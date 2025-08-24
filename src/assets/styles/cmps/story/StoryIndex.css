@@ -1,4 +1,12 @@
-.car-index {
+
+.story-index{
+    grid-column: 3;
+    /* background-color: green; */
+
+}
+
+
+/* .-index {
     & header {
         display: flex;
         align-items: center;
@@ -15,4 +23,4 @@
     & button {
         margin-inline-end: 0;
     }
-}
+} */

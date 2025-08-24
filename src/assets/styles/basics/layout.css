@@ -6,8 +6,8 @@
 }
 
 .sample-grid-layout {
-    display: grid;
-    grid-template-columns: 12px 1fr 12px;
+    /* display: grid; */
+    /* grid-template-columns: 12px 1fr 12px; */
 
     @media (min-width: 624px) {
         grid-template-columns: minmax(12px, 1fr) minmax(auto, 624px) minmax(12px, 1fr);        

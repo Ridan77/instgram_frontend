@@ -1,8 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router'
 
-import { HomePage } from './pages/HomePage'
-import { AboutUs, AboutTeam, AboutVision } from './pages/AboutUs'
 import { StoryIndex } from './pages/storyIndex.jsx'
 import { ReviewIndex } from './pages/ReviewIndex.jsx'
 import { ChatApp } from './pages/Chat.jsx'
@@ -22,10 +20,8 @@ export function RootCmp() {
         <div className="main-container">
             <SideBar />
             <UserMsg />
-
-            <main>
                 <Routes>
-             
+            
                     <Route path="story" element={<StoryIndex />} />
                     <Route path="story/:storyId" element={<StoryDetails />} />
                     <Route path="user/:id" element={<UserDetails />} />
@@ -37,8 +33,7 @@ export function RootCmp() {
                         <Route path="signup" element={<Signup />} />
                     </Route>
                 </Routes>
-            </main>
-            <AppFooter />
+            {/* <AppFooter /> */}
         </div>
     )
 }

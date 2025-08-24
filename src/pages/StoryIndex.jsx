@@ -58,7 +58,7 @@ export function StoryIndex() {
                 <h2>stories</h2>
                 {userService.getLoggedinUser() && <button onClick={onAddStory}>Add a story</button>}
             </header>
-            <StoryFilter filterBy={filterBy} setFilterBy={setFilterBy} />
+            {/* <StoryFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
             <StoryList 
                 stories={stories}
                 onRemovestory={onRemoveStory} 
