@@ -1,15 +1,8 @@
 
 .main-container {
-    display: grid;
-    grid-template-columns: 1rem 1fr 1rem;
+      display: grid;
+  grid-template-columns: 72px 100px 630px 380px;
 
-    >* {
-        grid-column: 2;
-
-        &.full {
-            grid-column: 1 / -1;
-        }
-    }
 }
 
 .sample-grid-layout {
@@ -29,7 +22,7 @@
     }
 
 
-    >* {
+    /* >* {
         grid-column: 2;
     }
 
@@ -40,7 +33,7 @@
 
     >*:not(.full) {
         background-color: var(--clr4);
-    }
+    } */
 }
 
 .grid-container {

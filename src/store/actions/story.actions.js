@@ -5,7 +5,7 @@ import { ADD_STORY, REMOVE_STORY, SET_STORIES, SET_STORY, UPDATE_STORY, ADD_STOR
 export async function loadStories(filterBy) {
     try {
         const stories = await storyService.query(filterBy)
-        store.dispatch(getCmdSetStories(stories))
+    ; store.dispatch(getCmdSetStories(stories))
     } catch (err) {
         console.log('Cannot load stories', err)
         throw err
@@ -107,7 +107,7 @@ function getCmdAddStoryMsg(msg) {
 // unitTestActions()
 async function unitTestActions() {
     await loadStories()
-    await addStory(storieservice.getEmptyStory())
+    await addStory(storyService.getEmptyStory())
     await updateStory({
         _id: 'm1oC7',
         vendor: 'Story-Good',
