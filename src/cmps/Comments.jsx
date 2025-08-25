@@ -1,5 +1,4 @@
 export function Comments({ story }) {
-  console.log(story.comments);
   return (
     <ul>
       {story.comments.map((comment) => {

@@ -1,7 +1,7 @@
 import { userService } from '../services/user'
 import { StoryPreview } from './StoryPreview'
 
-export function StoryList({ stories, addComment }) {
+export function StoryList({ stories, addComment}) {
     
     function shouldShowActionBtns(story) {
         const user = userService.getLoggedinUser()

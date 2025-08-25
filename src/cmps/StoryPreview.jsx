@@ -7,6 +7,7 @@ import { userService } from "../services/user";
 export function StoryPreview({ story, addComment }) {
   const [comments, setComments] = useState([]);
   const user = userService.getLoggedinUser();
+  const [likes, setLikes] = useState(user.likedStoryIds);
 
   function onAddComment(ev) {
     ev.preventDefault();
@@ -21,7 +22,16 @@ export function StoryPreview({ story, addComment }) {
 
     setComments([...comments, newComment]);
   }
-  console.log(user);
+
+  async function onLikeStory(userId, storyId) {
+    console.log('New Like from: userId to" storyId', userId, storyId);
+    setLikes(likedStoryIds);
+    const likedStoryIds = await userService.addLikedStory(userId, storyId);
+    const heart = document.querySelector(".like-heart");
+    heart.classList.remove("pop");
+    void heart.offsetWidth; // force reflow
+    heart.classList.add("pop");
+  }
 
   return (
     <article className="story-preview">
@@ -33,17 +43,22 @@ export function StoryPreview({ story, addComment }) {
         <img src={story.imgUrl} alt="" />
       </Link>
       <div className="actions">
-        <span onClick={() => console.log("click")}>{svg.notification}</span>
+        <span
+          className="like-heart"
+          onClick={() => onLikeStory(user._id, story._id)}>
+          {likes.includes(story._id) ? svg.heart : svg.notification}
+        </span>
+
         <span onClick={() => console.log("click")}>{svg.comment}</span>
         <span onClick={() => console.log("click")}>{svg.direct}</span>
       </div>
       {story.likedBy.length && <p>{story.likedBy.length} Likes</p>}
-        <p>
-      <Link className="story-preview-img" to={`/user/${story.by._id}`}>
+      <p>
+        <Link className="story-preview-img" to={`/user/${story.by._id}`}>
           <span className="bold">{story.by.fullname} </span>
-      </Link>
-          {story.txt}
-        </p>
+        </Link>
+        {story.txt}
+      </p>
       {story.comments.length && (
         <Link to={`/story/${story._id}`}>
           <p className="preview-comments">

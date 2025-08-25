@@ -18,6 +18,8 @@
 }
 .actions {
   margin-top: 10px;
+  display: flex;
+  align-items: center;
 
   span:nth-child(2) svg {
     margin-left: 10px;
@@ -30,9 +32,37 @@
   color: var(--gray-for-date);
 }
 
-.comment-input{
-  border:none;
+.comment-input {
+  border: none;
 }
-.comment-input:focus{
-  outline:none;
+.comment-input:focus {
+  outline: none;
+}
+
+.like-heart {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  background-color: inherit;
+  color: var(--black);
+  padding: 0;
+}
+
+.like-heart:active {
+  transform: scale(2);
+}
+.like-heart:hover {
+  transform: scale(1.1);
+    background-color: inherit;
+
+}
+
+/* pop animation */
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(2); }
+  100% { transform: scale(1); }
+}
+
+.like-heart.pop {
+  animation: pop 0.3s ease-in-out;
 }

@@ -41,29 +41,35 @@ export function StoryIndex() {
     }
   }
 
-async function onAddStory() {
-  const story = storyService.getEmptystory();
-  story.vendor = prompt("Vendor?", "Some Vendor");
-  try {
-    const savedstory = await addStory(story);
-    showSuccessMsg(`story added (id: ${savedstory._id})`);
-  } catch (err) {
-    showErrorMsg("Cannot add story");
+  async function onAddStory() {
+    const story = storyService.getEmptystory();
+    story.vendor = prompt("Vendor?", "Some Vendor");
+    try {
+      const savedstory = await addStory(story);
+      showSuccessMsg(`story added (id: ${savedstory._id})`);
+    } catch (err) {
+      showErrorMsg("Cannot add story");
+    }
   }
-}
 
-async function onUpdateStory(story) {
-  const speed = +prompt("New speed?", story.speed) || 0;
-  if (speed === 0 || speed === story.speed) return;
+  async function onUpdateStory(story) {
+    const speed = +prompt("New speed?", story.speed) || 0;
+    if (speed === 0 || speed === story.speed) return;
 
-  const storyToSave = { ...story, speed };
-  try {
-    const savedstory = await updateStory(storyToSave);
-    showSuccessMsg(`story updated, new speed: ${savedstory.speed}`);
-  } catch (err) {
-    showErrorMsg("Cannot update story");
+    const storyToSave = { ...story, speed };
+    try {
+      const savedstory = await updateStory(storyToSave);
+      showSuccessMsg(`story updated, new speed: ${savedstory.speed}`);
+    } catch (err) {
+      showErrorMsg("Cannot update story");
+    }
   }
-}
+
+  async function onLikeStory(userId, storyId) {
+    console.log('New Like from: userId to" storyId', userId, storyId);
+    const likedStoryIds = await userService.addLikedStory(userId, storyId);
+
+  }
 
   return (
     <section className="story-index">
@@ -73,7 +79,10 @@ async function onUpdateStory(story) {
         )}
       </header> */}
       {/* <StoryFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
-      <StoryList stories={stories} addComment={addComment} />
+      <StoryList
+        stories={stories}
+        addComment={addComment}
+      />
     </section>
   );
 }

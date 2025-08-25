@@ -12,6 +12,7 @@ export const userService = {
     update,
     getLoggedinUser,
     saveLoggedinUser,
+    addLikedStory,
 }
 
 async function getUsers() {
@@ -35,7 +36,7 @@ async function update({ _id, score }) {
     user.score = score
     await storageService.put('user', user)
 
-	// When admin updates other user's details, do not update loggedinUser
+    // When admin updates other user's details, do not update loggedinUser
     const loggedinUser = getLoggedinUser()
     if (loggedinUser._id === user._id) saveLoggedinUser(user)
 
@@ -66,15 +67,16 @@ function getLoggedinUser() {
 }
 
 function saveLoggedinUser(user) {
-	user = { 
-        _id: user._id, 
-        fullname: user.fullname, 
-        imgUrl: user.imgUrl, 
-        score: user.score, 
-        isAdmin: user.isAdmin 
+    user = {
+        _id: user._id,
+        fullname: user.fullname,
+        imgUrl: user.imgUrl,
+        score: user.score,
+        isAdmin: user.isAdmin,
+        likedStoryIds: user.likedStoryIds
     }
-	sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
-	return user
+    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
+    return user
 }
 
 // To quickly create an admin user, uncomment the next line
@@ -90,4 +92,24 @@ async function _createAdmin() {
 
     const newUser = await storageService.post('user', userCred)
     console.log('newUser: ', newUser)
+}
+
+async function addLikedStory(userId, storyId) {
+    const user = await storageService.get('user', userId)
+    try {
+        if (!user.likedStoryIds) { user.likedStoryIds = [storyId] }
+        else {
+            if (user.likedStoryIds.includes(storyId)) {
+                user.likedStoryIds= user.likedStoryIds.filter(itemId => itemId !== storyId)
+            }
+            else user.likedStoryIds.push(storyId)
+        }
+        await storageService.put('user', user)
+        saveLoggedinUser(user)
+        return user.likedStoryIds
+    }
+    catch (err) {
+        console.log('Cannot add liked story to user', err)
+        throw err
+    }
 }

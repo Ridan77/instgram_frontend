@@ -28,9 +28,6 @@ async function query(filterBy = { txt: '' }) {
         stories.sort((story1, story2) =>
             story1[sortField].localeCompare(story2[sortField]) * +sortDir)
     }
-
-
-    // stories = stories.map(({ _id, txt, owner }) => ({ _id, txt, owner }))
     return Promise.resolve(stories)
 }
 
