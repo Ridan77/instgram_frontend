@@ -22,19 +22,19 @@ export function SideBar() {
     <header className="side-nav">
       <nav>
         <NavLink to="/" className="logo">
-          <img className="logo" src="/src/assets/img/instagram-logo.png" alt="" />{" "}
+          <img src="/src/assets/img/instagram.png" alt="" />
         </NavLink>
-        <NavLink to="story">StoriesIndex</NavLink>
-        <NavLink to="search">Search</NavLink>
-        <NavLink to="explore">Explore</NavLink>
-        <NavLink to="reels">Reels</NavLink>
-        <NavLink to="direct">Direct</NavLink>
-        <NavLink to="review">Notifications</NavLink>
-        <NavLink to="story/add">Add Story</NavLink>
-        <NavLink to="user/:id">My Page</NavLink>
+        <NavLink to="story"><img src="/src/assets/img/home.png" alt="" /></NavLink>
+        <NavLink to="search"><img src="/src/assets/img/search.png" alt="" /></NavLink>
+        <NavLink to="explore"><img src="/src/assets/img/home.png" alt="" /></NavLink>
+        <NavLink to="reels"><img src="/src/assets/img/video.png" alt="" /></NavLink>
+        <NavLink to="direct"><img src="/src/assets/img/send.png" alt="" /></NavLink>
+        <NavLink to="review"><img src="/src/assets/img/heart.png" alt="" /></NavLink>
+        <NavLink to="story/add"><img src="/src/assets/img/add.png" alt="" /></NavLink>
+        <NavLink to="user/:id"><img src="/src/assets/img/user.png" alt="" /></NavLink>
 		
 
-        {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+        {/* {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
         {!user && (
           <NavLink to="auth/login" className="login-link">
@@ -50,7 +50,7 @@ export function SideBar() {
             <span className="score">{user.score?.toLocaleString()}</span>
             <button onClick={onLogout}>logout</button>
           </div>
-        )}
+        )} */}
       </nav>
     </header>
   );

@@ -92,11 +92,11 @@ function _mockData() {
     return [{
         _id: 's101',
         txt: 'Best trip ever',
-        imgUrl: 'https://picsum.photos/seed/pic1/400/400',
+        imgUrl: 'https://picsum.photos/seed/pic1/460/400',
         by: {
             _id: 'u101',
             fullname: 'Ulash Ulashi',
-            imgUrl: 'http://some-img',
+            imgUrl: 'https://picsum.photos/seed/pic1/100/100',
         },
         loc: {
             // Optional
@@ -148,11 +148,11 @@ function _mockData() {
     {
         _id: 's102',
         txt: 'Sunset at the beach 🌅',
-        imgUrl: 'https://picsum.photos/seed/pic2/400/400',
+        imgUrl: 'https://picsum.photos/seed/pic2/460/400',
         by: {
             _id: 'u102',
             fullname: 'Mona Lisa',
-            imgUrl: 'http://some-img',
+            imgUrl: 'https://picsum.photos/seed/pic2/100/100',
         },
         loc: {
             lat: 34.05,
@@ -203,11 +203,11 @@ function _mockData() {
     {
         _id: 's103',
         txt: 'Hiking the mountains 🏔️',
-        imgUrl: 'https://picsum.photos/seed/pic3/400/400',
+        imgUrl: 'https://picsum.photos/seed/pic3/460/400',
         by: {
             _id: 'u103',
             fullname: 'Chris Pine',
-            imgUrl: 'http://some-img',
+            imgUrl: 'https://picsum.photos/seed/pic3/100/100',
         },
         loc: {
             lat: 46.88,

@@ -1,6 +1,5 @@
 .side-nav {
-    display: flex;
-    min-height: 3.5rem;
+
     
     padding: .8rem 1rem;
     
@@ -8,32 +7,31 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        align-items: start;
+        align-items: center;
         height: 585px;
         gap: 1em;
         
         font-size: .8em;
-
+        img{
+            width :80px;
+            padding: 10px;
+            transition: 0.4s;
+        }
         .active {
-            background-color: var(--gray-icons);
+            background-color: var(--gray5);
         }
+        
 
-        .logo {
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-inline-end: 2em;
-            width:100px;
-        }
-
+        
         .login-link {
             margin-inline-start: auto;
         }
-
+        
         & button {
             margin-inline-end: 0;
         }
     }
-
+    
     .user-info {
         display: flex;
         align-items: center;

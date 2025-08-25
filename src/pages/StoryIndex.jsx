@@ -55,7 +55,6 @@ export function StoryIndex() {
     return (
         <section className="story-index">
             <header>
-                <h2>stories</h2>
                 {userService.getLoggedinUser() && <button onClick={onAddStory}>Add a story</button>}
             </header>
             {/* <StoryFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}

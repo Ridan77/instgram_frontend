@@ -1,23 +1,19 @@
-.car-list {
-    --min-column-size: 220px;
+.story-list {
+  /* --min-column-size: 220px; */
+  margin-top: 100px;
 
-    grid-column: 3;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(var(--min-column-size), 1fr));
-    gap: .5em;
-
-    & li {
-        display: grid;
-        grid-template-columns: max-content auto;
-        padding: .5em;
-        background-color: var(--clr2);
-
-        .actions {
-            justify-self: end;
-
-            & button {
-                padding: .3em .5em;
-            }
-        }
+  & li {
+    display: flex;
+    max-width: 470px;
+    flex-direction: column;
+    margin: auto;
+    .actions {
+      display: flex;
+      gap: 6px;
+      img {
+        width: 30px;
+        margin: 10px;
+      }
     }
+  }
 }
