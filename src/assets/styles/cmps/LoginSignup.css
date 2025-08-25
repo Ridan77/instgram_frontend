@@ -1,3 +1,13 @@
+
+.login-page{
+
+	background-color: green;
+	position: fixed;
+	top:0;
+	right:0;
+	width: 200px;
+}
+
 .login-form,
 .signup-form {
 	display: grid;

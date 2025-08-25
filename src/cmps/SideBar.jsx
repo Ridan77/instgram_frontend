@@ -33,14 +33,14 @@ export function SideBar() {
  
 		
 
-        {/* {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+        {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
         {!user && (
           <NavLink to="auth/login" className="login-link">
             Login
           </NavLink>
         )}
-        {user && (
+        {/* {user && (
           <div className="user-info">
             <Link to={`user/${user._id}`}>
               {user.imgUrl && <img src={user.imgUrl} />}
@@ -49,7 +49,7 @@ export function SideBar() {
             <span className="score">{user.score?.toLocaleString()}</span>
             <button onClick={onLogout}>logout</button>
           </div>
-        )} */}
+        )}  */}
       </nav>
   );
 }

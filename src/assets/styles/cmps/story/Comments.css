@@ -2,10 +2,11 @@
   p {
     display: flex;
     align-items: center;
+  }
 
-    span:nth-child(3) {
-      margin-left:1em;
-    }
+  .comment-txt{
+          margin-left:1em;
+
   }
 
   .commenter-pic {

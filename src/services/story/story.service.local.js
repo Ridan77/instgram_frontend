@@ -19,7 +19,7 @@ _createStrories()
 async function query(filterBy = { txt: '' }) {
     var stories = await storageService.query(STORAGE_KEY)
     const { txt, sortField, sortDir } = filterBy
-    
+
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
         stories = stories.filter(story => regex.test(story.txt) || regex.test(story.description))
@@ -28,8 +28,8 @@ async function query(filterBy = { txt: '' }) {
         stories.sort((story1, story2) =>
             story1[sortField].localeCompare(story2[sortField]) * +sortDir)
     }
-    
-    
+
+
     // stories = stories.map(({ _id, txt, owner }) => ({ _id, txt, owner }))
     return Promise.resolve(stories)
 }
@@ -67,20 +67,19 @@ async function save(story) {
 async function addStoryMsg(storyId, txt) {
     // Later, this is all done by the backend
     const story = await getById(storyId)
-
-    const msg = {
+    const { _id, imgUrl, fullname } = userService.getLoggedinUser()
+    const comment = {
         id: makeId(),
-        by: userService.getLoggedinUser(),
+        by: { _id, imgUrl, fullname },
         txt
     }
-    story.msgs.push(msg)
+    story.comments.push(comment)
     await storageService.put(STORAGE_KEY, story)
-
-    return msg
+    return comment
 }
 
 async function _createStrories() {
-    let stories = await storageService.query(STORAGE_KEY) 
+    let stories = await storageService.query(STORAGE_KEY)
     if (!stories || !stories.length) {
         stories = _mockData()
         localStorage.setItem(STORAGE_KEY, JSON.stringify(stories))

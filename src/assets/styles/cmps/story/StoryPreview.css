@@ -1,7 +1,5 @@
-.story-preview{
-
+.story-preview {
   font-size: 0.9em;
-
 }
 
 .user-preview {
@@ -20,16 +18,21 @@
 }
 .actions {
   margin-top: 10px;
-  
-  span:nth-child(2) svg{
-    margin-left: 10px;
-  }
-    span:nth-child(3) svg{
-    margin-left: 10px;
-  }
 
+  span:nth-child(2) svg {
+    margin-left: 10px;
+  }
+  span:nth-child(3) svg {
+    margin-left: 10px;
+  }
 }
-.preview-comments{
+.preview-comments {
+  color: var(--gray-for-date);
+}
 
-    color: var(--gray-for-date);
+.comment-input{
+  border:none;
+}
+.comment-input:focus{
+  outline:none;
 }

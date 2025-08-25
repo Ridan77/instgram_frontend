@@ -55,7 +55,7 @@ export async function updateStory(story) {
     }
 }
 
-export async function addStoryMsg(storyId, txt) {
+export async function addStoryComment(storyId, txt) {
     try {
         const msg = await storyService.addStoryMsg(storyId, txt)
         store.dispatch(getCmdAddStoryMsg(msg))

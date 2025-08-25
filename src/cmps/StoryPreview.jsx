@@ -1,8 +1,27 @@
 import { Link } from "react-router-dom";
 import { Comments } from "./Comments";
 import { svg } from "./Svgs";
-export function StoryPreview({ story }) {
-  console.log("in preview");
+import { useState } from "react";
+import { AddComment } from "@mui/icons-material";
+import { userService } from "../services/user";
+export function StoryPreview({ story, addComment }) {
+  const [comments, setComments] = useState([]);
+  const user = userService.getLoggedinUser();
+
+  function onAddComment(ev) {
+    ev.preventDefault();
+    const value = ev.target.txt.value;
+    addComment(story._id, value);
+    ev.target.txt.value = "";
+    const by = {
+      fullname: user.fullname,
+      imgUrl: user.imgUrl,
+    };
+    const newComment = { by, txt: value };
+
+    setComments([...comments, newComment]);
+  }
+  console.log(user);
 
   return (
     <article className="story-preview">
@@ -14,19 +33,39 @@ export function StoryPreview({ story }) {
         <img src={story.imgUrl} alt="" />
       </Link>
       <div className="actions">
-        <span onClick={()=>console.log('click')}>{svg.notification}</span>
-        <span onClick={()=>console.log('click')} >{svg.comment}</span>
-        <span onClick={()=>console.log('click')} >{svg.direct}</span>
-      
+        <span onClick={() => console.log("click")}>{svg.notification}</span>
+        <span onClick={() => console.log("click")}>{svg.comment}</span>
+        <span onClick={() => console.log("click")}>{svg.direct}</span>
       </div>
-      <p>XXX Likes</p>
-      <p>
-        <span className="bold">{story.by.fullname} </span>
-        {story.txt}
-      </p>
-      <p className="preview-comments">View all {story.commentsCount} comments</p>
-      <p className="preview-comments">Add a comment...</p>
-      {/* <Comments story={story} /> */}
+      {story.likedBy.length && <p>{story.likedBy.length} Likes</p>}
+        <p>
+      <Link className="story-preview-img" to={`/user/${story.by._id}`}>
+          <span className="bold">{story.by.fullname} </span>
+      </Link>
+          {story.txt}
+        </p>
+      {story.comments.length && (
+        <Link to={`/story/${story._id}`}>
+          <p className="preview-comments">
+            View all {story.comments.length} comments
+          </p>
+        </Link>
+      )}
+      {comments && <Comments story={{ comments: comments }} />}
+      {user && (
+        <form onSubmit={onAddComment}>
+          <input
+            className="comment-input preview-comments"
+            placeholder="Add a Comment..."
+            type="text"
+            name="txt"
+            id=""
+            autoComplete="off"
+          />
+        </form>
+      )}
+
+      {/* <Comments story={story} />  */}
       <hr />
     </article>
   );

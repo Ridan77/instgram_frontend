@@ -1,67 +1,79 @@
-import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-import { loadStories, addStory, updateStory, removeStory, addStoryMsg } from '../store/actions/story.actions'
+import {
+  loadStories,
+  addStory,
+  updateStory,
+  removeStory,
+  addStoryComment,
+} from "../store/actions/story.actions";
 
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-import { storyService } from '../services/story'
-import { userService } from '../services/user'
+import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service";
+import { storyService } from "../services/story";
+import { userService } from "../services/user";
 
-import { StoryList } from '../cmps/storyList'
-import { StoryFilter } from '../cmps/storyFilter'
+import { StoryList } from "../cmps/StoryList.jsx";
+import { StoryFilter } from "../cmps/storyFilter";
 
 export function StoryIndex() {
+  const [filterBy, setFilterBy] = useState(storyService.getDefaultFilter());
+  const stories = useSelector((storeState) => storeState.storyModule.stories);
 
-    const [ filterBy, setFilterBy ] = useState(storyService.getDefaultFilter())
-    const stories = useSelector(storeState => storeState.storyModule.stories)
+  useEffect(() => {
+    loadStories(filterBy);
+  }, [filterBy]);
 
-    useEffect(() => {
-        loadStories(filterBy)
-    }, [filterBy])
-
-    async function onRemoveStory(storyId) {
-        try {
-            await removeStory(storyId)
-            showSuccessMsg('story removed')            
-        } catch (err) {
-            showErrorMsg('Cannot remove story')
-        }
+  async function onRemoveStory(storyId) {
+    try {
+      await removeStory(storyId);
+      showSuccessMsg("story removed");
+    } catch (err) {
+      showErrorMsg("Cannot remove story");
     }
-
-    async function onAddStory() {
-        const story = storyService.getEmptystory()
-        story.vendor = prompt('Vendor?', 'Some Vendor')
-        try {
-            const savedstory = await addStory(story)
-            showSuccessMsg(`story added (id: ${savedstory._id})`)
-        } catch (err) {
-            showErrorMsg('Cannot add story')
-        }        
+  }
+  async function addComment(storyId, newComment) {
+    try {
+      await addStoryComment(storyId, newComment);
+      showSuccessMsg(`Story comment added`);
+    } catch (err) {
+      showErrorMsg("Cannot add story comment");
     }
+  }
 
-    async function onUpdateStory(story) {
-        const speed = +prompt('New speed?', story.speed) || 0
-        if(speed === 0 || speed === story.speed) return
+async function onAddStory() {
+  const story = storyService.getEmptystory();
+  story.vendor = prompt("Vendor?", "Some Vendor");
+  try {
+    const savedstory = await addStory(story);
+    showSuccessMsg(`story added (id: ${savedstory._id})`);
+  } catch (err) {
+    showErrorMsg("Cannot add story");
+  }
+}
 
-        const storyToSave = { ...story, speed }
-        try {
-            const savedstory = await updateStory(storyToSave)
-            showSuccessMsg(`story updated, new speed: ${savedstory.speed}`)
-        } catch (err) {
-            showErrorMsg('Cannot update story')
-        }        
-    }
+async function onUpdateStory(story) {
+  const speed = +prompt("New speed?", story.speed) || 0;
+  if (speed === 0 || speed === story.speed) return;
 
-    return (
-        <section className="story-index">
-            <header>
-                {userService.getLoggedinUser() && <button onClick={onAddStory}>Add a story</button>}
-            </header>
-            {/* <StoryFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
-            <StoryList 
-                stories={stories}
-                onRemovestory={onRemoveStory} 
-                onUpdatestory={onUpdateStory}/>
-        </section>
-    )
+  const storyToSave = { ...story, speed };
+  try {
+    const savedstory = await updateStory(storyToSave);
+    showSuccessMsg(`story updated, new speed: ${savedstory.speed}`);
+  } catch (err) {
+    showErrorMsg("Cannot update story");
+  }
+}
+
+  return (
+    <section className="story-index">
+      {/* <header>
+        {userService.getLoggedinUser() && (
+          <button onClick={onAddStory}>Add a story</button>
+        )}
+      </header> */}
+      {/* <StoryFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
+      <StoryList stories={stories} addComment={addComment} />
+    </section>
+  );
 }

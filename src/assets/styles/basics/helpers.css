@@ -20,6 +20,10 @@
     }
 }
 
+.bold{
+    font-weight: 600;
+}
+
 /* Simple and useful CSS Debugging Technique */
 .debug * {
     outline: 1px solid gold
