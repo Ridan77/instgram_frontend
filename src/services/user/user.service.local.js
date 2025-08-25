@@ -1,4 +1,5 @@
 import { storageService } from '../async-storage.service'
+import { storyService } from '../story'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
@@ -12,7 +13,7 @@ export const userService = {
     update,
     getLoggedinUser,
     saveLoggedinUser,
-    addLikedStory,
+    addLikedUser,
 }
 
 async function getUsers() {
@@ -94,19 +95,30 @@ async function _createAdmin() {
     console.log('newUser: ', newUser)
 }
 
-async function addLikedStory(userId, storyId) {
+async function addLikedUser(userId, storyId) {
     const user = await storageService.get('user', userId)
+    var slikes
     try {
-        if (!user.likedStoryIds) { user.likedStoryIds = [storyId] }
+        if (!user.likedStoryIds) {
+            user.likedStoryIds = [storyId]
+            slikes = await storyService.addLikeStory(user, storyId)
+        }
         else {
             if (user.likedStoryIds.includes(storyId)) {
-                user.likedStoryIds= user.likedStoryIds.filter(itemId => itemId !== storyId)
+                user.likedStoryIds = user.likedStoryIds.filter(itemId => itemId !== storyId)
+                slikes = await storyService.addLikeStory(user, storyId)
+
             }
-            else user.likedStoryIds.push(storyId)
+            else {
+                user.likedStoryIds.push(storyId)
+                slikes = await storyService.addLikeStory(user, storyId)
+            }
         }
         await storageService.put('user', user)
         saveLoggedinUser(user)
-        return user.likedStoryIds
+        console.log('slikes', slikes);
+
+        return { userLikes: user.likedStoryIds, storyLikes: slikes }
     }
     catch (err) {
         console.log('Cannot add liked story to user', err)

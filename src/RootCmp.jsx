@@ -1,12 +1,12 @@
 import React from 'react'
 import { Routes, Route } from 'react-router'
 
-import { StoryIndex } from './pages/storyIndex.jsx'
+import { StoryIndex } from './pages/StoryIndex.jsx'
 import { ReviewIndex } from './pages/ReviewIndex.jsx'
 import { ChatApp } from './pages/Chat.jsx'
 import { AdminIndex } from './pages/AdminIndex.jsx'
 
-import { StoryDetails } from './pages/storyDetails'
+import { StoryDetails } from './pages/StoryDetails.jsx'
 import { UserDetails } from './pages/UserDetails'
 
 import { SideBar } from './cmps/SideBar.jsx'

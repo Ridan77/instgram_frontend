@@ -7,7 +7,8 @@ import { userService } from "../services/user";
 export function StoryPreview({ story, addComment }) {
   const [comments, setComments] = useState([]);
   const user = userService.getLoggedinUser();
-  const [likes, setLikes] = useState(user.likedStoryIds);
+  const [userLikes, setUserLikes] = useState(user.likedStoryIds);
+  const [storyLikes, setStoryLikes] = useState(story.likedBy.length);
 
   function onAddComment(ev) {
     ev.preventDefault();
@@ -25,8 +26,11 @@ export function StoryPreview({ story, addComment }) {
 
   async function onLikeStory(userId, storyId) {
     console.log('New Like from: userId to" storyId', userId, storyId);
-    setLikes(likedStoryIds);
-    const likedStoryIds = await userService.addLikedStory(userId, storyId);
+    const likes = await userService.addLikedUser(userId, storyId);
+    console.log(likes);
+    
+    setUserLikes(likes.userLikes);
+    setStoryLikes(likes.storyLikes);
     const heart = document.querySelector(".like-heart");
     heart.classList.remove("pop");
     void heart.offsetWidth; // force reflow
@@ -46,13 +50,13 @@ export function StoryPreview({ story, addComment }) {
         <span
           className="like-heart"
           onClick={() => onLikeStory(user._id, story._id)}>
-          {likes.includes(story._id) ? svg.heart : svg.notification}
+          {userLikes.includes(story._id) ? svg.heart : svg.notification}
         </span>
 
         <span onClick={() => console.log("click")}>{svg.comment}</span>
         <span onClick={() => console.log("click")}>{svg.direct}</span>
       </div>
-      {story.likedBy.length && <p>{story.likedBy.length} Likes</p>}
+      {storyLikes.length && <p>{storyLikes.length} Likes</p>}
       <p>
         <Link className="story-preview-img" to={`/user/${story.by._id}`}>
           <span className="bold">{story.by.fullname} </span>
