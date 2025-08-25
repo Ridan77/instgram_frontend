@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { logout } from "../store/actions/user.actions";
+import { svg } from "./Svgs";
 
 export function SideBar() {
   const user = useSelector((storeState) => storeState.userModule.user);
@@ -19,19 +20,17 @@ export function SideBar() {
   }
 
   return (
-    <header className="side-nav">
-      <nav>
-        <NavLink to="/" className="logo">
-          <img src="/src/assets/img/instagram.png" alt="" />
-        </NavLink>
-        <NavLink to="story"><img src="/src/assets/img/home.png" alt="" /></NavLink>
-        <NavLink to="search"><img src="/src/assets/img/search.png" alt="" /></NavLink>
-        <NavLink to="explore"><img src="/src/assets/img/home.png" alt="" /></NavLink>
-        <NavLink to="reels"><img src="/src/assets/img/video.png" alt="" /></NavLink>
-        <NavLink to="direct"><img src="/src/assets/img/send.png" alt="" /></NavLink>
-        <NavLink to="review"><img src="/src/assets/img/heart.png" alt="" /></NavLink>
-        <NavLink to="story/add"><img src="/src/assets/img/add.png" alt="" /></NavLink>
-        <NavLink to="user/:id"><img src="/src/assets/img/user.png" alt="" /></NavLink>
+      <nav className="side-nav" >
+         <NavLink to=""><span>{svg.instagram}</span><span>     </span> </NavLink>
+        <NavLink to="story"><span>{svg.home}</span><span className="nav-title">Home</span></NavLink>
+        <NavLink to="search"><span>{svg.search}</span><span className="nav-title">Search</span></NavLink>
+        <NavLink to="explore"><span>{svg.explore}</span><span className="nav-title" >Explore</span></NavLink>
+        <NavLink to="reels"><span>{svg.reels}</span><span className="nav-title" >Reels</span></NavLink>
+        <NavLink to="direct"><span>{svg.direct}</span><span className="nav-title" >Messages</span></NavLink>
+        <NavLink to="review"><span>{svg.notification}</span><span className="nav-title">Notifications  </span></NavLink>
+        <NavLink to="story/add"><span>{svg.newPost}</span><span className="nav-title" >Create</span></NavLink>
+        <NavLink to="user/:id"><span>{svg.profile}</span><span className="nav-title">Profile</span></NavLink>
+ 
 		
 
         {/* {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
@@ -52,6 +51,5 @@ export function SideBar() {
           </div>
         )} */}
       </nav>
-    </header>
   );
 }

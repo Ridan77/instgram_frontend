@@ -110,14 +110,14 @@ function _mockData() {
                 by: {
                     _id: 'u105',
                     fullname: 'Bob',
-                    imgUrl: 'http://some-img',
+                    imgUrl: 'https://picsum.photos/seed/person3/100/100',
                 },
                 txt: 'good one!',
                 likedBy: [  // Optional
                     {
                         _id: 'u105',
                         fullname: 'Bob',
-                        imgUrl: 'http://some-img',
+                        imgUrl: 'https://picsum.photos/seed/person4/100/100',
                     },
                 ],
             },
@@ -126,7 +126,7 @@ function _mockData() {
                 by: {
                     _id: 'u106',
                     fullname: 'Dob',
-                    imgUrl: 'http://some-img',
+                    imgUrl: 'https://picsum.photos/seed/person5/100/100',
                 },
                 txt: 'not good!',
             },
@@ -165,7 +165,7 @@ function _mockData() {
                 by: {
                     _id: 'u107',
                     fullname: 'Alice',
-                    imgUrl: 'http://some-img',
+                    imgUrl: 'https://picsum.photos/seed/person7/100/100',
                 },
                 txt: 'wow amazing!',
             },
@@ -174,7 +174,7 @@ function _mockData() {
                 by: {
                     _id: 'u108',
                     fullname: 'John',
-                    imgUrl: 'http://some-img',
+                    imgUrl: 'https://picsum.photos/seed/person8/100/100',
                 },
                 txt: 'wish I was there!',
                 likedBy: [
@@ -220,7 +220,7 @@ function _mockData() {
                 by: {
                     _id: 'u110',
                     fullname: 'Emma',
-                    imgUrl: 'http://some-img',
+                    imgUrl: 'https://picsum.photos/seed/person1/100/100',
                 },
                 txt: 'looks cold but beautiful!',
             },
@@ -229,7 +229,7 @@ function _mockData() {
                 by: {
                     _id: 'u111',
                     fullname: 'Tom',
-                    imgUrl: 'http://some-img',
+                    imgUrl: 'https://picsum.photos/seed/person2/100/100',
                 },
                 txt: 'on my bucket list!',
             },

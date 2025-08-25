@@ -23,6 +23,7 @@
 @import "cmps/story/StoryList";
 @import "cmps/story/StoryPreview";
 @import "cmps/story/StoryFilter";
+@import "cmps/story/Comments.css";
 
 @import "cmps/review/ReviewEdit";
 @import "cmps/review/ReviewList";

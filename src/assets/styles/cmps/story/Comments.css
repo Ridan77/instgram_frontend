@@ -1,0 +1,17 @@
+.comment {
+  p {
+    display: flex;
+    align-items: center;
+
+    span:nth-child(3) {
+      margin-left:1em;
+    }
+  }
+
+  .commenter-pic {
+    display: inline;
+    width: 30px;
+    margin: 10px;
+    border-radius: 1em;
+  }
+}

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import {Comments} from './Comments'
+import { Comments } from "./Comments";
+import { svg } from "./Svgs";
 export function StoryPreview({ story }) {
   console.log("in preview");
 
@@ -7,36 +8,26 @@ export function StoryPreview({ story }) {
     <article className="story-preview">
       <div className="user-preview">
         <img src={story.by.imgUrl} alt="" />
-        <span>{story.by.fullname}</span>
+        <span className="bold">{story.by.fullname}</span>
       </div>
       <Link className="story-preview-img" to={`/story/${story._id}`}>
         <img src={story.imgUrl} alt="" />
       </Link>
-      <span>{story.txt}</span>
       <div className="actions">
-        <img
-          onClick={() => {
-            console.log("click");
-          }}
-          src="/src/assets/img/heart.png"
-          alt=""
-        />
-        <img
-          onClick={() => {
-            console.log("click");
-          }}
-          src="/src/assets/img/chat.png"
-          alt=""
-        />
-        <img
-          onClick={() => {
-            console.log("click");
-          }}
-          src="/src/assets/img/send.png"
-          alt=""
-        />
+        <span onClick={()=>console.log('click')}>{svg.notification}</span>
+        <span onClick={()=>console.log('click')} >{svg.comment}</span>
+        <span onClick={()=>console.log('click')} >{svg.direct}</span>
+      
       </div>
-      <Comments story={story}/>
+      <p>XXX Likes</p>
+      <p>
+        <span className="bold">{story.by.fullname} </span>
+        {story.txt}
+      </p>
+      <p className="preview-comments">View all {story.commentsCount} comments</p>
+      <p className="preview-comments">Add a comment...</p>
+      {/* <Comments story={story} /> */}
+      <hr />
     </article>
   );
 }
