@@ -116,8 +116,6 @@ async function addLikedUser(userId, storyId) {
         }
         await storageService.put('user', user)
         saveLoggedinUser(user)
-        console.log('slikes', slikes);
-
         return { userLikes: user.likedStoryIds, storyLikes: slikes }
     }
     catch (err) {

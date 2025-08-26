@@ -1,19 +1,28 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Modal } from "../cmps/Modal";
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service";
 import { loadStory, addStoryComment } from "../store/actions/story.actions";
+import { StoryPreview } from "../cmps/StoryPreview";
+import { Comments } from "../cmps/Comments";
 
 export function StoryDetails() {
   const { storyId } = useParams();
   const story = useSelector((storeState) => storeState.storyModule.story);
+  const [isOpen, setIsOpen] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadStory(storyId);
   }, [storyId]);
 
+  function onClose() {
+    setIsOpen(!isOpen);
+    navigate("/story");
+  }
   async function onAddStoryMsg(storyId) {
     try {
       await addStoryMsg(storyId, "bla bla " + parseInt(Math.random() * 10));
@@ -22,24 +31,18 @@ export function StoryDetails() {
       showErrorMsg("Cannot add story msg");
     }
   }
-
+if (!story) return <p>Later</p>
   return (
     <section className="story-details">
-      <Link to="/story">Back to list</Link>
-      <h1>Story Details</h1>
-      {story && (
-        <div>
-          <h3>{story.vendor}</h3>
-          <h4>{story.speed} KMH</h4>
-          <pre> {JSON.stringify(story, null, 2)} </pre>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <div className="details-container">
+          <img className="details-img" src={story.imgUrl} alt="" />
+          <section className="details-info">
+          <StoryPreview story={story} showImage={false} />
+          <Comments story={story}/>
+          </section>
         </div>
-      )}
-      <button
-        onClick={() => {
-          onAddStoryMsg(story._id);
-        }}>
-        Add story msg
-      </button>
+      </Modal>
     </section>
   );
 }

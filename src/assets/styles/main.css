@@ -18,12 +18,14 @@
 @import "cmps/SideNav.css";
 @import "cmps/AppFooter";
 @import "cmps/UserMsg";
+@import "cmps/story/modal.css";
 
 @import "cmps/story/StoryIndex";
 @import "cmps/story/StoryList";
 @import "cmps/story/StoryPreview";
 @import "cmps/story/StoryFilter";
 @import "cmps/story/Comments.css";
+@import "cmps/story/StoryDetails.css";
 
 @import "cmps/review/ReviewEdit";
 @import "cmps/review/ReviewList";

@@ -4,7 +4,7 @@ import { svg } from "./Svgs";
 import { useState } from "react";
 import { AddComment } from "@mui/icons-material";
 import { userService } from "../services/user";
-export function StoryPreview({ story, addComment }) {
+export function StoryPreview({ story, addComment,showImage }) {
   const [comments, setComments] = useState([]);
   const user = userService.getLoggedinUser();
   const [userLikes, setUserLikes] = useState(user.likedStoryIds);
@@ -28,24 +28,25 @@ export function StoryPreview({ story, addComment }) {
     console.log('New Like from: userId to" storyId', userId, storyId);
     const likes = await userService.addLikedUser(userId, storyId);
     console.log(likes);
-    
     setUserLikes(likes.userLikes);
-    setStoryLikes(likes.storyLikes);
+    setStoryLikes(likes.storyLikes.length);
+    
     const heart = document.querySelector(".like-heart");
     heart.classList.remove("pop");
-    void heart.offsetWidth; // force reflow
+    void heart.offsetWidth; 
     heart.classList.add("pop");
   }
-
+console.log('userLikes', userLikes);
+console.log('StoryLikes', storyLikes);
   return (
     <article className="story-preview">
       <div className="user-preview">
         <img src={story.by.imgUrl} alt="" />
         <span className="bold">{story.by.fullname}</span>
       </div>
-      <Link className="story-preview-img" to={`/story/${story._id}`}>
+     {showImage && <Link className="story-preview-img" to={`/story/${story._id}`}>
         <img src={story.imgUrl} alt="" />
-      </Link>
+      </Link>}
       <div className="actions">
         <span
           className="like-heart"
@@ -56,7 +57,7 @@ export function StoryPreview({ story, addComment }) {
         <span onClick={() => console.log("click")}>{svg.comment}</span>
         <span onClick={() => console.log("click")}>{svg.direct}</span>
       </div>
-      {storyLikes.length && <p>{storyLikes.length} Likes</p>}
+      {storyLikes && <p>{storyLikes} Likes</p>}
       <p>
         <Link className="story-preview-img" to={`/user/${story.by._id}`}>
           <span className="bold">{story.by.fullname} </span>

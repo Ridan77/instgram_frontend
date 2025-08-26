@@ -17,6 +17,9 @@ nav.side-nav {
     margin-left: 20px;
     display: flex;
     align-items: center;
+    transition: 0.5s;
+    padding: 5px;
+    border-radius: 0.8em;
   }
 
     .active {
@@ -24,10 +27,7 @@ nav.side-nav {
       font-weight: 700;
     }
 
-    .login-link {
-      margin-inline-start: auto;
-    }
-
+ 
     & button {
       margin-inline-end: 0;
     }
@@ -35,8 +35,9 @@ nav.side-nav {
     .nav-title{
             margin: 0;
             margin-left: 20px;
-            
-
+    }
+    a:hover{
+      background-color: var(--gray5);
     }
   }
   nav.side-nav a:nth-of-type(2){

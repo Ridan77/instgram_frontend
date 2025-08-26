@@ -1,6 +1,6 @@
 
 import { storageService } from '../async-storage.service'
-import { makeId } from '../util.service'
+import { makeId, makeLorem } from '../util.service'
 import { userService } from '../user'
 
 const STORAGE_KEY = 'story'
@@ -111,13 +111,13 @@ async function _createStrories() {
     }
 }
 
-
+makeLorem
 
 function _mockData() {
     return [
         {
             _id: 's101',
-            txt: 'Best trip ever',
+            txt: 'Best trip ever, , Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis nibh eu dignissim condimentum. Vestibulum quam augue, tristique ac semper ac, molestie a ligula. Praesent blandit, neque nec consequat consequat, urna neque maximus felis, in condimentum arcu ligula at purus. Ut ac risus a mi tempus ultricies. Praesent varius pretium lectus vel venenatis. Fusce et maximus dolor. Aliquam aliquam, massa non lobortis ornare, sem nibh cursus purus, ac dignissim massa eros nec erat. Nullam nec ligula libero. Phasellus ullamcorper malesuada nisl ac iaculis.',
             imgUrl: 'https://picsum.photos/seed/pic1/460/400',
             by: {
                 _id: 'u101',
