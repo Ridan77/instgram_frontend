@@ -17,12 +17,10 @@ export function StoryEdit() {
   useEffect(() => {
     try {
       if (storyId) loadStory();
-      else
-        setStoryToEdit({
-          ...storyService.getEmptyStory(),
-          imgUrl:
-            "http://res.cloudinary.com/vanilla-test-images/image/upload/v1756199716/pzyvqsuoahwung4arrhm.jpg",
-        });
+      else{
+        // setStoryToEdit({...storyService.getEmptyStory(),imgUrl:"http://res.cloudinary.com/vanilla-test-images/image/upload/v1756199716/pzyvqsuoahwung4arrhm.jpg",
+        setStoryToEdit(storyService.getEmptyStory())
+        };
     } catch (error) {
       console.log(error);
     }
@@ -40,6 +38,7 @@ export function StoryEdit() {
 
   function handleChange(ev) {
     console.log(ev.target.value);
+    setStoryToEdit({...storyToEdit,txt: ev.target.value})
   }
   async function onFileChange(ev) {
     const url = await uploadService.uploadImg(ev);
@@ -54,7 +53,6 @@ export function StoryEdit() {
   async function onSaveStory(ev) {
     ev.preventDefault();
     storyToEdit.txt = ev.target.txt.value;
-    console.log("stortToEdit", storyToEdit);
     try {
       await addStory(storyToEdit);
       showSuccessMsg("Story Saved!");

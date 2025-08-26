@@ -46,11 +46,13 @@ async function save(story) {
     if (story._id) {
         const storyToSave = {
             _id: story._id,
-            speed: story.speed
+            txt: story.txt
         }
+        console.log(story);
+
         savedStory = await storageService.put(STORAGE_KEY, storyToSave)
     } else {
-        const storyToSave ={...story,likedBy:[],comments:[]}
+        const storyToSave = { ...story, likedBy: [], comments: [], createdAt: Date.now() }
         savedStory = await storageService.post(STORAGE_KEY, storyToSave)
         console.log('story from ssave service', savedStory);
     }

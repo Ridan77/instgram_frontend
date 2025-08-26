@@ -74,7 +74,7 @@ function saveLoggedinUser(user) {
         imgUrl: user.imgUrl,
         score: user.score,
         isAdmin: user.isAdmin,
-        likedStoryIds: user.likedStoryIds
+        likedStoryIds: user.likedStoryIds||[]
     }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user

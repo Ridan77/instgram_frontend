@@ -64,7 +64,6 @@ export function StoryIndex() {
     console.log('New Like from: userId to" storyId', userId, storyId);
     const likedStoryIds = await userService.addLikedStory(userId, storyId);
   }
-  console.log("stories", stories);
   return (
     <section className="story-index">
       {/* <header>

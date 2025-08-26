@@ -1,14 +1,14 @@
 
 .main-container {
       display: grid;
-  grid-template-columns: 220px 1fr 630px 1fr;
+  grid-template-columns: 244px minmax(80px, 222px) 630px 1fr;
 
 }
 
 .sample-grid-layout {
     /* display: grid; */
     /* grid-template-columns: 12px 1fr 12px; */
-
+/* 
     @media (min-width: 624px) {
         grid-template-columns: minmax(12px, 1fr) minmax(auto, 624px) minmax(12px, 1fr);        
     }
@@ -20,7 +20,7 @@
     @media (min-width: 1048px) {
         grid-template-columns: minmax(12px, 1fr) minmax(auto, 1048px) minmax(12px, 1fr);        
     }
-
+ */
 
     /* >* {
         grid-column: 2;

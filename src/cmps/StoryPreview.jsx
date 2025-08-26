@@ -42,6 +42,7 @@ export function StoryPreview({ story, addComment,showImage }) {
       <div className="user-preview">
         <img src={story.by.imgUrl} alt="" />
         <span className="bold">{story.by.fullname}</span>
+        <span className="gray">• 3d</span>
       </div>
      {showImage && <Link className="story-preview-img" to={`/story/${story._id}`}>
         <img src={story.imgUrl} alt="" />
@@ -65,7 +66,7 @@ export function StoryPreview({ story, addComment,showImage }) {
       </p>
       {story.comments.length && (
         <Link to={`/story/${story._id}`}>
-          <p className="preview-comments">
+          <p className="preview-comments gray">
             View all {story.comments.length} comments
           </p>
         </Link>

@@ -14,6 +14,7 @@ import { AppFooter } from "./cmps/AppFooter";
 import { UserMsg } from "./cmps/UserMsg.jsx";
 import { LoginSignup, Login, Signup } from "./pages/LoginSignup.jsx";
 import { StoryEdit } from "./pages/StoryEdit.jsx";
+import { UnderConstruction } from "./cmps/UnderConstruction.jsx";
 
 export function RootCmp() {
   return (
@@ -28,6 +29,7 @@ export function RootCmp() {
         </Route>
         <Route path="story/:storyId" element={<StoryDetails />} />
         <Route path="user/:id" element={<UserDetails />} />
+        <Route path="under" element={<UnderConstruction />} />
         {/* <Route path="story/edit" element={<StoryEdit />} /> */}
         <Route path="review" element={<ReviewIndex />} />
         <Route path="chat" element={<ChatApp />} />

@@ -1,16 +1,30 @@
 .details-container {
   display: flex;
-
+  
   .details-img {
     width: 50%; 
-    max-height: 80vh;
     height: auto; 
-    object-fit: contain; 
+    object-fit: contain;
+    background-color: black; 
   }
   .details-info {
-    display: flex;
+    max-height: 80vh;
+    display: grid;
+    grid-template-columns: 50px 1fr;
     flex-direction: column;
     font-size: 0.8em;
     padding: 10px;
+    text-align: start;
+    
+    img{
+      width: 30px;
+      margin: 12px 2px;
+      border-radius: 1em;
+      display: inline;
+    }
+    
+
   }
+  
 }
+

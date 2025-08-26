@@ -1,30 +1,47 @@
-
 /* Flex helpers */
 .flex {
-    display: flex;
+  display: flex;
 
-    >.full {
-        flex: 1;
-    }
+  > .full {
+    flex: 1;
+  }
 
-    &.column {
-        flex-direction: column;
-    }
+  &.column {
+    flex-direction: column;
+  }
 
-    &.justify-center {
-        justify-content: center;
-    }
+  &.justify-center {
+    justify-content: center;
+  }
 
-    &.align-center {
-        align-items: center;
-    }
+  &.align-center {
+    align-items: center;
+  }
 }
 
-.bold{
-    font-weight: 600;
+.bold {
+  font-weight: 600;
+}
+.under-construction {
+  margin-left: 300px;
 }
 
+.gray {
+  color: var(--gray-for-date);
+}
+
+.full {
+  width: 100%;
+}
+
+.scrollable {
+  overflow-y: auto;
+  grid-column: 1/-1;
+}
+.scrollable::-webkit-scrollbar {
+  display: none
+}
 /* Simple and useful CSS Debugging Technique */
 .debug * {
-    outline: 1px solid gold
+  outline: 1px solid gold;
 }
