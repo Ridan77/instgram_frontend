@@ -1,60 +1,61 @@
-
-.login-page{
-
-	background-color: green;
-	position: fixed;
-	top:0;
-	right:0;
-	width: 200px;
+.login-page {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 300px;
+  max-width: 600px; /* optional: limit max width */
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%);
 }
 
 .login-form,
 .signup-form {
-	display: grid;
-	width: min(80%, 300px);
-	margin: auto;
+  display: grid;
+  width: auto;
+  margin: auto;
 
-	padding: 1em;
-	background-color: var(--clr4);
+  padding: 1em;
+  /* background-color: var(--clr4); */
 }
 
 .signup-form {
-	>input {
-		width: 100%;
-		margin: 0.4em 0;
-	}
+  > input {
+    width: 100%;
+    margin: 0.4em 0;
+  }
 
-	.admin-toggle {
-		display: flex;
-		align-items: center;
-		justify-self: start;
+  .admin-toggle {
+    display: flex;
+    align-items: center;
+    justify-self: start;
 
-		>span {
-			font-size: .8em;
-		}
-	}
+    > span {
+      font-size: 0.8em;
+    }
+  }
 }
 
 .login-page nav {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 2em;
-
-	margin-block: 100px 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
 
 
-	> a {
-		font-size: 0.8em;
-		color: var(--clr4);
+  > a {
+    font-size: 0.8em;
+    /* color: var(--clr4); */
 
-		&:hover {
-			color: var(--clr1);
-		}
+    &:hover {
+      color: var(--clr1);
+    }
 
-		&.active {
-			text-decoration: underline;
-			color: var(--clr2);
-		}
-	}
+    &.active {
+      text-decoration: underline;
+      color: var(--clr2);
+    }
+  }
 }

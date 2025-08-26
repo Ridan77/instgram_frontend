@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
-
+import { Outlet, NavLink, Navigate } from "react-router-dom";
 
 import {
   loadStories,
@@ -17,16 +16,17 @@ import { userService } from "../services/user";
 
 import { StoryList } from "../cmps/StoryList.jsx";
 import { StoryFilter } from "../cmps/storyFilter";
+import { LoginSignup } from "./LoginSignup.jsx";
 
 export function StoryIndex() {
   const [filterBy, setFilterBy] = useState(storyService.getDefaultFilter());
   const stories = useSelector((storeState) => storeState.storyModule.stories);
+  const user = useSelector((storeState) => storeState.userModule.user);
 
   useEffect(() => {
     loadStories();
-  }, []);
+  }, [user]);
 
- 
   async function addComment(storyId, newComment) {
     try {
       await addStoryComment(storyId, newComment);
@@ -66,14 +66,23 @@ export function StoryIndex() {
   }
   return (
     <section className="story-index">
+    {!user && <Navigate to="/auth/login" replace />}
+        {/* // <NavLink to="auth/login" className="login-link">
+        //   Please login....
+        // </NavLink> */}
+      
       {/* <header>
         {userService.getLoggedinUser() && (
           <button onClick={onAddStory}>Add a story</button>
         )}
       </header> */}
       {/* <StoryFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
-      <StoryList stories={stories} addComment={addComment} />
-      <Outlet />
+      {user && (
+        <>
+          <StoryList stories={stories} addComment={addComment} />
+          <Outlet />
+        </>
+      )}
     </section>
   );
 }

@@ -13,45 +13,58 @@ export function SideBar() {
   async function onLogout() {
     try {
       await logout();
-      navigate("/");
+      navigate("/auth");
       showSuccessMsg(`Bye now`);
     } catch (err) {
       showErrorMsg("Cannot logout");
     }
   }
   return (
-      <nav className="side-nav" >
-         <NavLink to=""><span>{svg.instagram}</span><span>     </span> </NavLink>
-        <NavLink to="story"><span>{svg.home}</span><span className="nav-title">Home</span></NavLink>
-        <NavLink to="search"><span>{svg.search}</span><span className="nav-title">Search</span></NavLink>
-        <NavLink to="explore"><span>{svg.explore}</span><span className="nav-title" >Explore</span></NavLink>
-        <NavLink to="under"><span>{svg.reels}</span><span className="nav-title" >Reels</span></NavLink>
-        <NavLink to="under"><span>{svg.direct}</span><span className="nav-title" >Messages</span></NavLink>
-        <NavLink to="under"><span>{svg.notification}</span><span className="nav-title">Notifications  </span></NavLink>
-        <NavLink to="story/edit"><span>{svg.newPost}</span><span className="nav-title" >Create</span></NavLink>
-        <NavLink to="user/:id"><span>
-          {user ? <img src={user.imgUrl} alt="" /> : <img src='src/assets/img/user1.png' alt="" />   }
-          </span>
-          <span className="nav-title">Profile</span></NavLink> 
-    
+    <nav className="side-nav">
+      <NavLink to="">
+        <span>{svg.instagram}</span>
+        <span> </span>{" "}
+      </NavLink>
+      <NavLink to="story">
+        <span>{svg.home}</span>
+        <span className="nav-title">Home</span>
+      </NavLink>
+      <NavLink to="search">
+        <span>{svg.search}</span>
+        <span className="nav-title">Search</span>
+      </NavLink>
+      <NavLink to="explore">
+        <span>{svg.explore}</span>
+        <span className="nav-title">Explore</span>
+      </NavLink>
+      <NavLink to="under">
+        <span>{svg.reels}</span>
+        <span className="nav-title">Reels</span>
+      </NavLink>
+      <NavLink to="under">
+        <span>{svg.direct}</span>
+        <span className="nav-title">Messages</span>
+      </NavLink>
+      <NavLink to="under">
+        <span>{svg.notification}</span>
+        <span className="nav-title">Notifications </span>
+      </NavLink>
+      <NavLink to="story/edit">
+        <span>{svg.newPost}</span>
+        <span className="nav-title">Create</span>
+      </NavLink>
+      {user && <NavLink  to={`user/${user._id}`}>
+        <span>
+          {user ? (
+            <img src={user.imgUrl} alt="" />
+          ) : (
+            <img src="src/assets/img/user1.png" alt="" />
+          )}
+        </span>
+          <span className="nav-title">Profile</span>
+      </NavLink>}
 
-        {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
-
-        {!user && (
-          <NavLink to="auth/login" className="login-link">
-            Login
-          </NavLink>
-        )}
-        {/* {user && (
-          <div className="user-info">
-            <Link to={`user/${user._id}`}>
-              {user.imgUrl && <img src={user.imgUrl} />}
-              {user.fullname}
-            </Link>
-            <span className="score">{user.score?.toLocaleString()}</span>
-            <button onClick={onLogout}>logout</button>
-          </div>
-        )}  */}
-      </nav>
+      {user && <button className="logout-btn"onClick={onLogout}>logout</button>}
+    </nav>
   );
 }

@@ -4,10 +4,11 @@ import { svg } from "./Svgs";
 import { useState } from "react";
 import { AddComment } from "@mui/icons-material";
 import { userService } from "../services/user";
-export function StoryPreview({ story, addComment,showImage }) {
+import { addLike } from "../store/actions/story.actions";
+export function StoryPreview({ story, addComment, showImage }) {
   const [comments, setComments] = useState([]);
   const user = userService.getLoggedinUser();
-  const [userLikes, setUserLikes] = useState(user.likedStoryIds);
+  const [userLikes, setUserLikes] = useState(user.likedStoryIds || []);
   const [storyLikes, setStoryLikes] = useState(story.likedBy.length);
 
   function onAddComment(ev) {
@@ -24,19 +25,29 @@ export function StoryPreview({ story, addComment,showImage }) {
     setComments([...comments, newComment]);
   }
 
-  async function onLikeStory(userId, storyId) {
-    console.log('New Like from: userId to" storyId', userId, storyId);
-    const likes = await userService.addLikedUser(userId, storyId);
-    console.log(likes);
-    setUserLikes(likes.userLikes);
-    setStoryLikes(likes.storyLikes.length);
-    
+  //optimistic
+  async function onLikeStory(storyId) {
+    const isLiked = userLikes.includes(storyId);
+    setUserLikes((prev) =>
+      isLiked ? prev.filter((id) => id !== storyId) : [...prev, storyId]
+    );
+    setStoryLikes((prev) => (isLiked ? prev - 1 : prev + 1));
     const heart = document.querySelector(".like-heart");
     heart.classList.remove("pop");
-    void heart.offsetWidth; 
+    void heart.offsetWidth; // force reflow
     heart.classList.add("pop");
+    try {
+      const newLikes = await addLike(user._id, storyId);
+    } catch (err) {
+      setUserLikes((prev) =>
+        isLiked ? [...prev, storyId] : prev.filter((id) => id !== storyId)
+      )
+      setStoryLikes((prev) => (isLiked ? prev + 1 : prev - 1));
+      console.error("Failed to update like:", err);
+    }
   }
-
+  
+  console.log("userLikes", userLikes);
   return (
     <article className="story-preview">
       <div className="user-preview">
@@ -44,20 +55,20 @@ export function StoryPreview({ story, addComment,showImage }) {
         <span className="bold">{story.by.fullname}</span>
         <span className="gray">• 3d</span>
       </div>
-     {showImage && <Link className="story-preview-img" to={`/story/${story._id}`}>
-        <img src={story.imgUrl} alt="" />
-      </Link>}
+      {showImage && (
+        <Link className="story-preview-img" to={`/story/${story._id}`}>
+          <img src={story.imgUrl} alt="" />
+        </Link>
+      )}
       <div className="actions">
-        <span
-          className="like-heart"
-          onClick={() => onLikeStory(user._id, story._id)}>
+        <span className="like-heart" onClick={() => onLikeStory(story._id)}>
           {userLikes.includes(story._id) ? svg.heart : svg.notification}
         </span>
 
         <span onClick={() => console.log("click")}>{svg.comment}</span>
         <span onClick={() => console.log("click")}>{svg.direct}</span>
       </div>
-      {storyLikes>0 && <p>{storyLikes} Likes</p>}
+      {storyLikes > 0 && <p>{storyLikes} Likes</p>}
       <p>
         <Link className="story-preview-img" to={`/user/${story.by._id}`}>
           <span className="bold">{story.by.fullname} </span>

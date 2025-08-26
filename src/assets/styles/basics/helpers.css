@@ -41,6 +41,10 @@
 .scrollable::-webkit-scrollbar {
   display: none
 }
+
+.file-input {
+  display: none;
+}
 /* Simple and useful CSS Debugging Technique */
 .debug * {
   outline: 1px solid gold;

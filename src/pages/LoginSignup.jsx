@@ -39,7 +39,7 @@ export function Login() {
 
         if (!credentials.username) return
         await login(credentials)
-        navigate('/')
+        navigate('/story')
     }
 
     function handleChange(ev) {

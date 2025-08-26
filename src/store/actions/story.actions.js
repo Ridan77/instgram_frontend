@@ -5,7 +5,7 @@ import { ADD_STORY, REMOVE_STORY, SET_STORIES, SET_STORY, UPDATE_STORY, ADD_STOR
 export async function loadStories(filterBy) {
     try {
         const stories = await storyService.query(filterBy)
-    ; store.dispatch(getCmdSetStories(stories))
+            ; store.dispatch(getCmdSetStories(stories))
     } catch (err) {
         console.log('Cannot load stories', err)
         throw err
@@ -60,6 +60,17 @@ export async function addStoryComment(storyId, txt) {
         const msg = await storyService.addStoryMsg(storyId, txt)
         store.dispatch(getCmdAddStoryMsg(msg))
         return msg
+    } catch (err) {
+        console.log('Cannot add story msg', err)
+        throw err
+    }
+}
+
+export async function addLike(userId, storyId) {
+    try {
+        const likes = await userService.addLikedUser(userId, storyId);
+        console.log('likes from action', likes);
+        return Promise.resolve(likes)
     } catch (err) {
         console.log('Cannot add story msg', err)
         throw err
