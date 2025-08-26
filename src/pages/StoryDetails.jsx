@@ -93,7 +93,7 @@ export function StoryDetails() {
               <span onClick={() => console.log("click")}>{svg.comment}</span>
               <span onClick={() => console.log("click")}>{svg.direct}</span>
             </div>
-            {story.likedBy?.length > 0 && <p>{story.likedBy.length} Likes</p>}
+            {story.likedBy?.length > 0 && <p className="likes-count">{story.likedBy.length} Likes</p>}
 
             {/* <StoryPreview story={story} showImage={false} /> */}
             {/* <Comments story={story} /> */}

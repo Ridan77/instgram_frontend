@@ -1,5 +1,9 @@
 .story-preview {
   font-size: 0.9em;
+  .actions {
+   margin-top: 10px;
+  
+  } 
 }
 
 .user-preview {
@@ -17,10 +21,6 @@
 .story-preview-img img {
   width: 100%;
 }
- .actions {
-  margin-top: 10px;
-
-} 
 .preview-comments {
   color: var(--gray-for-date);
 }

@@ -13,7 +13,8 @@
     max-height: 50%;
     max-height: 100%;
     display: grid;
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: 40px 40px 1fr 40px 40px;
     flex-direction: column;
     align-items: center;
     font-size: 0.8em;
@@ -30,6 +31,17 @@
       grid-column: 1/-1;
       overflow-y: auto;
       max-height: 100%; 
+      place-self: start;
     }
+.actions{
+  grid-column: 1/-1;
+  display: flex;
+  gap:10px
+}
+.likes-count{
+  grid-column: 1/-1;
+
+}
+
   }
 }
