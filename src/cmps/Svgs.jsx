@@ -276,7 +276,34 @@ export const svg = {
     </svg>
   ),
   direct: (
-    <svg xmlns="http://www.w3.org/2000/svg" aria-label="Direct" className="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>Direct</title><line fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="2" x1="22" x2="9.218" y1="3" y2="10.083"/><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" strokeLinejoin="round" strokeWidth="2"/></svg>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Direct"
+      className="x1lliihq x1n2onr6 x5n08af"
+      fill="currentColor"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24">
+      <title>Direct</title>
+      <line
+        fill="none"
+        stroke="currentColor"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        x1="22"
+        x2="9.218"
+        y1="3"
+        y2="10.083"
+      />
+      <polygon
+        fill="none"
+        points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
+        stroke="currentColor"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
     // <svg
     //   xmlns="http://www.w3.org/2000/svg"
     //   aria-label="Direct"
@@ -371,28 +398,24 @@ export const svg = {
       <circle cx="18" cy="12" r="1.5" />
     </svg>
   ),
-  heart: 
-
-  <svg
-  xmlns="http://www.w3.org/2000/svg"
-  aria-label="Like"
-  className="x1lliihq x1n2onr6 x5n08af"
-  role="img"
-  viewBox="0 0 24 24"
-  width="24"
-  height="24"
->
-  <title>Like</title>
-  <path
-    fill="#d11d13"
-    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 
+  heart: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Like"
+      className="x1lliihq x1n2onr6 x5n08af"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24">
+      <title>Like</title>
+      <path
+        fill="#d11d13"
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 
        5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 
        2.09C13.09 3.81 14.76 3 16.5 
        3 19.58 3 22 5.42 22 8.5c0 
        3.78-3.4 6.86-8.55 11.54L12 21.35z"
-  />
-</svg>
-
-
-
+      />
+    </svg>
+  ),
 };

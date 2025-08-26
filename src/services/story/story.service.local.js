@@ -50,14 +50,9 @@ async function save(story) {
         }
         savedStory = await storageService.put(STORAGE_KEY, storyToSave)
     } else {
-        const storyToSave = {
-            txt: story.txt,
-            speed: story.speed,
-            // Later, owner is set by the backend
-            owner: userService.getLoggedinUser(),
-            msgs: []
-        }
+        const storyToSave ={...story,likedBy:[],comments:[]}
         savedStory = await storageService.post(STORAGE_KEY, storyToSave)
+        console.log('story from ssave service', savedStory);
     }
     return savedStory
 }

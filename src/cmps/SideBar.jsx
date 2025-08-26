@@ -28,7 +28,7 @@ export function SideBar() {
         <NavLink to="reels"><span>{svg.reels}</span><span className="nav-title" >Reels</span></NavLink>
         <NavLink to="direct"><span>{svg.direct}</span><span className="nav-title" >Messages</span></NavLink>
         <NavLink to="review"><span>{svg.notification}</span><span className="nav-title">Notifications  </span></NavLink>
-        <NavLink to="story/add"><span>{svg.newPost}</span><span className="nav-title" >Create</span></NavLink>
+        <NavLink to="story/edit"><span>{svg.newPost}</span><span className="nav-title" >Create</span></NavLink>
         <NavLink to="user/:id"><span>{svg.profile}</span><span className="nav-title">Profile</span></NavLink>
  
 		

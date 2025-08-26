@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
+
 
 import {
   loadStories,
@@ -21,17 +23,10 @@ export function StoryIndex() {
   const stories = useSelector((storeState) => storeState.storyModule.stories);
 
   useEffect(() => {
-    loadStories(filterBy);
-  }, [filterBy]);
+    loadStories();
+  }, []);
 
-  async function onRemoveStory(storyId) {
-    try {
-      await removeStory(storyId);
-      showSuccessMsg("story removed");
-    } catch (err) {
-      showErrorMsg("Cannot remove story");
-    }
-  }
+ 
   async function addComment(storyId, newComment) {
     try {
       await addStoryComment(storyId, newComment);
@@ -68,9 +63,8 @@ export function StoryIndex() {
   async function onLikeStory(userId, storyId) {
     console.log('New Like from: userId to" storyId', userId, storyId);
     const likedStoryIds = await userService.addLikedStory(userId, storyId);
-
   }
-
+  console.log("stories", stories);
   return (
     <section className="story-index">
       {/* <header>
@@ -79,10 +73,8 @@ export function StoryIndex() {
         )}
       </header> */}
       {/* <StoryFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
-      <StoryList
-        stories={stories}
-        addComment={addComment}
-      />
+      <StoryList stories={stories} addComment={addComment} />
+      <Outlet />
     </section>
   );
 }

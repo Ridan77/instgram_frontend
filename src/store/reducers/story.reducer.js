@@ -26,7 +26,7 @@ export function storyReducer(state = initialState, action) {
             newState = { ...state, stories, lastRemovedStory }
             break
         case ADD_STORY:
-            newState = { ...state, stories: [...state.stories, action.story] }
+            newState = { ...state, stories: [ action.story,...state.stories,] }
             break
         case UPDATE_STORY:
             stories = state.stories.map(story => (story._id === action.story._id) ? action.story : story)

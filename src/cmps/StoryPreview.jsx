@@ -36,8 +36,7 @@ export function StoryPreview({ story, addComment,showImage }) {
     void heart.offsetWidth; 
     heart.classList.add("pop");
   }
-console.log('userLikes', userLikes);
-console.log('StoryLikes', storyLikes);
+
   return (
     <article className="story-preview">
       <div className="user-preview">
@@ -57,7 +56,7 @@ console.log('StoryLikes', storyLikes);
         <span onClick={() => console.log("click")}>{svg.comment}</span>
         <span onClick={() => console.log("click")}>{svg.direct}</span>
       </div>
-      {storyLikes && <p>{storyLikes} Likes</p>}
+      {storyLikes>0 && <p>{storyLikes} Likes</p>}
       <p>
         <Link className="story-preview-img" to={`/user/${story.by._id}`}>
           <span className="bold">{story.by.fullname} </span>

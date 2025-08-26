@@ -3,8 +3,7 @@ import { useState } from "react";
 import { Fragment } from "react";
 import { svg } from "./Svgs";
 
-export function Modal({ children,isOpen, onClose}) {
-  if (!isOpen) return null;
+export function Modal({ children, onClose}) {
 
   return (
     <Fragment>

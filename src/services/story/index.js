@@ -1,16 +1,15 @@
 const { DEV, VITE_LOCAL } = import.meta.env
 
+import { userService } from '../user'
 import { getRandomIntInclusive, makeId } from '../util.service'
 
 import { storyService as local } from './story.service.local'
 import { storyService as remote } from './story.service.remote'
 
 function getEmptyStory() {
+    const {_id, fullname, imgUrl }=userService.getLoggedinUser()
 	return {
-        _id: '',
-		vendor: makeId(),
-		speed: getRandomIntInclusive(80, 240),
-		msgs: [],
+      by: {_id, fullname, imgUrl }
 	}
 }
 
