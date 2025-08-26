@@ -62,7 +62,6 @@ export function StoryDetails() {
       showErrorMsg("Cannot remove story");
     }
   }
-  console.log(user);
 
   if (!story || isLoading) return <p>Later</p>;
   return (
@@ -72,17 +71,16 @@ export function StoryDetails() {
           <img className="details-img" src={story.imgUrl} alt="" />
           <section className="details-info">
             <img className="mini-user-img" src={story.by.imgUrl} alt="" />
-            <div>
+            <div className="flex-align">
               <span className="bold">{story.by.fullname}</span>
               <span>{svg.more}</span>
             </div>
-            <div className="scrollable" >
               <img className="mini-user-img" src={story.by.imgUrl} alt="" />
-              <p>
-                <span className="bold">{story.by.fullname} </span>
-                {story.txt}
-              </p>
-            </div>
+              <span className="bold">{story.by.fullname} </span>
+              <div
+
+               className="scrollable text-row" >{story.txt}
+              </div>
             <div className="actions">
               <span
                 className="like-heart"

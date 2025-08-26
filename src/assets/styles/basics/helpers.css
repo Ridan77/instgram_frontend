@@ -36,10 +36,9 @@
 
 .scrollable {
   overflow-y: auto;
-  grid-column: 1/-1;
 }
 .scrollable::-webkit-scrollbar {
-  display: none
+  display: none;
 }
 
 .file-input {
@@ -48,4 +47,10 @@
 /* Simple and useful CSS Debugging Technique */
 .debug * {
   outline: 1px solid gold;
+}
+
+.flex-align {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

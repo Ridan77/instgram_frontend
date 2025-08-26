@@ -17,18 +17,10 @@
 .story-preview-img img {
   width: 100%;
 }
-.actions {
+ .actions {
   margin-top: 10px;
-  display: flex;
-  align-items: center;
 
-  span:nth-child(2) svg {
-    margin-left: 10px;
-  }
-  span:nth-child(3) svg {
-    margin-left: 10px;
-  }
-}
+} 
 .preview-comments {
   color: var(--gray-for-date);
 }
@@ -52,8 +44,8 @@
   transform: scale(2);
 }
 .like-heart:hover {
-  transform: scale(1.1);
-    background-color: inherit;
+  /* transform: scale(1.1); */
+    color: var(--gray-for-date);
 
 }
 

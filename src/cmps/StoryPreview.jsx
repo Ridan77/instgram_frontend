@@ -46,8 +46,7 @@ export function StoryPreview({ story, addComment, showImage }) {
       console.error("Failed to update like:", err);
     }
   }
-  
-  console.log("userLikes", userLikes);
+
   return (
     <article className="story-preview">
       <div className="user-preview">
@@ -64,8 +63,10 @@ export function StoryPreview({ story, addComment, showImage }) {
         <span className="like-heart" onClick={() => onLikeStory(story._id)}>
           {userLikes.includes(story._id) ? svg.heart : svg.notification}
         </span>
+         <Link className="comment-preview" to={`/story/${story._id}`}>
+        {svg.comment}
+        </Link>
 
-        <span onClick={() => console.log("click")}>{svg.comment}</span>
         <span onClick={() => console.log("click")}>{svg.direct}</span>
       </div>
       {storyLikes > 0 && <p>{storyLikes} Likes</p>}
