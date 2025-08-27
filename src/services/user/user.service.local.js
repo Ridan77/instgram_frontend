@@ -32,16 +32,16 @@ function remove(userId) {
     return storageService.remove('user', userId)
 }
 
-async function update({ _id, score }) {
-    const user = await storageService.get('user', _id)
-    user.score = score
-    await storageService.put('user', user)
+async function update(userToSave) {
+    const user = await storageService.get('user', userToSave._id)
+    const userToUpdate = {...user,...userToSave}
+    const savedUser = await storageService.put('user', userToUpdate)
 
     // When admin updates other user's details, do not update loggedinUser
-    const loggedinUser = getLoggedinUser()
-    if (loggedinUser._id === user._id) saveLoggedinUser(user)
+    // const loggedinUser = getLoggedinUser()
+    // if (loggedinUser._id === user._id) saveLoggedinUser(user)
 
-    return user
+    return savedUser
 }
 
 async function login(userCred) {
@@ -53,7 +53,7 @@ async function login(userCred) {
 
 async function signup(userCred) {
     if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
-    userCred.score = 10000
+    userCred.likedStoryIds =[]
 
     const user = await storageService.post('user', userCred)
     return saveLoggedinUser(user)

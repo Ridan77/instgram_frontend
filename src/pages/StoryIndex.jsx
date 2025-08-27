@@ -17,6 +17,7 @@ import { userService } from "../services/user";
 import { StoryList } from "../cmps/StoryList.jsx";
 import { StoryFilter } from "../cmps/storyFilter";
 import { LoginSignup } from "./LoginSignup.jsx";
+import { updateUser } from "../store/actions/user.actions.js";
 
 export function StoryIndex() {
   const [filterBy, setFilterBy] = useState(storyService.getDefaultFilter());
@@ -60,17 +61,34 @@ export function StoryIndex() {
     }
   }
 
-  async function onLikeStory(userId, storyId) {
-    console.log('New Like from: userId to" storyId', userId, storyId);
-    const likedStoryIds = await userService.addLikedStory(userId, storyId);
+  async function onLikeStory(story) {
+    const storyToSave = { ...story };
+    const isLiked = story.likedBy.some((item) => item._id === user._id);
+    const { _id, imgUrl, fullname } = user;
+    storyToSave.likedBy = isLiked
+      ? storyToSave.likedBy.filter((like) => like._id !== user._id)
+      : [...storyToSave.likedBy, { _id, imgUrl, fullname }];
+    updateStory(storyToSave);
+    const userToSave = { ...user };
+    const isUserLiked = user.likedStoryIds.some((item) => item === story._id);
+    console.log("isUserLiked", isUserLiked);
+    const test = [...user.likedStoryIds]
+    console.log('test', test);
+    userToSave.likedStoryIds = isUserLiked
+      ? userToSave.likedStoryIds.filter((like) => like !== story._id)
+      : [...user.likedStoryIds, story._id];
+    console.log("userToSave.likedStoryId", userToSave.likedStoryIds);
+    updateUser(userToSave);
   }
+
+  console.log('user.likedStoryIds', user.likedStoryIds);
   return (
     <section className="story-index">
-    {!user && <Navigate to="/auth/login" replace />}
-        {/* // <NavLink to="auth/login" className="login-link">
+      {!user && <Navigate to="/auth/login" replace />}
+      {/* // <NavLink to="auth/login" className="login-link">
         //   Please login....
         // </NavLink> */}
-      
+
       {/* <header>
         {userService.getLoggedinUser() && (
           <button onClick={onAddStory}>Add a story</button>
@@ -79,7 +97,11 @@ export function StoryIndex() {
       {/* <StoryFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
       {user && (
         <>
-          <StoryList stories={stories} addComment={addComment} />
+          <StoryList
+            stories={stories}
+            addComment={addComment}
+            onLikeStory={onLikeStory}
+          />
           <Outlet />
         </>
       )}

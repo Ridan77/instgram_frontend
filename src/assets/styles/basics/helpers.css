@@ -26,12 +26,19 @@
   margin-left: 300px;
 }
 
+.full-grid{
+  grid-column: 1/-1;
+}
 .gray {
   color: var(--gray-for-date);
 }
 
 .full {
   width: 100%;
+}
+
+.time{
+  font-size: 0.8em;
 }
 
 .scrollable {

@@ -22,15 +22,13 @@ export function RootCmp() {
       <SideBar />
       <UserMsg />
       <Routes>
-        {/* <Route path="story" element={<StoryIndex />} /> */}
-
+        <Route path="/" element={<StoryIndex />} />
         <Route path="/story" element={<StoryIndex />}>
           <Route path="edit/:storyId?" element={<StoryEdit />} />
         </Route>
         <Route path="story/:storyId" element={<StoryDetails />} />
         <Route path="user/:id" element={<UserDetails />} />
         <Route path="under" element={<UnderConstruction />} />
-        {/* <Route path="story/edit" element={<StoryEdit />} /> */}
         <Route path="review" element={<ReviewIndex />} />
         <Route path="chat" element={<ChatApp />} />
         <Route path="admin" element={<AdminIndex />} />

@@ -64,7 +64,6 @@ export function StoryEdit() {
       // () => resetForm();
     }
   }
-  console.log("storyToEdit", storyToEdit);
 
   if (!storyToEdit) return <div>Wait</div>;
   return (

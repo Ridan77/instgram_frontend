@@ -1,7 +1,7 @@
 .details-container {
   display: flex;
   width: 100%;
-  height: 80vh ;
+  height: 80vh;
 
   .details-img {
     width: 50%;
@@ -14,12 +14,19 @@
     max-height: 100%;
     display: grid;
     grid-template-columns: 40px 1fr;
-    grid-template-rows: 40px 40px 1fr 40px 40px;
+    grid-template-rows: 40px 30px 40px 1fr 40px 40px;
     flex-direction: column;
     align-items: center;
     font-size: 0.8em;
     padding: 10px;
     text-align: start;
+    
+    .location{
+      margin-left: 42px;
+      place-self: start;
+      font-size: 0.8em;
+      border-bottom: 1px black solid;
+    }
 
     img {
       width: 30px;
@@ -30,18 +37,17 @@
     .text-row {
       grid-column: 1/-1;
       overflow-y: auto;
-      max-height: 100%; 
+      max-height: 100%;
       place-self: start;
     }
-.actions{
-  grid-column: 1/-1;
-  display: flex;
-  gap:10px
-}
-.likes-count{
-  grid-column: 1/-1;
-
-}
-
+    .actions {
+      grid-column: 1/-1;
+      display: flex;
+      gap: 10px;
+    }
+    .likes-count {
+      grid-column: 1/-1;
+      margin-block-end: 0em;
+    }
   }
 }

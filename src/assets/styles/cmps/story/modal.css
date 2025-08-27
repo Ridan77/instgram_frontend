@@ -1,46 +1,42 @@
-
-
 .modal-backdrop {
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.5); 
-    backdrop-filter: blur(3px);
-    inset: 0;
-    height: 100vh;
-    width: 100vw;
-    z-index: 2;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  inset: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 2;
 }
 
 .modal-content {
+  position: fixed;
+  font-size: 1.1em;
+  inset: 0;
+  width: 70vw;
+  height: fit-content;
+  padding: 0;
+  border-radius: 5px;
+  margin: auto;
+  z-index: 3;
+  background-color: white;
+
+  .close-btn {
     position: fixed;
-    font-size: 1.1em;
-    inset: 0;
-    width: 70vw;
-    height: fit-content;
-    padding: 33px;
-    border-radius: 10px;
-    margin: auto;
+    top: 10px;
+    right: 10px;
     z-index: 3;
-    outline: 2px solid white;
-    background-color: white;
-    
 
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: transparent;
-        color: white;
-        z-index: 3;
-        
+    .close-svg{
+        color:white;
+        font-size: 1.8em
     }
+  }
 
-    p {
-        /* margin: 15px; */
-    }
-
-    
+  p {
+    /* margin: 15px; */
+  }
 }
-.modal-header{
-    margin-bottom: 10px;
-    font-size: 1.2em;
+.modal-header {
+  margin-bottom: 10px;
+  font-size: 1.2em;
 }

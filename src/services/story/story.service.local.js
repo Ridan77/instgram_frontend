@@ -19,11 +19,14 @@ _createStrories()
 
 async function query(filterBy = { txt: '' }) {
     var stories = await storageService.query(STORAGE_KEY)
-    const { txt, sortField, sortDir } = filterBy
+    const { txt, sortField, sortDir, userId } = filterBy
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
         stories = stories.filter(story => regex.test(story.txt) || regex.test(story.description))
+    }
+    if (userId) {
+        stories = stories.filter(story => story.by._id === userId)
     }
     if (sortField === 'txt') {
         stories.sort((story1, story2) =>
@@ -44,13 +47,8 @@ async function remove(storyId) {
 async function save(story) {
     var savedStory
     if (story._id) {
-        const storyToSave = {
-            _id: story._id,
-            txt: story.txt
-        }
-        console.log(story);
 
-        savedStory = await storageService.put(STORAGE_KEY, storyToSave)
+        savedStory = await storageService.put(STORAGE_KEY, story)
     } else {
         const storyToSave = { ...story, likedBy: [], comments: [], createdAt: Date.now() }
         savedStory = await storageService.post(STORAGE_KEY, storyToSave)

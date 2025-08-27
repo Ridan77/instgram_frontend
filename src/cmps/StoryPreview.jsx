@@ -5,11 +5,10 @@ import { useState } from "react";
 import { AddComment } from "@mui/icons-material";
 import { userService } from "../services/user";
 import { addLike } from "../store/actions/story.actions";
-export function StoryPreview({ story, addComment, showImage }) {
+import { useSelector } from "react-redux";
+export function StoryPreview({ story, addComment, showImage, onLikeStory }) {
   const [comments, setComments] = useState([]);
-  const user = userService.getLoggedinUser();
-  const [userLikes, setUserLikes] = useState(user.likedStoryIds || []);
-  const [storyLikes, setStoryLikes] = useState(story.likedBy.length);
+  const user = useSelector((storeState) => storeState.userModule.user);
 
   function onAddComment(ev) {
     ev.preventDefault();
@@ -25,27 +24,29 @@ export function StoryPreview({ story, addComment, showImage }) {
     setComments([...comments, newComment]);
   }
 
-  //optimistic
-  async function onLikeStory(storyId) {
-    const isLiked = userLikes.includes(storyId);
-    setUserLikes((prev) =>
-      isLiked ? prev.filter((id) => id !== storyId) : [...prev, storyId]
-    );
-    setStoryLikes((prev) => (isLiked ? prev - 1 : prev + 1));
-    const heart = document.querySelector(".like-heart");
-    heart.classList.remove("pop");
-    void heart.offsetWidth; // force reflow
-    heart.classList.add("pop");
-    try {
-      const newLikes = await addLike(user._id, storyId);
-    } catch (err) {
-      setUserLikes((prev) =>
-        isLiked ? [...prev, storyId] : prev.filter((id) => id !== storyId)
-      )
-      setStoryLikes((prev) => (isLiked ? prev + 1 : prev - 1));
-      console.error("Failed to update like:", err);
-    }
-  }
+  // //optimistic
+  // async function onLikeStory(storyId) {
+  //   const isLiked = userLikes.includes(storyId);
+  //   setUserLikes((prev) =>
+  //     isLiked ? prev.filter((id) => id !== storyId) : [...prev, storyId]
+  //   );
+  //   setStoryLikes((prev) => (isLiked ? prev - 1 : prev + 1));
+  //   try {
+  //     const newLikes = await addLike(user._id, storyId);
+  //   } catch (err) {
+  //     setUserLikes((prev) =>
+  //       isLiked ? [...prev, storyId] : prev.filter((id) => id !== storyId)
+  //     )
+  //     setStoryLikes((prev) => (isLiked ? prev + 1 : prev - 1));
+  //     console.error("Failed to update like:", err);
+  //   }
+  // }
+// console.log('user.likedStoryIds', user.likedStoryIds);
+// console.log('story.likedBy', story.likedBy);
+// console.log('story._id', story._id);
+// console.log(user.likedStoryIds.includes(story._id));
+
+
 
   return (
     <article className="story-preview">
@@ -60,16 +61,16 @@ export function StoryPreview({ story, addComment, showImage }) {
         </Link>
       )}
       <div className="actions">
-        <span className="like-heart" onClick={() => onLikeStory(story._id)}>
-          {userLikes.includes(story._id) ? svg.heart : svg.notification}
+        <span className="like-heart" onClick={() => onLikeStory(story)}>
+          {user.likedStoryIds?.includes(story._id) ? svg.heart : svg.notification}
         </span>
-         <Link className="comment-preview" to={`/story/${story._id}`}>
-        {svg.comment}
+        <Link className="comment-preview" to={`/story/${story._id}`}>
+          {svg.comment}
         </Link>
 
         <span onClick={() => console.log("click")}>{svg.direct}</span>
       </div>
-      {storyLikes > 0 && <p>{storyLikes} Likes</p>}
+      {story.likedBy?.length > 0 && <p>{story.likedBy.length} Likes</p>}
       <p>
         <Link className="story-preview-img" to={`/user/${story.by._id}`}>
           <span className="bold">{story.by.fullname} </span>

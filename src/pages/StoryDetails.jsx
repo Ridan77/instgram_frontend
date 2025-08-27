@@ -21,7 +21,6 @@ export function StoryDetails() {
     (storeState) => storeState.systemModule.isLoading
   );
   const user = useSelector((storeState) => storeState.userModule.user);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -63,6 +62,22 @@ export function StoryDetails() {
     }
   }
 
+    async function onLikeStory(storyId) {
+      const isLiked = userLikes.includes(storyId);
+      setUserLikes((prev) => isLiked ? prev.filter((id) => id !== storyId) : [...prev, storyId]
+      );
+      setStoryLikes((prev) => (isLiked ? prev - 1 : prev + 1));
+      try {
+        const newLikes = await addLike(user._id, storyId);
+      } catch (err) {
+        setUserLikes((prev) =>
+          isLiked ? [...prev, storyId] : prev.filter((id) => id !== storyId)
+        )
+        setStoryLikes((prev) => (isLiked ? prev + 1 : prev - 1));
+        console.error("Failed to update like:", err);
+      }
+    }
+
   if (!story || isLoading) return <p>Later</p>;
   return (
     <section className="story-details">
@@ -73,14 +88,15 @@ export function StoryDetails() {
             <img className="mini-user-img" src={story.by.imgUrl} alt="" />
             <div className="flex-align">
               <span className="bold">{story.by.fullname}</span>
-              <span>{svg.more}</span>
+              <span >{svg.more}</span>
             </div>
-              <img className="mini-user-img" src={story.by.imgUrl} alt="" />
-              <span className="bold">{story.by.fullname} </span>
-              <div
-
-               className="scrollable text-row" >{story.txt}
-              </div>
+              <span className="full-grid location">{story.loc.name}</span>
+            <img className="mini-user-img" src={story.by.imgUrl} alt="" />
+            <span className="bold">{story.by.fullname} </span>
+            <div 
+            className="scrollable text-row">{story.txt}
+            <Comments story={story} />
+            </div>
             <div className="actions">
               <span
                 className="like-heart"
@@ -93,10 +109,13 @@ export function StoryDetails() {
               <span onClick={() => console.log("click")}>{svg.comment}</span>
               <span onClick={() => console.log("click")}>{svg.direct}</span>
             </div>
-            {story.likedBy?.length > 0 && <p className="likes-count">{story.likedBy.length} Likes</p>}
+            <div className="full-grid">
 
-            {/* <StoryPreview story={story} showImage={false} /> */}
-            {/* <Comments story={story} /> */}
+              {story.likedBy?.length > 0 && (
+                <p className="likes-count">{story.likedBy.length} Likes</p>
+              )}
+              <p className="gray  time">3 Hours ago</p>
+              </div>
             <button onClick={() => navigate(`/story/edit/${storyId}`)}>
               Edit
             </button>
