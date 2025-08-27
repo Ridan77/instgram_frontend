@@ -1,7 +1,7 @@
 import { userService } from "../services/user";
 import { StoryPreview } from "./StoryPreview";
 
-export function StoryList({ stories, addComment }) {
+export function StoryList({ stories, onAddComment }) {
   function shouldShowActionBtns(story) {
     const user = userService.getLoggedinUser();
 
@@ -15,7 +15,7 @@ export function StoryList({ stories, addComment }) {
       <ul className="story-list">
         {stories.map((story) => (
           <li className="story-li " key={story._id}>
-            <StoryPreview story={story} addComment={addComment} showImage={true}  />
+            <StoryPreview story={story} onAddComment={onAddComment} showImage={true}  />
             {/* { <div className="actions"> */}
             {/* <button onClick={() => onUpdateStory(story)}>Edit</button> */}
             {/* <button onClick={() => onRemoveStory(story._id)}>x</button> */}

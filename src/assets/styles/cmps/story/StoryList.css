@@ -1,8 +1,11 @@
+.s
+
 .story-list {
   /* --min-column-size: 220px; */
   margin-top: 100px;
 
   & li {
+    background-color: green;
     display: flex;
     max-width: 470px;
     flex-direction: column;

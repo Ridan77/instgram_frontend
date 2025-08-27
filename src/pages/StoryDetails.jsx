@@ -19,13 +19,14 @@ import { userService } from "../services/user";
 export function StoryDetails() {
   const { storyId } = useParams();
   const story = useSelector((storeState) => storeState.storyModule.story);
-  console.log("story", story);
+  const comments = useSelector((storeState) => storeState.storyModule.story.comments ||[]);
+  console.log(comments);
+  
   const isLoading = useSelector(
     (storeState) => storeState.systemModule.isLoading
   );
   // const user = useSelector((storeState) => storeState.userModule.user);
   const user = userService.getLoggedinUser();
-  console.log("user", user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,13 +50,11 @@ export function StoryDetails() {
     navigate("/story");
   }
 
-  async function onAddStoryMsg(storyId) {
-    try {
-      await addStoryMsg(storyId, "bla bla " + parseInt(Math.random() * 10));
-      showSuccessMsg(`Story msg added`);
-    } catch (err) {
-      showErrorMsg("Cannot add story msg");
-    }
+  function onAddComment(ev) {
+    ev.preventDefault();
+    const value = ev.target.txt.value;
+    addStoryComment(story._id, value);
+    ev.target.txt.value = "";
   }
 
   async function onRemoveStory() {
@@ -69,7 +68,7 @@ export function StoryDetails() {
   }
 
   if (!story) return <p>Later</p>;
-  if (!story || isLoading) return <p>Later</p>;
+  if (!story || isLoading || !comments) return <p>Later</p>;
   return (
     <section className="story-details">
       <Modal onClose={onClose}>
@@ -88,11 +87,15 @@ export function StoryDetails() {
                 <span>{svg.more}</span>
               </div>
             </div>
-            <img className="mini-user-img" src={story.by.imgUrl} alt="" />
+            <img
+              className="mini-user-img mini-user"
+              src={story.by.imgUrl}
+              alt=""
+            />
             <span className="bold">{story.by.fullname} </span>
             <div className="scrollable text-row">
               <p>{story.txt}</p>
-              <Comments story={story} />
+              <Comments comments={comments} />
             </div>
             <div className="actions">
               <span
@@ -112,10 +115,22 @@ export function StoryDetails() {
               )}
               <p className="gray  time">3 Hours ago</p>
             </div>
-            <button onClick={() => navigate(`/story/edit/${storyId}`)}>
-              Edit
-            </button>
-            <button onClick={onRemoveStory}>Delete</button>
+            <form className="full-grid" onSubmit={onAddComment}>
+              <input
+                className="comment-input preview-comments"
+                placeholder="Add a Comment..."
+                type="text"
+                name="txt"
+                id=""
+                autoComplete="off"
+              />
+            </form>
+            <dialog>
+              <button onClick={() => navigate(`/story/edit/${storyId}`)}>
+                Edit
+              </button>
+              <button onClick={onRemoveStory}>Delete</button>
+            </dialog>
           </section>
         </div>
       </Modal>

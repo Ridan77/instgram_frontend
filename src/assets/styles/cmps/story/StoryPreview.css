@@ -2,6 +2,8 @@
   font-size: 0.9em;
   .actions {
    margin-top: 10px;
+   display: flex;
+   gap:10px
   
   } 
 }
@@ -30,6 +32,7 @@
 }
 .comment-input:focus {
   outline: none;
+  color: black
 }
 
 .like-heart {

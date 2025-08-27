@@ -2,17 +2,16 @@ import { Link } from "react-router-dom";
 import { Comments } from "./Comments";
 import { svg } from "./Svgs";
 import { useState } from "react";
-import { AddComment } from "@mui/icons-material";
 import {toggleLikeStory} from '../store/actions/story.actions'
 import { useSelector } from "react-redux";
-export function StoryPreview({ story, addComment, showImage }) {
+export function StoryPreview({ story, onAddComment, showImage }) {
   const [comments, setComments] = useState([]);
   const user = useSelector((storeState) => storeState.userModule.user);
 
-  function onAddComment(ev) {
+  function onSubmitComment(ev) {
     ev.preventDefault();
     const value = ev.target.txt.value;
-    addComment(story._id, value);
+    onAddComment(story._id, value);
     ev.target.txt.value = "";
     const by = {
       fullname: user.fullname,
@@ -59,9 +58,9 @@ export function StoryPreview({ story, addComment, showImage }) {
           </p>
         </Link>
       )}
-      {comments && <Comments story={{ comments: comments }} />}
+      {comments && <Comments comments={ comments } />}
       {user && (
-        <form onSubmit={onAddComment}>
+        <form onSubmit={onSubmitComment}>
           <input
             className="comment-input preview-comments"
             placeholder="Add a Comment..."

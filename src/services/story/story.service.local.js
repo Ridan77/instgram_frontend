@@ -10,7 +10,7 @@ export const storyService = {
     getById,
     save,
     remove,
-    addStoryMsg,
+    addStoryComment,
     addLikeStory
 }
 window.ss = storyService
@@ -57,7 +57,7 @@ async function save(story) {
     return savedStory
 }
 
-async function addStoryMsg(storyId, txt) {
+async function addStoryComment(storyId, txt) {
     // Later, this is all done by the backend
     const story = await getById(storyId)
     const { _id, imgUrl, fullname } = userService.getLoggedinUser()

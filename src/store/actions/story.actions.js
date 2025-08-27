@@ -1,7 +1,7 @@
 import { storyService } from '../../services/story'
-import{updateUser} from './user.actions'
+import { updateUser } from './user.actions'
 import { store } from '../store'
-import { ADD_STORY, REMOVE_STORY, SET_STORIES, SET_STORY, UPDATE_STORY, ADD_STORY_MSG } from '../reducers/story.reducer'
+import { ADD_STORY, REMOVE_STORY, SET_STORIES, SET_STORY, UPDATE_STORY, ADD_STORY_COMMENT } from '../reducers/story.reducer'
 
 export async function loadStories(filterBy) {
     try {
@@ -48,7 +48,6 @@ export async function addStory(story) {
 export async function updateStory(story) {
     try {
         const savedStory = await storyService.save(story)
-        // console.log('savedStory', savedStory);
         store.dispatch(getCmdUpdateStory(savedStory))
         return savedStory
     } catch (err) {
@@ -59,57 +58,48 @@ export async function updateStory(story) {
 
 export async function addStoryComment(storyId, txt) {
     try {
-        const msg = await storyService.addStoryMsg(storyId, txt)
-        store.dispatch(getCmdAddStoryMsg(msg))
-        return msg
+        const savedComment = await storyService.addStoryComment(storyId, txt)
+        console.log('savedComment', savedComment);
+        store.dispatch(getCmdAddStoryComment(savedComment))
+        return savedComment
     } catch (err) {
         console.log('Cannot add story msg', err)
         throw err
     }
 }
 
-// export async function addLike(userId, storyId) {
-//     try {
-//         const likes = await userService.addLikedUser(userId, storyId);
-//         console.log('likes from action', likes);
-//         return Promise.resolve(likes)
-//     } catch (err) {
-//         console.log('Cannot add story msg', err)
-//         throw err
-//     }
-// }
 
 export async function toggleLikeStory(story) {
-  try {
-    const user = store.getState().userModule.user
-    if (!user) return
+    try {
+        const user = store.getState().userModule.user
+        if (!user) return
 
-    // --- toggle on the story ---
-    const storyToSave = { ...story }
-    const isLiked = storyToSave.likedBy.some((item) => item._id === user._id)
-    // console.log('user was',isLiked,'in story')
-    const { _id, imgUrl, fullname } = user
-    
-    storyToSave.likedBy = isLiked
-    ? storyToSave.likedBy.filter((like) => like._id !== user._id)
-    : [...storyToSave.likedBy, { _id, imgUrl, fullname }]
-    await updateStory(storyToSave)
-    
-    // --- toggle on the user ---
-    const userToSave = { ...user }
-    const isUserLiked = userToSave.likedStoryIds.some((id) => id === story._id)
-    // console.log('story was',isUserLiked,'in user')
+        // --- toggle on the story ---
+        const storyToSave = { ...story }
+        const isLiked = storyToSave.likedBy.some((item) => item._id === user._id)
+        // console.log('user was',isLiked,'in story')
+        const { _id, imgUrl, fullname } = user
 
-    userToSave.likedStoryIds = isUserLiked
-      ? userToSave.likedStoryIds.filter((id) => id !== story._id)
-      : [...user.likedStoryIds, story._id]
+        storyToSave.likedBy = isLiked
+            ? storyToSave.likedBy.filter((like) => like._id !== user._id)
+            : [...storyToSave.likedBy, { _id, imgUrl, fullname }]
+        await updateStory(storyToSave)
 
-    await updateUser(userToSave)
+        // --- toggle on the user ---
+        const userToSave = { ...user }
+        const isUserLiked = userToSave.likedStoryIds.some((id) => id === story._id)
+        // console.log('story was',isUserLiked,'in user')
 
-  } catch (err) {
-    console.log("Cannot toggle like", err)
-    throw err
-  }
+        userToSave.likedStoryIds = isUserLiked
+            ? userToSave.likedStoryIds.filter((id) => id !== story._id)
+            : [...user.likedStoryIds, story._id]
+
+        await updateUser(userToSave)
+
+    } catch (err) {
+        console.log("Cannot toggle like", err)
+        throw err
+    }
 }
 
 
@@ -146,10 +136,10 @@ function getCmdUpdateStory(story) {
         story
     }
 }
-function getCmdAddStoryMsg(msg) {
+function getCmdAddStoryComment(comment) {
     return {
-        type: ADD_STORY_MSG,
-        msg
+        type: ADD_STORY_COMMENT,
+        comment
     }
 }
 

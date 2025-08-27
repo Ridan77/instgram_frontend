@@ -28,13 +28,8 @@ export function StoryIndex() {
     loadStories();
   }, [user]);
 
-  async function addComment(storyId, newComment) {
-    try {
-      await addStoryComment(storyId, newComment);
-      showSuccessMsg(`Story comment added`);
-    } catch (err) {
-      showErrorMsg("Cannot add story comment");
-    }
+  async function onAddComment(storyId, newComment) {
+     addStoryComment(storyId, newComment);   
   }
   
   return (
@@ -44,7 +39,7 @@ export function StoryIndex() {
         <>
           <StoryList
             stories={stories}
-            addComment={addComment}
+            onAddComment={onAddComment}
           />
           <Outlet />
         </>
