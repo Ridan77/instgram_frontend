@@ -45,7 +45,6 @@ export async function login(credentials) {
 export async function updateUser(userToSave) {
     try {
         const user = await userService.update(userToSave)
-        console.log('user from action', user);
         store.dispatch({
             type: SET_USER,
             user

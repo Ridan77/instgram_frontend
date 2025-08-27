@@ -7,20 +7,18 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { uploadService } from "../services/upload.service.js";
 import { svg } from "../cmps/Svgs.jsx";
 
-
 export function StoryEdit() {
   const navigate = useNavigate();
-  const [storyToEdit, setStoryToEdit] = useState();
+  const [storyToEdit, setStoryToEdit] = useState(storyService.getEmptyStory());
 
   const { storyId } = useParams();
 
   useEffect(() => {
     try {
       if (storyId) loadStory();
-      else{
-        // setStoryToEdit({...storyService.getEmptyStory(),imgUrl:"http://res.cloudinary.com/vanilla-test-images/image/upload/v1756199716/pzyvqsuoahwung4arrhm.jpg",
-        setStoryToEdit(storyService.getEmptyStory())
-        };
+      else {
+        // setStoryToEdit({...storyService.getEmptyStory(),imgUrl:"http://res.cloudinary.com/vanilla-test-images/image/upload/v1756199716/pzyvqsuoahwung4arrhm.jpg"})
+      }
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +36,7 @@ export function StoryEdit() {
 
   function handleChange(ev) {
     console.log(ev.target.value);
-    setStoryToEdit({...storyToEdit,txt: ev.target.value})
+    setStoryToEdit({ ...storyToEdit, txt: ev.target.value });
   }
   async function onFileChange(ev) {
     const url = await uploadService.uploadImg(ev);

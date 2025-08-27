@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 
 import { StoryIndex } from "./pages/StoryIndex.jsx";
 import { ReviewIndex } from "./pages/ReviewIndex.jsx";
@@ -22,7 +22,7 @@ export function RootCmp() {
       <SideBar />
       <UserMsg />
       <Routes>
-        <Route path="/" element={<StoryIndex />} />
+        <Route path="/" element={<Navigate to='/story'/>} />
         <Route path="/story" element={<StoryIndex />}>
           <Route path="edit/:storyId?" element={<StoryEdit />} />
         </Route>

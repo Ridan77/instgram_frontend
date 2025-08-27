@@ -61,3 +61,11 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.clickable{
+  cursor: pointer;
+}
+
+.clickable:hover{
+  text-decoration: underline;
+}

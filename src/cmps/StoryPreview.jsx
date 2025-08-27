@@ -3,10 +3,9 @@ import { Comments } from "./Comments";
 import { svg } from "./Svgs";
 import { useState } from "react";
 import { AddComment } from "@mui/icons-material";
-import { userService } from "../services/user";
-import { addLike } from "../store/actions/story.actions";
+import {toggleLikeStory} from '../store/actions/story.actions'
 import { useSelector } from "react-redux";
-export function StoryPreview({ story, addComment, showImage, onLikeStory }) {
+export function StoryPreview({ story, addComment, showImage }) {
   const [comments, setComments] = useState([]);
   const user = useSelector((storeState) => storeState.userModule.user);
 
@@ -20,34 +19,10 @@ export function StoryPreview({ story, addComment, showImage, onLikeStory }) {
       imgUrl: user.imgUrl,
     };
     const newComment = { by, txt: value };
-
     setComments([...comments, newComment]);
   }
 
-  // //optimistic
-  // async function onLikeStory(storyId) {
-  //   const isLiked = userLikes.includes(storyId);
-  //   setUserLikes((prev) =>
-  //     isLiked ? prev.filter((id) => id !== storyId) : [...prev, storyId]
-  //   );
-  //   setStoryLikes((prev) => (isLiked ? prev - 1 : prev + 1));
-  //   try {
-  //     const newLikes = await addLike(user._id, storyId);
-  //   } catch (err) {
-  //     setUserLikes((prev) =>
-  //       isLiked ? [...prev, storyId] : prev.filter((id) => id !== storyId)
-  //     )
-  //     setStoryLikes((prev) => (isLiked ? prev + 1 : prev - 1));
-  //     console.error("Failed to update like:", err);
-  //   }
-  // }
-// console.log('user.likedStoryIds', user.likedStoryIds);
-// console.log('story.likedBy', story.likedBy);
-// console.log('story._id', story._id);
-// console.log(user.likedStoryIds.includes(story._id));
-
-
-
+  
   return (
     <article className="story-preview">
       <div className="user-preview">
@@ -61,7 +36,7 @@ export function StoryPreview({ story, addComment, showImage, onLikeStory }) {
         </Link>
       )}
       <div className="actions">
-        <span className="like-heart" onClick={() => onLikeStory(story)}>
+        <span className="like-heart" onClick={() => toggleLikeStory(story)}>
           {user.likedStoryIds?.includes(story._id) ? svg.heart : svg.notification}
         </span>
         <Link className="comment-preview" to={`/story/${story._id}`}>
@@ -97,8 +72,6 @@ export function StoryPreview({ story, addComment, showImage, onLikeStory }) {
           />
         </form>
       )}
-
-      {/* <Comments story={story} />  */}
       <hr />
     </article>
   );
