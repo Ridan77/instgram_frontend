@@ -22,15 +22,18 @@
     text-align: start;
 
     .location {
-      margin-left: 42px;
+      /* margin-left: 42px; */
     }
     .header {
       grid-column: 1/-1;
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: 40px 1fr;
+      /* gap:20px; */
+      align-items: center;
     }
     .sub-header {
       display: flex;
+      justify-content: space-between;
       & > * {
         display: block;
       }
@@ -42,10 +45,20 @@
       display: inline;
     }
     .text-row {
+      
       grid-column: 1/-1;
       overflow-y: auto;
       max-height: 100%;
-      place-self: start;
+      display: grid;
+      grid-template-columns: 40px 1fr;
+       p{
+        grid-column: 2;
+       }
+
+       ul{
+        grid-column: 1/-1;
+       }
+
     }
     .actions {
       grid-column: 1/-1;

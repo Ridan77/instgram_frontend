@@ -1,13 +1,9 @@
 .comment {
-  p {
-    display: flex;
+  
+    display: grid;
+    grid-template-columns: 40px 1fr  40px;
     align-items: center;
-  }
-
-  .comment-txt{
-          margin-left:1em;
-
-  }
+  
 
   .commenter-pic {
     display: inline;

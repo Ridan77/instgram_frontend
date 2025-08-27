@@ -19,13 +19,13 @@ import { userService } from "../services/user";
 export function StoryDetails() {
   const { storyId } = useParams();
   const story = useSelector((storeState) => storeState.storyModule.story);
-  console.log('story', story);
+  console.log("story", story);
   const isLoading = useSelector(
     (storeState) => storeState.systemModule.isLoading
   );
   // const user = useSelector((storeState) => storeState.userModule.user);
-  const user = userService.getLoggedinUser()
-  console.log('user', user);
+  const user = userService.getLoggedinUser();
+  console.log("user", user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -68,25 +68,8 @@ export function StoryDetails() {
     }
   }
 
-  // async function onLikeStory(storyId) {
-  //   const isLiked = userLikes.includes(storyId);
-  //   setUserLikes((prev) => isLiked ? prev.filter((id) => id !== storyId) : [...prev, storyId]
-  //   );
-  //   setStoryLikes((prev) => (isLiked ? prev - 1 : prev + 1));
-  //   try {
-  //     const newLikes = await addLike(user._id, storyId);
-  //   } catch (err) {
-  //     setUserLikes((prev) =>
-  //       isLiked ? [...prev, storyId] : prev.filter((id) => id !== storyId)
-  //     )
-  //     setStoryLikes((prev) => (isLiked ? prev + 1 : prev - 1));
-  //     console.error("Failed to update like:", err);
-  //   }
-  // }
-  // console.log('story', story);
-  // console.log('user', user);
   if (!story) return <p>Later</p>;
-  // if (!story || isLoading) return <p>Later</p>;
+  if (!story || isLoading) return <p>Later</p>;
   return (
     <section className="story-details">
       <Modal onClose={onClose}>
@@ -96,10 +79,9 @@ export function StoryDetails() {
             <div className="header">
               <img className="mini-user-img" src={story.by.imgUrl} alt="" />
               <div className="sub-header">
-                <div >
-                 <div>
-                   <span className="bold">{story.by.fullname}</span>
-                  
+                <div>
+                  <div>
+                    <span className="bold">{story.by.fullname}</span>
                   </div>
                   <span className="full-grid location">{story.loc?.name}</span>
                 </div>
@@ -109,7 +91,7 @@ export function StoryDetails() {
             <img className="mini-user-img" src={story.by.imgUrl} alt="" />
             <span className="bold">{story.by.fullname} </span>
             <div className="scrollable text-row">
-              {story.txt}
+              <p>{story.txt}</p>
               <Comments story={story} />
             </div>
             <div className="actions">
