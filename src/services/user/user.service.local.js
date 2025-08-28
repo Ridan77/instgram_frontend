@@ -14,6 +14,7 @@ export const userService = {
     getLoggedinUser,
     saveLoggedinUser,
     addLikedUser,
+    toggleFollow,
 }
 
 async function getUsers() {
@@ -53,7 +54,7 @@ async function login(userCred) {
 
 async function signup(userCred) {
     if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
-    userCred.likedStoryIds =[]
+    userCred.likedStoryIds = []
 
     const user = await storageService.post('user', userCred)
     return saveLoggedinUser(user)
@@ -74,7 +75,9 @@ function saveLoggedinUser(user) {
         imgUrl: user.imgUrl,
         score: user.score,
         isAdmin: user.isAdmin,
-        likedStoryIds: user.likedStoryIds||[]
+        likedStoryIds: user.likedStoryIds || [],
+        following: user.following || [],
+        followers: user.followers || [],
     }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
@@ -122,4 +125,41 @@ async function addLikedUser(userId, storyId) {
         console.log('Cannot add liked story to user', err)
         throw err
     }
+}
+
+async function toggleFollow(userToFollowId) {
+    try {
+        const { _id } = getLoggedinUser()
+        const user = await getById(_id)
+        const userToFollow = await getById(userToFollowId)
+        const miniUser = { _id: user._id, imgUrl: user.imgUrl, fullname: user.fullname }
+        const miniUserToFollow = { _id: userToFollow._id, imgUrl: userToFollow.imgUrl, fullname: userToFollow.fullname }
+
+        const isFollowing = user.following?.some(item => item._id === userToFollowId)
+        let userToUpdate
+        if (isFollowing) {
+            userToUpdate = { ...user, following: user.following.filter(item => item._id !== userToFollowId) }
+        } else {
+            userToUpdate = { ...user, following: [...user.following || [], miniUserToFollow] }
+        }
+        let userToFollowToUpdate
+        const isFollowed = userToFollow.followers?.some(item => item._id === user._id)
+        if (isFollowed) {
+            userToFollowToUpdate = {
+                ...userToFollow, followers: userToFollow.followers.filter(item => item._id !== user._id)
+            }
+        } else {
+            userToFollowToUpdate = { ...userToFollow, followers: [...userToFollow.followers || [], miniUser] }
+        }
+        const savedUser = await storageService.put('user', userToUpdate)
+        const savedFollowUser = await storageService.put('user', userToFollowToUpdate)
+        saveLoggedinUser(savedUser)
+
+        return ({ savedUser, savedFollowUser })
+    } catch (err) {
+        console.log('Cannot add liked story to user', err)
+        throw err
+    }
+
+
 }

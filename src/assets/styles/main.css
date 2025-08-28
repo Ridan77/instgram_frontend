@@ -33,3 +33,6 @@
 @import "cmps/review/ReviewPreview";
 
 @import "cmps/user/UserDetails.css";
+
+
+@import "./setup/mq.css";

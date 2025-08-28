@@ -55,7 +55,7 @@ export async function updateUser(userToSave) {
         throw err
     }
 }
-    
+
 
 export async function signup(credentials) {
     try {
@@ -94,4 +94,14 @@ export async function loadUser(userId) {
         showErrorMsg('Cannot load user')
         console.log('Cannot load user', err)
     }
+}
+export async function toggleFollow(userToFollowId) {
+    try {
+        const users = await userService.toggleFollow(userToFollowId)
+        store.dispatch({ type: SET_WATCHED_USER, user:users.savedFollowUser})
+    }catch (err) {
+        showErrorMsg('Cannot load user')
+        console.log('Cannot load user', err)
+    }
+
 }

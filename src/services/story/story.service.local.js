@@ -89,7 +89,6 @@ async function addLikeStory(user, storyId) {
     } else {
         story.likedBy = [miniUser]
     }
-    console.log('story.likedBy', story.likedBy);
     await storageService.put(STORAGE_KEY, story)
     return story.likedBy
 

@@ -19,8 +19,7 @@ import { userService } from "../services/user";
 export function StoryDetails() {
   const { storyId } = useParams();
   const story = useSelector((storeState) => storeState.storyModule.story);
-  const comments = useSelector((storeState) => storeState.storyModule.story.comments ||[]);
-  console.log(comments);
+  const comments = useSelector((storeState) => storeState.storyModule.story?.comments ||[]);  
   
   const isLoading = useSelector(
     (storeState) => storeState.systemModule.isLoading

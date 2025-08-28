@@ -35,7 +35,6 @@ export function StoryEdit() {
   }
 
   function handleChange(ev) {
-    console.log(ev.target.value);
     setStoryToEdit({ ...storyToEdit, txt: ev.target.value });
   }
   async function onFileChange(ev) {

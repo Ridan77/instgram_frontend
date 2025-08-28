@@ -59,7 +59,6 @@ export async function updateStory(story) {
 export async function addStoryComment(storyId, txt) {
     try {
         const savedComment = await storyService.addStoryComment(storyId, txt)
-        console.log('savedComment', savedComment);
         store.dispatch(getCmdAddStoryComment(savedComment))
         return savedComment
     } catch (err) {
@@ -74,10 +73,8 @@ export async function toggleLikeStory(story) {
         const user = store.getState().userModule.user
         if (!user) return
 
-        // --- toggle on the story ---
         const storyToSave = { ...story }
         const isLiked = storyToSave.likedBy.some((item) => item._id === user._id)
-        // console.log('user was',isLiked,'in story')
         const { _id, imgUrl, fullname } = user
 
         storyToSave.likedBy = isLiked
@@ -85,10 +82,8 @@ export async function toggleLikeStory(story) {
             : [...storyToSave.likedBy, { _id, imgUrl, fullname }]
         await updateStory(storyToSave)
 
-        // --- toggle on the user ---
         const userToSave = { ...user }
         const isUserLiked = userToSave.likedStoryIds.some((id) => id === story._id)
-        // console.log('story was',isUserLiked,'in user')
 
         userToSave.likedStoryIds = isUserLiked
             ? userToSave.likedStoryIds.filter((id) => id !== story._id)
