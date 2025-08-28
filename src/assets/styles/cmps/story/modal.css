@@ -26,14 +26,10 @@
     right: 10px;
     z-index: 3;
 
-    .close-svg{
-        color:white;
-        font-size: 1.8em
+    .close-svg {
+      color: white;
+      font-size: 1.8em;
     }
-  }
-
-  p {
-    /* margin: 15px; */
   }
 }
 .modal-header {

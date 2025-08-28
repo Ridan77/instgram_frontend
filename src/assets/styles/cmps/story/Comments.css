@@ -1,18 +1,16 @@
 .comment {
-  
-    display: grid;
-    grid-template-columns: 40px 1fr  40px;
-    align-items: center;
-  
- .comment-content{
-  display: flex;
-  gap:10px;
-  max-width:100% ;
-  min-width: 0;   
-  word-wrap: break-word;
-  /* overflow-wrap: anywhere; */
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
 
- }
+  .comment-content {
+    display: flex;
+    gap: 10px;
+    max-width: 100%;
+    min-width: 0;
+    word-wrap: break-word;
+    /* overflow-wrap: anywhere; */
+  }
   .commenter-pic {
     display: inline;
     width: 30px;
@@ -20,10 +18,10 @@
     border-radius: 1em;
   }
   .comment-text {
-  white-space: normal; 
-  flex: 1;             
-}
-svg{
-  width:  1em;
-}
+    white-space: normal;
+    flex: 1;
+  }
+  svg {
+    width: 1em;
+  }
 }

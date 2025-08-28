@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Comments } from "./Comments";
 import { svg } from "./Svgs";
 import { useState } from "react";
-import {toggleLikeStory} from '../store/actions/story.actions'
+import { toggleLikeStory } from "../store/actions/story.actions";
 import { useSelector } from "react-redux";
 export function StoryPreview({ story, onAddComment, showImage }) {
   const [comments, setComments] = useState([]);
@@ -21,7 +21,6 @@ export function StoryPreview({ story, onAddComment, showImage }) {
     setComments([...comments, newComment]);
   }
 
-  
   return (
     <article className="story-preview">
       <div className="user-preview">
@@ -36,7 +35,9 @@ export function StoryPreview({ story, onAddComment, showImage }) {
       )}
       <div className="actions">
         <span className="like-heart" onClick={() => toggleLikeStory(story)}>
-          {user.likedStoryIds?.includes(story._id) ? svg.heart : svg.notification}
+          {user.likedStoryIds?.includes(story._id)
+            ? svg.heart
+            : svg.notification}
         </span>
         <Link className="comment-preview" to={`/story/${story._id}`}>
           {svg.comment}
@@ -58,7 +59,7 @@ export function StoryPreview({ story, onAddComment, showImage }) {
           </p>
         </Link>
       )}
-      {comments && <Comments comments={ comments } />}
+      {comments && <Comments comments={comments} />}
       {user && (
         <form onSubmit={onSubmitComment}>
           <input

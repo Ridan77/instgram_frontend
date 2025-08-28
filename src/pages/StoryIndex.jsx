@@ -29,23 +29,18 @@ export function StoryIndex() {
   }, [user]);
 
   async function onAddComment(storyId, newComment) {
-     addStoryComment(storyId, newComment);   
+    addStoryComment(storyId, newComment);
   }
-  
+
   return (
     <section className="story-index">
       {!user && <Navigate to="/auth/login" replace />}
       {user && (
         <>
-          <StoryList
-            stories={stories}
-            onAddComment={onAddComment}
-          />
+          <StoryList stories={stories} onAddComment={onAddComment} />
           <Outlet />
         </>
       )}
     </section>
   );
 }
-
-

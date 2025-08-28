@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { storyService } from "../services/story/index.js";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 import { addStory } from "../store/actions/story.actions.js";
-import { Link, useNavigate, useParams } from "react-router-dom";
-// import { Field, Form, Formik } from "formik";
+import { useNavigate, useParams } from "react-router-dom";
 import { uploadService } from "../services/upload.service.js";
 import { svg } from "../cmps/Svgs.jsx";
 
@@ -57,8 +56,6 @@ export function StoryEdit() {
     } catch (error) {
       console.log("Had issues in story details", error);
       showErrorMsg("Had issues in story details");
-    } finally {
-      // () => resetForm();
     }
   }
 

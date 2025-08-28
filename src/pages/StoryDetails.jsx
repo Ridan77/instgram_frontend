@@ -10,7 +10,6 @@ import {
   removeStory,
   toggleLikeStory,
 } from "../store/actions/story.actions";
-import { StoryPreview } from "../cmps/StoryPreview";
 import { Comments } from "../cmps/Comments";
 import { LOADING_DONE, LOADING_START } from "../store/reducers/system.reducer";
 import { svg } from "../cmps/Svgs";
@@ -19,12 +18,13 @@ import { userService } from "../services/user";
 export function StoryDetails() {
   const { storyId } = useParams();
   const story = useSelector((storeState) => storeState.storyModule.story);
-  const comments = useSelector((storeState) => storeState.storyModule.story?.comments ||[]);  
-  
+  const comments = useSelector(
+    (storeState) => storeState.storyModule.story?.comments || []
+  );
+
   const isLoading = useSelector(
     (storeState) => storeState.systemModule.isLoading
   );
-  // const user = useSelector((storeState) => storeState.userModule.user);
   const user = userService.getLoggedinUser();
 
   const dispatch = useDispatch();

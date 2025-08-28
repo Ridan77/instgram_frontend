@@ -1,17 +1,16 @@
 .story-preview {
   font-size: 0.9em;
   .actions {
-   margin-top: 10px;
-   display: flex;
-   gap:10px
-  
-  } 
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+  }
 }
 
 .user-preview {
   display: flex;
   align-items: center;
-  gap:10px;
+  gap: 10px;
 
   img {
     width: 30px;
@@ -32,7 +31,7 @@
 }
 .comment-input:focus {
   outline: none;
-  color: black
+  color: black;
 }
 
 .like-heart {
@@ -47,16 +46,20 @@
   transform: scale(2);
 }
 .like-heart:hover {
-  /* transform: scale(1.1); */
-    color: var(--gray-for-date);
-
+  color: var(--gray-for-date);
 }
 
 /* pop animation */
 @keyframes pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(2); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .like-heart.pop {

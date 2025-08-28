@@ -3,8 +3,7 @@ import { useState } from "react";
 import { Fragment } from "react";
 import { svg } from "./Svgs";
 
-export function Modal({ children, onClose}) {
-
+export function Modal({ children, onClose }) {
   return (
     <Fragment>
       <section onClick={onClose} className="modal-backdrop"></section>

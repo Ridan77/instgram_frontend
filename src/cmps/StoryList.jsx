@@ -15,11 +15,11 @@ export function StoryList({ stories, onAddComment }) {
       <ul className="story-list">
         {stories.map((story) => (
           <li className="story-li " key={story._id}>
-            <StoryPreview story={story} onAddComment={onAddComment} showImage={true}  />
-            {/* { <div className="actions"> */}
-            {/* <button onClick={() => onUpdateStory(story)}>Edit</button> */}
-            {/* <button onClick={() => onRemoveStory(story._id)}>x</button> */}
-            {/* </div>} */}
+            <StoryPreview
+              story={story}
+              onAddComment={onAddComment}
+              showImage={true}
+            />
           </li>
         ))}
       </ul>

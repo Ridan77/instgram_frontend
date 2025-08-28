@@ -18,7 +18,7 @@ export function UserDetails() {
   const user = useSelector((storeState) => storeState.userModule.watchedUser);
   const stories = useSelector((storeState) => storeState.storyModule.stories);
   const loggedinUser = userService.getLoggedinUser();
-  
+
   useEffect(() => {
     loadUser(params.id);
     loadStories({ userId: params.id });

@@ -3,10 +3,10 @@ import { svg } from "./Svgs";
 
 export function Comments({ comments }) {
   const navigate = useNavigate();
-  
+
   return (
     <ul>
-      {comments.map((comment,index) => {
+      {comments.map((comment, index) => {
         return (
           <li className="comment" key={index}>
             {comment.by.imgUrl && (
@@ -18,12 +18,10 @@ export function Comments({ comments }) {
                 className="bold clickable">
                 {comment.by.fullname}
               </span>
-              <span className='comment-text' >{comment.txt}</span>
+              <span className="comment-text">{comment.txt}</span>
             </span>
 
             {svg.notification}
-
-            {/* <img className="icon" onClick={()=>console.log('click')} src="/src/assets/img/heart.png" alt="" /> */}
           </li>
         );
       })}

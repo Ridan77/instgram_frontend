@@ -53,18 +53,24 @@ export function SideBar() {
         <span>{svg.newPost}</span>
         <span className="nav-title">Create</span>
       </NavLink>
-      {user && <NavLink  to={`user/${user._id}`}>
-        <span>
-          {user ? (
-            <img src={user.imgUrl} alt="" />
-          ) : (
-            <img src="src/assets/img/user1.png" alt="" />
-          )}
-        </span>
+      {user && (
+        <NavLink to={`user/${user._id}`}>
+          <span>
+            {user ? (
+              <img src={user.imgUrl} alt="" />
+            ) : (
+              <img src="src/assets/img/user1.png" alt="" />
+            )}
+          </span>
           <span className="nav-title">Profile</span>
-      </NavLink>}
+        </NavLink>
+      )}
 
-      {user && <button className="logout-btn"onClick={onLogout}>logout</button>}
+      {user && (
+        <button className="logout-btn" onClick={onLogout}>
+          logout
+        </button>
+      )}
     </nav>
   );
 }
