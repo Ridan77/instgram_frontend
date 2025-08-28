@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Modal } from "../cmps/Modal";
@@ -21,11 +21,19 @@ export function StoryDetails() {
   const comments = useSelector(
     (storeState) => storeState.storyModule.story?.comments || []
   );
-
+  const [text, setText] = useState("");
   const isLoading = useSelector(
     (storeState) => storeState.systemModule.isLoading
   );
   const user = userService.getLoggedinUser();
+  const dialogRef = useRef(null);
+
+  function openDialog() {
+    dialogRef.current?.showModal();
+  }
+  function closeDialog() {
+    dialogRef.current?.close();
+  }
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -48,12 +56,15 @@ export function StoryDetails() {
   function onClose() {
     navigate("/story");
   }
-
+  function onChange({ target }) {
+    setText(target.value);
+  }
   function onAddComment(ev) {
     ev.preventDefault();
     const value = ev.target.txt.value;
+    console.log("submitted");
     addStoryComment(story._id, value);
-    ev.target.txt.value = "";
+    setText('')
   }
 
   async function onRemoveStory() {
@@ -65,7 +76,6 @@ export function StoryDetails() {
       showErrorMsg("Cannot remove story");
     }
   }
-
   if (!story) return <p>Later</p>;
   if (!story || isLoading || !comments) return <p>Later</p>;
   return (
@@ -83,7 +93,7 @@ export function StoryDetails() {
                   </div>
                   <span className="full-grid location">{story.loc?.name}</span>
                 </div>
-                <span>{svg.more}</span>
+                <span onClick={openDialog}>{svg.more}</span>
               </div>
             </div>
             <div className="scrollable text-row">
@@ -115,22 +125,27 @@ export function StoryDetails() {
               <p className="gray  time">3 Hours ago</p>
             </div>
             <form className="full-grid" onSubmit={onAddComment}>
+              {svg.smiley}
               <input
+                onChange={onChange}
                 className="comment-input preview-comments"
-                
+                value={text}
                 placeholder="Add a Comment..."
                 type="text"
                 name="txt"
                 id=""
                 autoComplete="off"
               />
-              <button >Post</button>
+              <button disabled={!text}>Post</button>
             </form>
-            <dialog>
-              <button onClick={() => navigate(`/story/edit/${storyId}`)}>
-                Edit
-              </button>
-              <button onClick={onRemoveStory}>Delete</button>
+            <dialog ref={dialogRef}>
+              <div className="dialog-grid">
+                <button onClick={() => navigate(`/story/edit/${storyId}`)}>
+                  Edit
+                </button>
+                <button onClick={onRemoveStory}>Delete</button>
+                <button onClick={closeDialog}>Cancel</button>
+              </div>
             </dialog>
           </section>
         </div>

@@ -72,7 +72,7 @@ export function StoryPreview({ story, onAddComment, showImage }) {
           />
         </form>
       )}
-      <hr />
+      <hr className="stories-seperator"/>
     </article>
   );
 }

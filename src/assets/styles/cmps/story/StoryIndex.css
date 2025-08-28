@@ -1,3 +1,8 @@
 .story-index {
   grid-column: 3;
+
+.stories-seperator{
+  margin-top:25px;
+  color: var(--gray6)
+}
 }

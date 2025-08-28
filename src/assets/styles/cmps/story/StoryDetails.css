@@ -19,8 +19,8 @@
     align-items: center;
     font-size: 0.8em;
     text-align: start;
-    & > *:not(.mini-user-img) {
-      padding:  0px 10px;
+    & >*:not(.mini-user-img):not(dialog) {
+      padding: 0px 10px;
     }
     .mini-user {
       /* margin-left: 12px; */
@@ -81,20 +81,63 @@
       border-bottom: 1px solid var(--gray6);
       padding-bottom: 10px;
     }
-  } form{
+  }
+  form {
     display: grid;
-    grid-template-columns: 1fr 40px;
-    align-items:center;
+    grid-template-columns: 40px 1fr 40px;
+    align-items: center;
     padding: 0px 5px;
 
-    button{
+    svg {
+      scale: 2;
+      place-self: center;
+    }
+
+    button {
       color: var(--blue);
       font-weight: 700;
       justify-self: left;
       border-radius: 8px;
-      padding: 0;
+      padding-left: 0;
+    }
+    button:disabled {
+      cursor:default;
+      color: var(--gray6);
+    }
+  }
+  dialog {
+    border-radius: 8px;
+    border: none;
+    padding: 0;
+
+    button{
       
+      margin: 0;
+      padding: 50px ;
+      height: 30px;
+
+    }
+    .dialog-grid {
+      display: grid;
+      width: 50vw;
+      
+      button{
+        border-bottom: 1px var(--gray6) solid;
+        padding: 0;
+      }
     }
     
-  }
+   
+     &::backdrop {
+          background-color: rgba(0, 0, 0, 0.6);
+     }
+
+  
+  
+  
+  
+  
+  
+  
+}
 }
