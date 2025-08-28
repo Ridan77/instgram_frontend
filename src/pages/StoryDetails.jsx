@@ -86,13 +86,13 @@ export function StoryDetails() {
                 <span>{svg.more}</span>
               </div>
             </div>
-            <img
-              className="mini-user-img mini-user"
-              src={story.by.imgUrl}
-              alt=""
-            />
-            <span className="bold">{story.by.fullname} </span>
             <div className="scrollable text-row">
+              <img
+                className="mini-user-img mini-user"
+                src={story.by.imgUrl}
+                alt=""
+              />
+              <span className="bold scroll-name">{story.by.fullname} </span>
               <p>{story.txt}</p>
               <Comments comments={comments} />
             </div>
@@ -117,12 +117,14 @@ export function StoryDetails() {
             <form className="full-grid" onSubmit={onAddComment}>
               <input
                 className="comment-input preview-comments"
+                
                 placeholder="Add a Comment..."
                 type="text"
                 name="txt"
                 id=""
                 autoComplete="off"
               />
+              <button >Post</button>
             </form>
             <dialog>
               <button onClick={() => navigate(`/story/edit/${storyId}`)}>

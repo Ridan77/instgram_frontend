@@ -1,12 +1,17 @@
 @media (width < 900px) {
- .main-container {
-  grid-template-columns: 80px 1fr 630px 1fr;
-}
-
-.side-nav{
-
-    span.nav-title{
-        display: none;
-    }
-}
+  .main-container {
+    grid-template-columns: 80px 1fr 630px 1fr;
   }
+
+  .side-nav {
+    span.nav-title {
+      display: none;
+    }
+  }
+  .camera svg {
+    display: block !important;
+  }
+  .instagram svg {
+    display: none;
+  }
+}

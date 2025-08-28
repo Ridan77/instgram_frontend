@@ -32,7 +32,7 @@ async function query(filterBy = { txt: '' }) {
         stories.sort((story1, story2) =>
             story1[sortField].localeCompare(story2[sortField]) * +sortDir)
     }
-    return Promise.resolve(stories)
+    return stories
 }
 
 function getById(storyId) {

@@ -3,8 +3,7 @@
 .story-list {
   margin-top: 100px;
 
-  & li {
-    background-color: green;
+  & .story-li {
     display: flex;
     max-width: 470px;
     flex-direction: column;

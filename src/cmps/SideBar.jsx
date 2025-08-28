@@ -12,7 +12,7 @@ export function SideBar() {
 
   async function onLogout() {
     try {
-      await logout();
+      await logout()
       navigate("/auth");
       showSuccessMsg(`Bye now`);
     } catch (err) {
@@ -22,8 +22,8 @@ export function SideBar() {
   return (
     <nav className="side-nav">
       <NavLink to="">
-        <span>{svg.instagram}</span>
-        <span> </span>{" "}
+        <div className="instagram">{svg.instagram}</div>
+        <span className="camera">{svg.camera}</span>
       </NavLink>
       <NavLink to="story">
         <span>{svg.home}</span>
