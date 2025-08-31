@@ -56,7 +56,7 @@ export async function updateUser(userToSave) {
     }
 }
 
-export async function updateLikeUser(storyId) {
+export async function toggleLikeUser(storyId) {
     try {
         const user = await userService.updateLike(storyId)
         store.dispatch({

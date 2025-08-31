@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Comments } from "./Comments";
 import { svg } from "./Svgs";
 import { useState } from "react";
-import { toggleLikeStory } from "../store/actions/story.actions";
+import { toggleLike } from "../store/actions/story.actions";
 import { useSelector } from "react-redux";
 export function StoryPreview({ story, onAddComment, showImage }) {
   const [comments, setComments] = useState([]);
@@ -33,7 +33,7 @@ export function StoryPreview({ story, onAddComment, showImage }) {
         </Link>
       )}
       <div className="actions">
-        <span className="like-heart" onClick={() => toggleLikeStory(story)}>
+        <span className="like-heart" onClick={() => toggleLike(story)}>
           {user.likedStoryIds?.includes(story._id)
             ? svg.heart
             : svg.notification}

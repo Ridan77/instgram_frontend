@@ -55,7 +55,7 @@ export function UserDetails() {
           <button
             onClick={() => onToggleFollow(user._id)}
             className="follow-btn">
-            {user.followers.some(item=>item._id===loggedinUser._id) ? 'Unfollow' : 'Follow'}
+            {user.followers?.some(item=>item._id===loggedinUser._id) ? 'Unfollow' : 'Follow'}
           </button>
           <span className="more">{svg.more}</span>
         </div>

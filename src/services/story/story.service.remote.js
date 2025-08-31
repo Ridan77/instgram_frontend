@@ -32,7 +32,6 @@ async function save(story) {
 
 async function saveLike(story) {
     var savedStory
-        console.log('front',story)
         savedStory = await httpService.post(`story/like/${story._id}`)
     return savedStory
 }

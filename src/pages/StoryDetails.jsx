@@ -8,7 +8,7 @@ import {
   loadStory,
   addStoryComment,
   removeStory,
-  toggleLikeStory,
+  toggleLike,
 } from "../store/actions/story.actions";
 import { Comments } from "../cmps/Comments";
 import { LOADING_DONE, LOADING_START } from "../store/reducers/system.reducer";
@@ -109,7 +109,7 @@ export function StoryDetails() {
             <div className="actions">
               <span
                 className="like-heart"
-                onClick={() => toggleLikeStory(story)}>
+                onClick={() => toggleLike(story)}>
                 {story.likedBy?.some((like) => like._id === user._id)
                   ? svg.heart
                   : svg.notification}
