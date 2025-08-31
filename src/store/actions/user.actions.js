@@ -112,6 +112,7 @@ export async function toggleFollow(userToFollowId) {
     try {
         const users = await userService.toggleFollow(userToFollowId)
         store.dispatch({ type: SET_WATCHED_USER, user: users.savedFollowUser })
+        store.dispatch({ type: SET_USER, user: users.savedUser })
     } catch (err) {
         showErrorMsg('Cannot load user')
         console.log('Cannot load user', err)
