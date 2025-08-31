@@ -41,7 +41,9 @@ nav.side-nav {
     background-color: var(--gray5);
   }
   img {
-    width: 25px;
+    width: 30px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
   }
 }
 

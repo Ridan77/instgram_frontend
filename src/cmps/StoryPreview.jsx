@@ -24,7 +24,7 @@ export function StoryPreview({ story, onAddComment, showImage }) {
     <article className="story-preview">
       <div className="user-preview">
         <img src={story.by.imgUrl} alt="" />
-        <span className="bold">{story.by.fullname}</span>
+        <Link to={`/user/${story.by._id}`} className="bold">{story.by.fullname}</Link>
         <span className="gray">• 3d</span>
       </div>
       {showImage && (

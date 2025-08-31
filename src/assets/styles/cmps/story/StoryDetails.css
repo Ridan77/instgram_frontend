@@ -6,7 +6,7 @@
   .details-img {
     width: 50%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     background-color: black;
   }
   .details-info {
@@ -60,17 +60,18 @@
       grid-column: 1/-1;
       padding-top: 10px;
       display: grid;
-      grid-template-columns: 10px repeat(3,40px) ;
-      .like-heart{
+      grid-template-columns: 10px repeat(3, 40px);
+      .like-heart {
         grid-column: 2;
       }
-    
+
       border-top: 1px solid var(--gray6);
     }
     .stats {
       grid-column: 1/-1;
       display: grid;
       grid-template-columns: subgrid;
+      border-bottom: 1px solid var(--gray6);
 
       .likes-count {
         grid-column: 2/4;
@@ -79,8 +80,6 @@
 
       .time {
         grid-column: 2/4;
-        border-bottom: 1px solid var(--gray6);
-        padding-bottom: 10px;
       }
     }
   }
@@ -112,10 +111,15 @@
     border: none;
     padding: 0;
 
+    .dialog-grid {
+      max-width: 560px;
+    }
     button {
+      font-size: 1em;
       margin: 0;
+      width: 100%;
       padding: 50px;
-      height: 30px;
+      height: 50px;
     }
     .dialog-grid {
       display: grid;

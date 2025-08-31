@@ -3,6 +3,7 @@
 
 .stories-seperator{
   margin-top:25px;
-  color: var(--gray6)
+  border:none;
+  border-bottom:1px solid var(--gray6);
 }
-}
+} 
