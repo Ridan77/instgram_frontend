@@ -69,3 +69,8 @@
 .clickable:hover{
   text-decoration: underline;
 }
+
+.user-img{
+
+  border-radius: 6em;
+}

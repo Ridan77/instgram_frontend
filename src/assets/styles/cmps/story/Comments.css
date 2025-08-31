@@ -1,27 +1,36 @@
 .comment {
   display: grid;
-  grid-template-columns: 40px 1fr 40px;
+  grid-template-columns: 10px 50px 1fr 30px;
   align-items: center;
 
   .comment-content {
-    display: flex;
-    gap: 10px;
     max-width: 100%;
     min-width: 0;
     word-wrap: break-word;
-    /* overflow-wrap: anywhere; */
   }
   .commenter-pic {
-    display: inline;
-    width: 30px;
-    margin: 10px;
-    border-radius: 1em;
+    grid-column: 2;
+    width: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+
   }
   .comment-text {
+    margin-left: 10px;
     white-space: normal;
     flex: 1;
   }
+
   svg {
     width: 1em;
+  }
+  .comment-action {
+    font-size: 0.8em;
+    grid-column: 3;
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-auto-flow: column;
+    justify-items: start;
+    column-gap: 10px;
   }
 }

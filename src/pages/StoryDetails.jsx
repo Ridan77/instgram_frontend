@@ -83,26 +83,30 @@ export function StoryDetails() {
         <div className="details-container">
           <img className="details-img" src={story.imgUrl} alt="" />
           <section className="details-info">
-            <div className="header">
-              <img className="mini-user-img" src={story.by.imgUrl} alt="" />
-              <div className="sub-header">
+            <img className="mini-user-img" src={story.by.imgUrl} alt="" />
+            <div className="sub-header">
+              <div>
                 <div>
-                  <div>
-                    <span className="bold">{story.by.fullname}</span>
-                  </div>
-                  <span className="full-grid location">{story.loc?.name}</span>
+                  <span className="bold">{story.by.fullname}</span>
                 </div>
-                <span onClick={openDialog}>{svg.more}</span>
+                <span className="full-grid location">{story.loc?.name}</span>
               </div>
             </div>
+            <span className="more" onClick={openDialog}>
+              {svg.more}
+            </span>
             <div className="scrollable text-row">
               <img
                 className="mini-user-img mini-user"
                 src={story.by.imgUrl}
                 alt=""
               />
+              <div className="name-and-text">
               <span className="bold scroll-name">{story.by.fullname} </span>
-              <p>{story.txt}</p>
+              <span className="verified">{svg.verified}</span>
+              <span>{story.txt}</span>
+
+              </div>
               <Comments comments={story.comments} />
             </div>
             <div className="actions">
@@ -111,11 +115,10 @@ export function StoryDetails() {
                   ? svg.heart
                   : svg.notification}
               </span>
-
               <span onClick={() => console.log("click")}>{svg.comment}</span>
               <span onClick={() => console.log("click")}>{svg.direct}</span>
             </div>
-            <div className="full-grid">
+            <div className="stats">
               {story.likedBy?.length > 0 && (
                 <p className="likes-count">{story.likedBy.length} Likes</p>
               )}

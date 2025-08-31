@@ -57,7 +57,7 @@ export function SideBar() {
         <NavLink to={`user/${user._id}`}>
           <span>
             {user ? (
-              <img src={user.imgUrl} alt="" />
+              <img className="user-img" src={user.imgUrl} alt="" />
             ) : (
               <img src="src/assets/img/user1.png" alt="" />
             )}

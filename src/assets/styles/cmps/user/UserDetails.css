@@ -14,7 +14,7 @@
 
     .user-counters{
         display: grid;
-        grid-template-columns: 10px 1fr 10px 1fr 10px 1fr;
+        grid-template-columns: 15px 1fr 15px 1fr 15px 1fr;
     }
     .name-section {
       display: grid;
@@ -46,6 +46,7 @@
   }
 
   .gallery {
+    border-top: 1px solid var(--gray6);
     grid-column: 1/-1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -53,8 +54,8 @@
 
     img {
       width: 100%;
-      height: 100%;
-      aspect-ratio: 1 / 1.3; 
+      height: 80%;
+      /* aspect-ratio: 1 / 1;  */
       object-fit: cover; /* crop like Instagram */
       display: block;
     }

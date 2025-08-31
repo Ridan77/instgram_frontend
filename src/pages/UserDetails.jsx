@@ -49,7 +49,7 @@ export function UserDetails() {
   return (
     <section className="user-details">
       <section className="user-header">
-        <img src={user.imgUrl} alt="" />
+        <img src={user.imgUrl} className="user-img" alt="" />
         <div className="name-section">
           <span>{user.fullname}</span>
           <button
@@ -61,7 +61,7 @@ export function UserDetails() {
         </div>
         <div className="user-counters">
           <span className="bold">{stories?.length} </span>
-          <span className="gray"> Posts </span>
+          <span className="gray">Posts</span>
           <span className="bold">{user.followers?.length}</span>
           <span className="gray">Followers</span>
           <span className="bold">{user.following?.length}</span>

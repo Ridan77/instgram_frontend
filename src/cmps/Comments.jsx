@@ -9,9 +9,12 @@ export function Comments({ comments }) {
       {comments.map((comment, index) => {
         return (
           <li className="comment" key={index}>
-            {comment.by.imgUrl && (
-              <img className="commenter-pic" src={comment.by.imgUrl} alt="" />
-            )}
+            <img
+              className="commenter-pic user-img"
+              src={comment.by.imgUrl}
+              alt=""
+            />
+
             <span className="comment-content">
               <span
                 onClick={() => navigate(`/user/${comment.by._id}`)}
@@ -20,8 +23,12 @@ export function Comments({ comments }) {
               </span>
               <span className="comment-text">{comment.txt}</span>
             </span>
-
             {svg.notification}
+            <div className="comment-action">
+              <span className="gray">1 day</span>
+              <span className="gray bold">2 likes</span>
+              <span className="gray bold">Reply</span>
+            </div>
           </li>
         );
       })}
