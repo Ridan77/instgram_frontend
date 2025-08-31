@@ -18,14 +18,13 @@ import { userService } from "../services/user";
 export function StoryDetails() {
   const { storyId } = useParams();
   const story = useSelector((storeState) => storeState.storyModule.story);
-  const comments = useSelector(
-    (storeState) => storeState.storyModule.story?.comments || []
-  );
   const [text, setText] = useState("");
   const isLoading = useSelector(
     (storeState) => storeState.systemModule.isLoading
   );
-  const user = userService.getLoggedinUser();
+  const user = useSelector((storeState) => storeState.userModule.user);
+
+  // const user = userService.getLoggedinUser();
   const dialogRef = useRef(null);
 
   function openDialog() {
@@ -59,12 +58,12 @@ export function StoryDetails() {
   function onChange({ target }) {
     setText(target.value);
   }
-  function onAddComment(ev) {
+  async function onAddComment(ev) {
     ev.preventDefault();
     const value = ev.target.txt.value;
     console.log("submitted");
-    addStoryComment(story._id, value);
-    setText('')
+    await addStoryComment(story._id, value);
+    setText("");
   }
 
   async function onRemoveStory() {
@@ -77,7 +76,7 @@ export function StoryDetails() {
     }
   }
   if (!story) return <p>Later</p>;
-  if (!story || isLoading || !comments) return <p>Later</p>;
+  if (!story || isLoading || !story.comments) return <p>Later</p>;
   return (
     <section className="story-details">
       <Modal onClose={onClose}>
@@ -104,12 +103,10 @@ export function StoryDetails() {
               />
               <span className="bold scroll-name">{story.by.fullname} </span>
               <p>{story.txt}</p>
-              <Comments comments={comments} />
+              <Comments comments={story.comments} />
             </div>
             <div className="actions">
-              <span
-                className="like-heart"
-                onClick={() => toggleLike(story)}>
+              <span className="like-heart" onClick={() => toggleLike(story)}>
                 {story.likedBy?.some((like) => like._id === user._id)
                   ? svg.heart
                   : svg.notification}

@@ -6,6 +6,7 @@ export const storyService = {
     save,
     remove,
     saveLike,
+    addStoryComment,
     // addCarMsg
 }
 
@@ -36,7 +37,12 @@ async function saveLike(story) {
     return savedStory
 }
 
+async function addStoryComment(storyId,txt){
+    return httpService.post(`story/comment/${storyId}`,{txt})
 
+
+
+}
 // async function addCarMsg(storyId, txt) {
 //     const savedMsg = await httpService.post(`story/${storyId}/msg`, {txt})
 //     return savedMsg
