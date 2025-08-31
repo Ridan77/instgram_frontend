@@ -3,7 +3,6 @@ import { svg } from "./Svgs";
 
 export function Comments({ comments }) {
   const navigate = useNavigate();
-
   return (
     <ul>
       {comments.map((comment, index) => {

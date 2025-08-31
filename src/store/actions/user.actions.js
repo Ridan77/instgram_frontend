@@ -56,6 +56,19 @@ export async function updateUser(userToSave) {
     }
 }
 
+export async function updateLikeUser(storyId) {
+    try {
+        const user = await userService.updateLike(storyId)
+        store.dispatch({
+            type: SET_USER,
+            user
+        })
+        return user
+    } catch (err) {
+        console.log('Cannot login', err)
+        throw err
+    }
+}
 
 export async function signup(credentials) {
     try {

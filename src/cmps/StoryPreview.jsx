@@ -20,7 +20,6 @@ export function StoryPreview({ story, onAddComment, showImage }) {
     const newComment = { by, txt: value };
     setComments([...comments, newComment]);
   }
-
   return (
     <article className="story-preview">
       <div className="user-preview">
@@ -45,21 +44,21 @@ export function StoryPreview({ story, onAddComment, showImage }) {
 
         <span onClick={() => console.log("click")}>{svg.direct}</span>
       </div>
-      {story.likedBy?.length > 0 && <p>{story.likedBy.length} Likes</p>}
+      {story.likedBy.length > 0 && <p>{story.likedBy.length} Likes</p>}
       <p>
         <Link className="story-preview-img" to={`/user/${story.by._id}`}>
           <span className="bold">{story.by.fullname} </span>
         </Link>
         {story.txt}
       </p>
-      {story.comments.length && (
+      {story.comments.length>0 && (
         <Link to={`/story/${story._id}`}>
           <p className="preview-comments gray">
             View all {story.comments.length} comments
           </p>
         </Link>
       )}
-      {comments && <Comments comments={comments} />}
+      {comments.length > 0  && <Comments comments={comments} />}
       {user && (
         <form onSubmit={onSubmitComment}>
           <input

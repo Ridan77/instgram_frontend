@@ -102,19 +102,17 @@ async function addLikedUser(userId, storyId) {
     const user = await storageService.get('user', userId)
     var slikes
     try {
+        slikes = await storyService.addLikeStory(user, storyId)
         if (!user.likedStoryIds) {
             user.likedStoryIds = [storyId]
-            slikes = await storyService.addLikeStory(user, storyId)
         }
         else {
             if (user.likedStoryIds.includes(storyId)) {
                 user.likedStoryIds = user.likedStoryIds.filter(itemId => itemId !== storyId)
-                slikes = await storyService.addLikeStory(user, storyId)
 
             }
             else {
                 user.likedStoryIds.push(storyId)
-                slikes = await storyService.addLikeStory(user, storyId)
             }
         }
         await storageService.put('user', user)

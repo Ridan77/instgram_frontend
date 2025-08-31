@@ -1,5 +1,5 @@
 import { storyService } from '../../services/story'
-import { updateUser } from './user.actions'
+import { updateLikeUser } from './user.actions'
 import { store } from '../store'
 import { ADD_STORY, REMOVE_STORY, SET_STORIES, SET_STORY, UPDATE_STORY, ADD_STORY_COMMENT } from '../reducers/story.reducer'
 
@@ -56,6 +56,17 @@ export async function updateStory(story) {
     }
 }
 
+export async function updateLikeStory(story) {
+    try {
+        const savedStory = await storyService.saveLike(story)
+        store.dispatch(getCmdUpdateStory(savedStory))
+        // return savedStory
+    } catch (err) {
+        console.log('Cannot save story', err)
+        throw err
+    }
+}
+
 export async function addStoryComment(storyId, txt) {
     try {
         const savedComment = await storyService.addStoryComment(storyId, txt)
@@ -73,23 +84,23 @@ export async function toggleLikeStory(story) {
         const user = store.getState().userModule.user
         if (!user) return
 
-        const storyToSave = { ...story }
-        const isLiked = storyToSave.likedBy.some((item) => item._id === user._id)
-        const { _id, imgUrl, fullname } = user
+        // const storyToSave = { ...story }
+        // const isLiked = storyToSave.likedBy.some((item) => item._id === user._id)
+        // const { _id, imgUrl, fullname } = user
 
-        storyToSave.likedBy = isLiked
-            ? storyToSave.likedBy.filter((like) => like._id !== user._id)
-            : [...storyToSave.likedBy, { _id, imgUrl, fullname }]
-        await updateStory(storyToSave)
+        // storyToSave.likedBy = isLiked
+        //     ? storyToSave.likedBy.filter((like) => like._id !== user._id)
+        //     : [...storyToSave.likedBy, { _id, imgUrl, fullname }]
+        await updateLikeStory(story)
 
-        const userToSave = { ...user }
-        const isUserLiked = userToSave.likedStoryIds.some((id) => id === story._id)
+        // const userToSave = { ...user }
+        // const isUserLiked = userToSave.likedStoryIds.some((id) => id === story._id)
 
-        userToSave.likedStoryIds = isUserLiked
-            ? userToSave.likedStoryIds.filter((id) => id !== story._id)
-            : [...user.likedStoryIds, story._id]
+        // userToSave.likedStoryIds = isUserLiked
+        //     ? userToSave.likedStoryIds.filter((id) => id !== story._id)
+        //     : [...user.likedStoryIds, story._id]
 
-        await updateUser(userToSave)
+        await updateLikeUser(story._id)
 
     } catch (err) {
         console.log("Cannot toggle like", err)
@@ -141,7 +152,7 @@ function getCmdAddStoryComment(comment) {
 // unitTestActions()
 async function unitTestActions() {
     await loadStories()
-    await addStory(storyService.getEmptyStory())
+    // await addStory(storyService.getEmptyStory())
     await updateStory({
         _id: 'm1oC7',
         vendor: 'Story-Good',

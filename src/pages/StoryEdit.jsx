@@ -8,7 +8,7 @@ import { svg } from "../cmps/Svgs.jsx";
 
 export function StoryEdit() {
   const navigate = useNavigate();
-  const [storyToEdit, setStoryToEdit] = useState(storyService.getEmptyStory());
+  const [storyToEdit, setStoryToEdit] = useState({});
 
   const { storyId } = useParams();
 

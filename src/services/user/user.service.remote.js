@@ -12,6 +12,7 @@ export const userService = {
 	update,
     getLoggedinUser,
     saveLoggedinUser,
+	updateLike
 }
 
 function getUsers() {
@@ -34,6 +35,11 @@ async function update({ _id, score }) {
     const loggedinUser = getLoggedinUser() // Might not work because its defined in the main service???
     if (loggedinUser._id === user._id) saveLoggedinUser(user)
 
+	return user
+}
+
+async function updateLike(storyId ) {
+	const user = await httpService.post(`user/like/${storyId}`)
 	return user
 }
 

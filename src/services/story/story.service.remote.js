@@ -5,31 +5,40 @@ export const storyService = {
     getById,
     save,
     remove,
-    addCarMsg
+    saveLike,
+    // addCarMsg
 }
 
-async function query(filterBy = { txt: '', minSpeed: 0 }) {
-    return httpService.get(`car`, filterBy)
+async function query(filterBy = { txt: ''}) {
+    return httpService.get(`story`, filterBy)
 }
 
-function getById(carId) {
-    return httpService.get(`car/${carId}`)
+function getById(storyId) {
+    return httpService.get(`story/${storyId}`)
 }
 
-async function remove(carId) {
-    return httpService.delete(`car/${carId}`)
+async function remove(storyId) {
+    return httpService.delete(`story/${storyId}`)
 }
-async function save(car) {
-    var savedCar
-    if (car._id) {
-        savedCar = await httpService.put(`car/${car._id}`, car)
+async function save(story) {
+    var savedStory
+    if (story._id) {
+        savedStory = await httpService.put(`story/${story._id}`, story)
     } else {
-        savedCar = await httpService.post('car', car)
+        savedStory = await httpService.post('story', story)
     }
-    return savedCar
+    return savedStory
 }
 
-async function addCarMsg(carId, txt) {
-    const savedMsg = await httpService.post(`car/${carId}/msg`, {txt})
-    return savedMsg
+async function saveLike(story) {
+    var savedStory
+        console.log('front',story)
+        savedStory = await httpService.post(`story/like/${story._id}`)
+    return savedStory
 }
+
+
+// async function addCarMsg(storyId, txt) {
+//     const savedMsg = await httpService.post(`story/${storyId}/msg`, {txt})
+//     return savedMsg
+// }
