@@ -42,6 +42,9 @@
       width: 200px;
       grid-row: 1/-1;
       place-self: center;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+
     }
   }
 
@@ -54,9 +57,9 @@
 
     img {
       width: 100%;
-      height: 80%;
-      /* aspect-ratio: 1 / 1;  */
-      object-fit: cover; /* crop like Instagram */
+      /* height: 100%; */
+      aspect-ratio: 1 / 1.3; 
+      object-fit: cover;
       display: block;
     }
   }

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { loadUser, toggleFollow } from "../store/actions/user.actions";
 import { loadStories } from "../store/actions/story.actions";
@@ -73,12 +73,14 @@ export function UserDetails() {
         {stories &&
           stories.map((story) => {
             return (
+              <Link to={`/story/${story._id}`}>
               <img
-                key={story._id}
-                className="gallery-img"
-                src={story.imgUrl}
-                alt=""
+              key={story._id}
+              className="gallery-img"
+              src={story.imgUrl}
+              alt=""
               />
+              </Link>
             );
           })}
       </section>
