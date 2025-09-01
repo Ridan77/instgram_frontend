@@ -40,7 +40,6 @@ export function Login() {
 
   async function onLogin(ev = null) {
     if (ev) ev.preventDefault();
-
     if (!credentials.username) return;
     await login(credentials);
     navigate("/story");
@@ -65,6 +64,14 @@ export function Login() {
           </option>
         ))}
       </select>
+         <input
+        type="password"
+        name="password"
+        value={credentials.password}
+        placeholder="Password"
+        onChange={handleChange}
+        required
+      />
       <button>Login</button>
     </form>
   );

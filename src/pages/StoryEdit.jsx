@@ -5,10 +5,12 @@ import { addStory } from "../store/actions/story.actions.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { uploadService } from "../services/upload.service.js";
 import { svg } from "../cmps/Svgs.jsx";
+import { ImgUploader } from "../cmps/ImgUploader.jsx";
 
 export function StoryEdit() {
   const navigate = useNavigate();
   const [storyToEdit, setStoryToEdit] = useState({});
+  const [createStage, setCreateStage] = useState(0);
 
   const { storyId } = useParams();
 
@@ -27,6 +29,7 @@ export function StoryEdit() {
     try {
       const story = await storyService.getById(storyId);
       setStoryToEdit(story);
+      setCreateStage(2)
     } catch (error) {
       console.log("Had issues in story edit", err);
       navigate("/story");
@@ -36,14 +39,13 @@ export function StoryEdit() {
   function handleChange(ev) {
     setStoryToEdit({ ...storyToEdit, txt: ev.target.value });
   }
-  async function onFileChange(ev) {
-    const url = await uploadService.uploadImg(ev);
-    console.log(url.url);
-    setStoryToEdit((prevStory) => ({ ...prevStory, imgUrl: url.url }));
-  }
 
   function onClose() {
     navigate("/story");
+  }
+  function onUploaded(imgUrl) {
+    setStoryToEdit({ ...storyToEdit, imgUrl });
+    setCreateStage(1)
   }
 
   async function onSaveStory(ev) {
@@ -58,30 +60,25 @@ export function StoryEdit() {
       showErrorMsg("Had issues in story details");
     }
   }
-
+console.log(createStage)
   if (!storyToEdit) return <div>Wait</div>;
   return (
     <>
       <section onClick={onClose} className="modal-backdrop">
         <section onClick={(ev) => ev.stopPropagation()} className="story-edit">
-          <h2>{storyToEdit._id ? "Edit" : "Create new post"} Toy</h2>
-
+          <h4>{storyToEdit._id ? "Edit" : "Create new post"}</h4>
+          <hr />
           <form onSubmit={onSaveStory}>
-            {!storyToEdit.imgUrl && (
+            {createStage<2 && (
               <div className="edit-page1">
-                <label className="file-input-label" htmlFor="file">
-                  Select from computer
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  className="file-input"
-                  name="file"
-                  accept="image/png image/jpeg image/jpg"
-                  onChange={onFileChange}></input>
+                {createStage===0 && svg.files}
+                <div>
+                   <ImgUploader onUploaded={onUploaded} />
+                </div>
+                {createStage===1 &&<button onClick={()=>setCreateStage(2)} className="next-btn"type="button">Next</button>}
               </div>
             )}
-            {storyToEdit.imgUrl && (
+            {createStage===2 && (
               <div className="edit-page2">
                 <img className="edit-img" src={storyToEdit.imgUrl} alt="" />
                 <textarea
@@ -96,7 +93,7 @@ export function StoryEdit() {
               </div>
             )}
 
-            <button>{storyToEdit._id ? "Save" : "Add"}</button>
+            {/* {<button>{storyToEdit._id ? "Save" : "Next"}</button>} */}
             <button type="button" className="close-btn" onClick={onClose}>
               {svg.close}
             </button>

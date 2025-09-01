@@ -12,23 +12,62 @@
   position: fixed;
   font-size: 1.1em;
   inset: 0;
-  width: 70vw;
-  height: fit-content;
-  padding: 33px;
+  width: 80vw;
+  height: 50vh;
+
+  padding-top: 15px;
   border-radius: 10px;
   margin: auto;
   z-index: 3;
   background-color: white;
+  text-align: center;
+  hr{
+    border: none;
+    border-bottom: 1px solid var(--gray6);
+  }
 
   .close-btn {
-    position: absolute;
+    position: fixed;
     top: 10px;
     right: 10px;
-    color: var(--gray-icons);
     z-index: 3;
+    font-size: 1em;
+    svg {
+      color: white;
+    }
+  }
+  form {
+    height: 100%;
+    display: grid;
+  }
+  .edit-page1 {
+    display: grid;
+    gap:20px;
+    place-items: center;
+    place-content: center;
+    align-content: center;
+
+    .next-btn{
+      position: absolute;
+      top:5px;
+      right :0;
+      color: var(--blue);
+
+    }
+  
   }
   .edit-page2 {
-    display: flex;
+    width: 100%;
+    background-color: pink;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    
+
+    img{
+      height: 100%;
+      object-fit: cover;
+    }
   }
   .edit-img {
     max-height: 70vh;

@@ -17,6 +17,7 @@
 @import "cmps/AppFooter";
 @import "cmps/UserMsg";
 @import "cmps/story/modal.css";
+@import "cmps/story/ImgUploader.css";
 
 @import "cmps/story/StoryIndex";
 @import "cmps/story/StoryList";

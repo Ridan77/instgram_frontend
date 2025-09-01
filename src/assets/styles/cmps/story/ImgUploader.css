@@ -1,0 +1,12 @@
+.upload-preview{
+    display: grid;
+    
+
+    label{
+        background-color: var(--blue);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 0.8em;
+        font-size: 0.8em;
+    }
+}
