@@ -6,11 +6,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { uploadService } from "../services/upload.service.js";
 import { svg } from "../cmps/Svgs.jsx";
 import { ImgUploader } from "../cmps/ImgUploader.jsx";
+import { useSelector } from "react-redux";
 
 export function StoryEdit() {
   const navigate = useNavigate();
   const [storyToEdit, setStoryToEdit] = useState({});
   const [createStage, setCreateStage] = useState(0);
+  const user = useSelector((storeState) => storeState.userModule.user);
 
   const { storyId } = useParams();
 
@@ -29,7 +31,7 @@ export function StoryEdit() {
     try {
       const story = await storyService.getById(storyId);
       setStoryToEdit(story);
-      setCreateStage(2)
+      setCreateStage(2);
     } catch (error) {
       console.log("Had issues in story edit", err);
       navigate("/story");
@@ -45,7 +47,7 @@ export function StoryEdit() {
   }
   function onUploaded(imgUrl) {
     setStoryToEdit({ ...storyToEdit, imgUrl });
-    setCreateStage(1)
+    setCreateStage(1);
   }
 
   async function onSaveStory(ev) {
@@ -60,7 +62,7 @@ export function StoryEdit() {
       showErrorMsg("Had issues in story details");
     }
   }
-console.log(createStage)
+  console.log(createStage);
   if (!storyToEdit) return <div>Wait</div>;
   return (
     <>
@@ -69,31 +71,43 @@ console.log(createStage)
           <h4>{storyToEdit._id ? "Edit" : "Create new post"}</h4>
           <hr />
           <form onSubmit={onSaveStory}>
-            {createStage<2 && (
+            {createStage < 2 && (
               <div className="edit-page1">
-                {createStage===0 && svg.files}
+                {createStage === 0 && svg.files}
                 <div>
-                   <ImgUploader onUploaded={onUploaded} />
+                  <ImgUploader onUploaded={onUploaded} />
                 </div>
-                {createStage===1 &&<button onClick={()=>setCreateStage(2)} className="next-btn"type="button">Next</button>}
+                {createStage === 1 && (
+                  <button
+                    onClick={() => setCreateStage(2)}
+                    className="next-btn"
+                    type="button">
+                    Next
+                  </button>
+                )}
               </div>
             )}
-            {createStage===2 && (
+            {createStage === 2 && (
               <div className="edit-page2">
                 <img className="edit-img" src={storyToEdit.imgUrl} alt="" />
-                <textarea
-                  id="txt"
-                  name="txt"
-                  rows="5"
-                  cols="30"
-                  placeholder="Type something..."
-                  value={storyToEdit.txt}
-                  onChange={handleChange}
-                />
+                <section className="create-details">
+                  <div className="user-preview">
+                    <img src={user.imgUrl} alt="" />
+                    <span className="bold">{user.fullname}</span>
+                  </div>
+                  <input
+                    type="text"
+                    id="txt"
+                    name="txt"
+                    placeholder="Type something..."
+                    value={storyToEdit.txt}
+                    onChange={handleChange}
+                  />
+                </section>
+                <button className="share-btn">Share</button>
               </div>
             )}
 
-            {/* {<button>{storyToEdit._id ? "Save" : "Next"}</button>} */}
             <button type="button" className="close-btn" onClick={onClose}>
               {svg.close}
             </button>
