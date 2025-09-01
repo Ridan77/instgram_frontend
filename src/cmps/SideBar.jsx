@@ -21,17 +21,17 @@ export function SideBar() {
   }
   return (
     <nav className="side-nav">
-      <NavLink to="">
-        <div className="instagram">{svg.instagram}</div>
+      <NavLink className="disappear" to="">
+        <div className="instagram ">{svg.instagram}</div>
         <span className="camera">{svg.camera}</span>
       </NavLink>
       <NavLink to="story">
         <span>{svg.home}</span>
         <span className="nav-title">Home</span>
       </NavLink>
-      <NavLink to="search">
-        <span>{svg.search}</span>
-        <span className="nav-title">Search</span>
+      <NavLink className="disappear" to="search">
+        <span >{svg.search}</span>
+        <span className="nav-title ">Search</span>
       </NavLink>
       <NavLink to="explore">
         <span>{svg.explore}</span>
@@ -45,9 +45,9 @@ export function SideBar() {
         <span>{svg.direct}</span>
         <span className="nav-title">Messages</span>
       </NavLink>
-      <NavLink to="under">
-        <span>{svg.notification}</span>
-        <span className="nav-title">Notifications </span>
+      <NavLink className="disappear" to="under">
+        <span >{svg.notification}</span>
+        <span className="nav-title ">Notifications </span>
       </NavLink>
       <NavLink to="story/edit">
         <span>{svg.newPost}</span>

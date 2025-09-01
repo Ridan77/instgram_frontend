@@ -10,7 +10,11 @@ import { useSelector } from "react-redux";
 
 export function StoryEdit() {
   const navigate = useNavigate();
-  const [storyToEdit, setStoryToEdit] = useState({});
+  const [storyToEdit, setStoryToEdit] = useState({
+    txt: "",
+    loc: { name: "" },
+    imgUrl: "",
+  });
   const [createStage, setCreateStage] = useState(0);
   const user = useSelector((storeState) => storeState.userModule.user);
 
@@ -39,7 +43,16 @@ export function StoryEdit() {
   }
 
   function handleChange(ev) {
-    setStoryToEdit({ ...storyToEdit, txt: ev.target.value });
+    const { name, value } = ev.target;
+    if (name === "txt") {
+      setStoryToEdit({ ...storyToEdit, txt: value });
+    }
+    if (name === "loc") {
+      setStoryToEdit({
+        ...storyToEdit,
+        loc: { ...storyToEdit.loc, name: value },
+      });
+    }
   }
 
   function onClose() {
@@ -62,7 +75,7 @@ export function StoryEdit() {
       showErrorMsg("Had issues in story details");
     }
   }
-  console.log(createStage);
+
   if (!storyToEdit) return <div>Wait</div>;
   return (
     <>
@@ -95,12 +108,26 @@ export function StoryEdit() {
                     <img src={user.imgUrl} alt="" />
                     <span className="bold">{user.fullname}</span>
                   </div>
-                  <input
+                  <textarea
                     type="text"
+                    className="txt-input"
                     id="txt"
                     name="txt"
                     placeholder="Type something..."
                     value={storyToEdit.txt}
+                    onChange={handleChange}
+                  />
+                  <span className="char-count">
+                    {`${storyToEdit.txt.length}/2,200`}
+                  </span>
+                  
+                  <input
+                    className="loc-input"
+                    type="text"
+                    id="txt"
+                    name="loc"
+                    placeholder="Add location..."
+                    value={storyToEdit.loc?.name}
                     onChange={handleChange}
                   />
                 </section>
