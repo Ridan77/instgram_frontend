@@ -31,7 +31,7 @@
 
 @media (width < 750px) {
   .main-container {
-    grid-template-columns: 1fr 400px 1fr;
+    grid-template-columns: 50px minmax(1fr,400px) 50px;
   }
   .story-index {
     grid-column: 2;
@@ -43,6 +43,7 @@
 
     .gallery {
       margin-top: 100px;
+      width: 100%;
     }
   }
   nav.side-nav {

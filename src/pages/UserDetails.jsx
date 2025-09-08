@@ -67,7 +67,7 @@ export function UserDetails() {
           <span className="bold">{user.following?.length}</span>
           <span className="gray"> Following</span>
         </div>
-        <span>{user.bio}</span>
+        {/* <span>{user.bio}</span> */}
       </section>
       <section className="gallery">
         {stories &&

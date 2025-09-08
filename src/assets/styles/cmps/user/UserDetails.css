@@ -7,8 +7,8 @@
   .user-header {
     grid-column: 2;
     display: grid;
-    grid-template-columns: minmax(100px, 1fr) 2fr;
-    grid-template-rows: 50px auto auto;
+    grid-template-columns: minmax(200px, 1fr) 1fr;
+    grid-template-rows: 50px 250px;
     column-gap: 50px;
     align-items: center;
 
@@ -19,7 +19,7 @@
     .name-section {
       display: grid;
       grid-template-columns: 100px auto  100px;
-      align-items: center;
+      align-items: end;
       justify-content: start;
 
       button{
@@ -27,6 +27,8 @@
         background-color:var(--blue);
         color: white;
         border-radius: 8px;
+        margin: 0;
+        padding: 0.3em 0.8em;
       }
       
       span{
@@ -49,6 +51,7 @@
   }
 
   .gallery {
+    width: 100%;
     border-top: 1px solid var(--gray6);
     grid-column: 1/-1;
     display: grid;
@@ -57,10 +60,8 @@
 
     img {
       width: 100%;
-      /* height: 100%; */
       aspect-ratio: 1 / 1.3; 
       object-fit: cover;
-      display: block;
     }
   }
 }
