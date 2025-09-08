@@ -22,16 +22,14 @@
       width: 100%;
     }
     .details-info {
-
       grid-template-rows: auto 120px auto auto;
-  
     }
   }
 }
 
 @media (width < 750px) {
   .main-container {
-    grid-template-columns: 50px minmax(1fr,400px) 50px;
+    grid-template-columns: 50px minmax(400px, 1fr) 50px;
   }
   .story-index {
     grid-column: 2;
