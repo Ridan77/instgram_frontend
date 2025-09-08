@@ -14,13 +14,17 @@
   .instagram svg {
     display: none;
   }
+
+  .logo {
+    display: none;
+  }
   .details-container {
     flex-direction: column;
     height: 80vh;
 
     .details-img {
       width: 100%;
-      object-fit:contain;
+      object-fit: contain;
     }
     .details-info {
       grid-template-rows: auto 120px auto auto;
@@ -30,7 +34,7 @@
 
 @media (width < 750px) {
   .main-container {
-    grid-template-columns: 20px minmax(350px, 1fr) 20px;
+    grid-template-columns: 20px 1fr 20px;
   }
   .story-index {
     grid-column: 2;
@@ -38,11 +42,14 @@
 
   .user-details {
     grid-column: 2;
-    grid-template-columns: 50px 1fr 50px;
+    width: 100%;
+    grid-template-columns: 20px 1fr 20px;
 
     .gallery {
-      margin-top: 100px;
-      width: 100%;
+      grid-column: 1/-1 ;
+
+      grid-template-columns: repeat(3, 1fr);
+      /* margin-top: 100px; */
     }
   }
   nav.side-nav {

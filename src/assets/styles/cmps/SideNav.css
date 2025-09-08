@@ -23,8 +23,14 @@ nav.side-nav {
   .active {
     background-color: var(--gray5);
     font-weight: 700;
+    letter-spacing: 3;
   }
-
+  .logo {
+    font-family: Billabong;
+    font-size: 2em;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
   .instagram {
     display: block;
   }
