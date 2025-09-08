@@ -14,11 +14,24 @@
   .instagram svg {
     display: none;
   }
+  .details-container {
+    flex-direction: column;
+    height: 80vh;
+
+    .details-img {
+      width: 100%;
+    }
+    .details-info {
+
+      grid-template-rows: auto 120px auto auto;
+  
+    }
+  }
 }
 
 @media (width < 750px) {
   .main-container {
-    grid-template-columns: minmax(50px, 1fr) 530px minmax(50px, 1fr);
+    grid-template-columns: 1fr 400px 1fr;
   }
   .story-index {
     grid-column: 2;
