@@ -22,7 +22,7 @@ export function SideBar() {
   return (
     <nav className="side-nav">
       <NavLink className="disappear" to="">
-        <div className="instagram ">{svg.instagram}</div>
+        <div className="instagram ">{svg.instastam}</div>
         <span className="camera">{svg.camera}</span>
       </NavLink>
       <NavLink to="story">

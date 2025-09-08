@@ -20,6 +20,7 @@
 
     .details-img {
       width: 100%;
+      object-fit:contain;
     }
     .details-info {
       grid-template-rows: auto 120px auto auto;
@@ -29,7 +30,7 @@
 
 @media (width < 750px) {
   .main-container {
-    grid-template-columns: 50px minmax(400px, 1fr) 50px;
+    grid-template-columns: 20px minmax(350px, 1fr) 20px;
   }
   .story-index {
     grid-column: 2;
