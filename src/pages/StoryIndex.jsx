@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Outlet, NavLink, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
+import { Outlet, NavLink, Navigate } from "react-router-dom"
 
 import {
   loadStories,
@@ -8,30 +8,30 @@ import {
   updateStory,
   removeStory,
   addStoryComment,
-} from "../store/actions/story.actions";
+} from "../store/actions/story.actions"
 
-import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service";
-import { storyService } from "../services/story";
-import { userService } from "../services/user";
+import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
+import { storyService } from "../services/story"
+import { userService } from "../services/user"
 
-import { StoryList } from "../cmps/StoryList.jsx";
-import { StoryFilter } from "../cmps/storyFilter";
-import { LoginSignup } from "./LoginSignup.jsx";
-import { updateUser } from "../store/actions/user.actions.js";
+import { StoryList } from "../cmps/StoryList.jsx"
+import { StoryFilter } from "../cmps/storyFilter"
+import { LoginSignup } from "./LoginSignup.jsx"
+import { updateUser } from "../store/actions/user.actions.js"
 
 export function StoryIndex() {
-  const [filterBy, setFilterBy] = useState(storyService.getDefaultFilter());
-  const stories = useSelector((storeState) => storeState.storyModule.stories);
-  const user = useSelector((storeState) => storeState.userModule.user);
+  const [filterBy, setFilterBy] = useState(storyService.getDefaultFilter())
+  const stories = useSelector((storeState) => storeState.storyModule.stories)
+  const user = useSelector((storeState) => storeState.userModule.user)
 
   useEffect(() => {
-    loadStories();
-  }, [user]);
+    loadStories(filterBy)
+  }, [user])
 
   async function onAddComment(storyId, newComment) {
-    addStoryComment(storyId, newComment);
+    addStoryComment(storyId, newComment)
   }
-
+  console.log('stories.length', stories.length);
   return (
     <section className="story-index">
       {!user && <Navigate to="/auth/login" replace />}
@@ -42,5 +42,5 @@ export function StoryIndex() {
         </>
       )}
     </section>
-  );
+  )
 }

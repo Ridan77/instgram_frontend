@@ -18,6 +18,7 @@ function getDefaultFilter() {
         txt: '',
         sortField: '',
         sortDir: '',
+        random: true,
     }
 }
 

@@ -10,7 +10,7 @@ export const storyService = {
     // addCarMsg
 }
 
-async function query(filterBy = { txt: ''}) {
+async function query(filterBy = { txt: '' }) {
     return httpService.get(`story`, filterBy)
 }
 
@@ -33,12 +33,12 @@ async function save(story) {
 
 async function saveLike(story) {
     var savedStory
-        savedStory = await httpService.post(`story/like/${story._id}`)
+    savedStory = await httpService.post(`story/like/${story._id}`)
     return savedStory
 }
 
-async function addStoryComment(storyId,txt){
-    return httpService.post(`story/comment/${storyId}`,{txt})
+async function addStoryComment(storyId, txt) {
+    return httpService.post(`story/comment/${storyId}`, { txt })
 
 
 

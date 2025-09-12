@@ -18,18 +18,7 @@
   .logo {
     display: none;
   }
-  .details-container {
-    flex-direction: column;
-    height: 80vh;
 
-    .details-img {
-      width: 100%;
-      object-fit: contain;
-    }
-    .details-info {
-      grid-template-rows: auto 120px auto auto;
-    }
-  }
 }
 
 @media (width < 750px) {
@@ -80,5 +69,17 @@
   }
   .logout-btn {
     display: none;
+  }
+    .details-container {
+    flex-direction: column;
+    height: 80vh;
+
+    .details-img {
+      width: 100%;
+      object-fit: contain;
+    }
+    .details-info {
+      grid-template-rows: auto 120px auto auto;
+    }
   }
 }

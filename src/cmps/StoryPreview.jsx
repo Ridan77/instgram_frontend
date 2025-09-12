@@ -4,6 +4,7 @@ import { svg } from "./Svgs";
 import { useState } from "react";
 import { toggleLike } from "../store/actions/story.actions";
 import { useSelector } from "react-redux";
+import { ReadMore } from "./ReadMore"
 export function StoryPreview({ story, onAddComment, showImage }) {
   const [comments, setComments] = useState([]);
   const user = useSelector((storeState) => storeState.userModule.user);
@@ -49,7 +50,7 @@ export function StoryPreview({ story, onAddComment, showImage }) {
         <Link className="story-preview-img" to={`/user/${story.by._id}`}>
           <span className="bold">{story.by.fullname} </span>
         </Link>
-        {story.txt}
+        <ReadMore text={story.txt}/>
       </p>
       {story.comments.length>0 && (
         <Link to={`/story/${story._id}`}>
