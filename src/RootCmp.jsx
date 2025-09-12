@@ -15,6 +15,7 @@ import { UserMsg } from "./cmps/UserMsg.jsx";
 import { LoginSignup, Login, Signup } from "./pages/LoginSignup.jsx";
 import { StoryEdit } from "./pages/StoryEdit.jsx";
 import { UnderConstruction } from "./cmps/UnderConstruction.jsx";
+import { Explore } from "./pages/Explore.jsx"
 
 export function RootCmp() {
   return (
@@ -29,7 +30,7 @@ export function RootCmp() {
         <Route path="story/:storyId" element={<StoryDetails />} />
         <Route path="user/:id" element={<UserDetails />} />
         <Route path="under" element={<UnderConstruction />} />
-        <Route path="review" element={<ReviewIndex />} />
+        <Route path="explore" element={<Explore />} />
         <Route path="chat" element={<ChatApp />} />
         <Route path="admin" element={<AdminIndex />} />
         <Route path="auth" element={<LoginSignup />}>

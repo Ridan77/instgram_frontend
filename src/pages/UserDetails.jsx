@@ -12,6 +12,7 @@ import {
   SOCKET_EMIT_USER_WATCH,
 } from "../services/socket.service";
 import { svg } from "../cmps/Svgs";
+import { Gallery } from "../cmps/Gallery"
 
 export function UserDetails() {
   const params = useParams();
@@ -21,7 +22,7 @@ export function UserDetails() {
   
   useEffect(() => {
     loadUser(params.id);
-    loadStories({ userId: params.id });
+    loadStories({ userId: params.id,random:true });
 
     socketService.emit(SOCKET_EMIT_USER_WATCH, params.id);
     socketService.on(SOCKET_EVENT_USER_UPDATED, onUserUpdate);
@@ -69,21 +70,7 @@ export function UserDetails() {
         </div>
         {/* <span>{user.bio}</span> */}
       </section>
-      <section className="gallery">
-        {stories &&
-          stories.map((story) => {
-            return (
-              <Link key={story._id} to={`/story/${story._id}`}>
-              <img
-              key={story._id}
-              className="gallery-img"
-              src={story.imgUrl}
-              alt=""
-              />
-              </Link>
-            );
-          })}
-      </section>
+      <Gallery stories={stories}/>
     </section>
   );
 }

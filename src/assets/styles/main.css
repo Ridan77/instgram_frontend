@@ -26,6 +26,9 @@
 @import "cmps/story/Comments.css";
 @import "cmps/story/StoryDetails.css";
 @import "cmps/story/StoryEdit.css";
+@import "cmps/story/StoryEdit.css";
+@import "cmps/story/Gallery.css";
+@import "cmps/story/Explore.css";
 
 @import "cmps/review/ReviewEdit";
 @import "cmps/review/ReviewList";
