@@ -16,7 +16,6 @@ export function Explore() {
   if (!stories) return <div>Wait</div>
   return (
     <section className="explore">
-      <h1>Explore</h1>
       <Gallery stories={stories}/>
     </section>
   )

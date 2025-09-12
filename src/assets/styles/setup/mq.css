@@ -18,6 +18,7 @@
   .logo {
     display: none;
   }
+  
 
 }
 
@@ -81,5 +82,8 @@
     .details-info {
       grid-template-rows: auto 120px auto auto;
     }
+  }
+  .explore{
+    grid-column: 2;
   }
 }
