@@ -16,6 +16,7 @@ import { LoginSignup, Login, Signup } from "./pages/LoginSignup.jsx";
 import { StoryEdit } from "./pages/StoryEdit.jsx";
 import { UnderConstruction } from "./cmps/UnderConstruction.jsx";
 import { Explore } from "./pages/Explore.jsx"
+import { ChatButton } from "./cmps/ChatButton.jsx"
 
 export function RootCmp() {
   return (
@@ -38,6 +39,8 @@ export function RootCmp() {
           <Route path="signup" element={<Signup />} />
         </Route>
       </Routes>
+      <ChatButton/>
+      
       {/* <AppFooter /> */}
     </div>
   );

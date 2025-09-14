@@ -31,7 +31,6 @@ export function StoryIndex() {
   async function onAddComment(storyId, newComment) {
     addStoryComment(storyId, newComment)
   }
-  console.log('stories.length', stories.length);
   return (
     <section className="story-index">
       {!user && <Navigate to="/auth/login" replace />}

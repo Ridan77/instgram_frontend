@@ -1,5 +1,6 @@
 
-.chat {
+.chata {
+    grid-column: 2;
     & li {
         padding-inline-start: .3em;
         font-size: .9em;

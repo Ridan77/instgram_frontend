@@ -448,8 +448,7 @@ export const svg = {
       height="50"
       viewBox="0 0 1024 256"
       role="img"
-      aria-label="instaStam wordmark"
-      >
+      aria-label="instaStam wordmark">
       <title>instaStam</title>
       <path
         className="st0"
@@ -494,4 +493,229 @@ export const svg = {
         
     </svg>
   ),
-};
+  chat: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Direct messages"
+      className="x1lliihq x1n2onr6 xyb1xck"
+      fill="currentColor"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24">
+      <title>Direct messages</title>
+      <path
+        d="M12.003 2.001a9.705 9.705 0 1 1 0 19.4 10.876 10.876 0 0 1-2.895-.384.798.798 0 0 0-.533.04l-1.984.876a.801.801 0 0 1-1.123-.708l-.054-1.78a.806.806 0 0 0-.27-.569 9.49 9.49 0 0 1-3.14-7.175 9.65 9.65 0 0 1 10-9.7Z"
+        fill="none"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeWidth="1.739"
+      />
+      <path
+        d="M17.79 10.132a.659.659 0 0 0-.962-.873l-2.556 2.05a.63.63 0 0 1-.758.002L11.06 9.47a1.576 1.576 0 0 0-2.277.42l-2.567 3.98a.659.659 0 0 0 .961.875l2.556-2.049a.63.63 0 0 1 .759-.002l2.452 1.84a1.576 1.576 0 0 0 2.278-.42Z"
+        fillRule="evenodd"
+      />
+    </svg>
+  ),
+  expand: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Expand"
+      className="x1lliihq x1n2onr6 x5n08af"
+      fill="currentColor"
+      height="20"
+      role="img"
+      viewBox="0 0 24 24"
+      width="20">
+      <title>Expand</title>
+      <path d="M10 20H4v-6a1 1 0 0 0-2 0v7a1 1 0 0 0 1 1h7a1 1 0 0 0 0-2ZM20.999 2H14a1 1 0 0 0 0 2h5.999v6a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1Z" />
+    </svg>
+  ),
+  close1: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Close"
+      className="x1lliihq x1n2onr6 x5n08af"
+      fill="currentColor"
+      height="20"
+      role="img"
+      viewBox="0 0 24 24"
+      width="20">
+      <title>Close</title>
+      <line
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        x1="21"
+        x2="3"
+        y1="3"
+        y2="21"
+      />
+      <line
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        x1="21"
+        x2="3"
+        y1="21"
+        y2="3"
+      />
+    </svg>
+  ),
+  arrowFull: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Send"
+      className="x1lliihq x1n2onr6 x9bdzbf"
+      fill="currentColor"
+      height="18"
+      role="img"
+      viewBox="0 0 24 24"
+      width="18">
+      <title>Send</title>
+      <path
+        d="M22.91 2.388a.69.69 0 0 0-.597-.347l-20.625.002a.687.687 0 0 0-.482 1.178L7.26 9.16a.686.686 0 0 0 .778.128l7.612-3.657a.723.723 0 0 1 .937.248.688.688 0 0 1-.225.932l-7.144 4.52a.69.69 0 0 0-.3.743l2.102 8.692a.687.687 0 0 0 .566.518.655.655 0 0 0 .103.008.686.686 0 0 0 .59-.337L22.903 3.08a.688.688 0 0 0 .007-.692"
+        fillRule="evenodd"
+      />
+    </svg>
+  ),
+  voice: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Voice Clip"
+      className="x1lliihq x1n2onr6 x5n08af"
+      fill="currentColor"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24">
+      <title>Voice Clip</title>
+      <path
+        d="M19.5 10.671v.897a7.5 7.5 0 0 1-15 0v-.897"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+      <line
+        fill="none"
+        stroke="currentColor"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        x1="12"
+        x2="12"
+        y1="19.068"
+        y2="22"
+      />
+      <line
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        x1="8.706"
+        x2="15.104"
+        y1="22"
+        y2="22"
+      />
+      <path
+        d="M12 15.745a4 4 0 0 1-4-4V6a4 4 0 0 1 8 0v5.745a4 4 0 0 1-4 4Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
+  ),
+  sticker: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Choose a GIF or sticker"
+      className="x1lliihq x1n2onr6 x5n08af"
+      fill="currentColor"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24">
+      <title>Choose a GIF or sticker</title>
+      <path
+        d="M13.11 22H7.416A5.417 5.417 0 0 1 2 16.583V7.417A5.417 5.417 0 0 1 7.417 2h9.166A5.417 5.417 0 0 1 22 7.417v5.836a2.083 2.083 0 0 1-.626 1.488l-6.808 6.664A2.083 2.083 0 0 1 13.11 22Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+      <circle cx="8.238" cy="9.943" r="1.335" />
+      <circle cx="15.762" cy="9.943" r="1.335" />
+      <path
+        d="M15.174 15.23a4.887 4.887 0 0 1-6.937-.301"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+      <path
+        d="M22 10.833v1.629a1.25 1.25 0 0 1-1.25 1.25h-1.79a5.417 5.417 0 0 0-5.417 5.417v1.62a1.25 1.25 0 0 1-1.25 1.25H9.897"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
+  ),
+  photo: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Add Photo or Video"
+      className="x1lliihq x1n2onr6 x5n08af"
+      fill="currentColor"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24">
+      <title>Add Photo or Video</title>
+      <path
+        d="M6.549 5.013A1.557 1.557 0 1 0 8.106 6.57a1.557 1.557 0 0 0-1.557-1.557Z"
+        fillRule="evenodd"
+      />
+      <path
+        d="m2 18.605 3.901-3.9a.908.908 0 0 1 1.284 0l2.807 2.806a.908.908 0 0 0 1.283 0l5.534-5.534a.908.908 0 0 1 1.283 0l3.905 3.905"
+        fill="none"
+        stroke="currentColor"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+      <path
+        d="M18.44 2.004A3.56 3.56 0 0 1 22 5.564h0v12.873a3.56 3.56 0 0 1-3.56 3.56H5.568a3.56 3.56 0 0 1-3.56-3.56V5.563a3.56 3.56 0 0 1 3.56-3.56Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
+  ),
+  smily2: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Choose an emoji"
+      className="x1lliihq x1n2onr6 x5n08af"
+      fill="currentColor"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24">
+      <title>Choose an emoji</title>
+      <path d="M15.83 10.997a1.167 1.167 0 1 0 1.167 1.167 1.167 1.167 0 0 0-1.167-1.167Zm-6.5 1.167a1.167 1.167 0 1 0-1.166 1.167 1.167 1.167 0 0 0 1.166-1.167Zm5.163 3.24a3.406 3.406 0 0 1-4.982.007 1 1 0 1 0-1.557 1.256 5.397 5.397 0 0 0 8.09 0 1 1 0 0 0-1.55-1.263ZM12 .503a11.5 11.5 0 1 0 11.5 11.5A11.513 11.513 0 0 0 12 .503Zm0 21a9.5 9.5 0 1 1 9.5-9.5 9.51 9.51 0 0 1-9.5 9.5Z" />
+    </svg>
+  ),
+}

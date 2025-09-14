@@ -29,6 +29,7 @@
 @import "cmps/story/StoryEdit.css";
 @import "cmps/story/Gallery.css";
 @import "cmps/story/Explore.css";
+@import "cmps/story/ChatButton.css";
 
 @import "cmps/review/ReviewEdit";
 @import "cmps/review/ReviewList";

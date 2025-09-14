@@ -42,7 +42,7 @@ export function SideBar() {
         <span>{svg.reels}</span>
         <span className="nav-title">Reels</span>
       </NavLink>
-      <NavLink to="under">
+      <NavLink to="chat">
         <span>{svg.direct}</span>
         <span className="nav-title">Messages</span>
       </NavLink>
