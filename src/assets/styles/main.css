@@ -8,16 +8,13 @@
 
 @import "RootCmp";
 
-@import "cmps/AboutUs";
-@import "cmps/HomePage";
-@import "cmps/LoginSignup";
-@import "cmps/Chat";
 
 @import "cmps/SideNav.css";
-@import "cmps/AppFooter";
 @import "cmps/UserMsg";
-@import "cmps/story/modal.css";
-@import "cmps/story/ImgUploader.css";
+@import "cmps/modal.css";
+@import "cmps/ImgUploader.css";
+@import "cmps/Chat.css";
+@import "cmps/Loader.css";
 
 @import "cmps/story/StoryIndex";
 @import "cmps/story/StoryList";
@@ -25,16 +22,15 @@
 @import "cmps/story/StoryFilter";
 @import "cmps/story/Comments.css";
 @import "cmps/story/StoryDetails.css";
+@import "cmps/story/StoryHeader.css";
 @import "cmps/story/StoryEdit.css";
 @import "cmps/story/StoryEdit.css";
 @import "cmps/story/Gallery.css";
 @import "cmps/story/Explore.css";
-@import "cmps/story/ChatButton.css";
 
-@import "cmps/review/ReviewEdit";
-@import "cmps/review/ReviewList";
-@import "cmps/review/ReviewPreview";
 
+
+@import "cmps/user/LoginSignup.css";
 @import "cmps/user/UserDetails.css";
 
 @import "./setup/mq.css";

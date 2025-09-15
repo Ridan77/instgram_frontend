@@ -14,6 +14,8 @@ import { Comments } from "../cmps/Comments";
 import { LOADING_DONE, LOADING_START } from "../store/reducers/system.reducer";
 import { svg } from "../cmps/Svgs";
 import { userService } from "../services/user";
+import { Loader } from "../cmps/Loader"
+import { StoryHeader } from "../cmps/StoryHeader"
 
 export function StoryDetails() {
   const { storyId } = useParams();
@@ -75,26 +77,14 @@ export function StoryDetails() {
       showErrorMsg("Cannot remove story");
     }
   }
-  if (!story) return <p>Later</p>;
-  if (!story || isLoading || !story.comments) return <p>Later</p>;
+  if (!story || isLoading || !story.comments) return <Loader/>;
   return (
     <section className="story-details">
       <Modal onClose={onClose}>
         <div className="details-container">
           <img className="details-img" src={story.imgUrl} alt="" />
           <section className="details-info">
-            <img className="mini-user-img" src={story.by.imgUrl} alt="" />
-            <div className="sub-header">
-              <div>
-                <div>
-                  <span className="bold">{story.by.fullname}</span>
-                </div>
-                <span className="full-grid location">{story.loc?.name}</span>
-              </div>
-            </div>
-            <span className="more" onClick={openDialog}>
-              {svg.more}
-            </span>
+            <StoryHeader story={story} openDialog={openDialog}/>
             <div className="scrollable text-row">
               <img
                 className="mini-user-img mini-user"

@@ -24,9 +24,9 @@
       aspect-ratio: 1/1;
       object-fit: cover;
     }
-    .more {
+    /* .more {
       grid-column: 4;
-    }
+    } */
 
     img {
       width: 30px;

@@ -18,6 +18,7 @@ import { StoryList } from "../cmps/StoryList.jsx"
 import { StoryFilter } from "../cmps/storyFilter"
 import { LoginSignup } from "./LoginSignup.jsx"
 import { updateUser } from "../store/actions/user.actions.js"
+import { Loader } from "../cmps/Loader.jsx"
 
 export function StoryIndex() {
   const [filterBy, setFilterBy] = useState(storyService.getDefaultFilter())
@@ -31,6 +32,7 @@ export function StoryIndex() {
   async function onAddComment(storyId, newComment) {
     addStoryComment(storyId, newComment)
   }
+  if (!stories) return <Loader/>
   return (
     <section className="story-index">
       {!user && <Navigate to="/auth/login" replace />}

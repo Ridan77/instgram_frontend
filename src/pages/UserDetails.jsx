@@ -13,6 +13,7 @@ import {
 } from "../services/socket.service";
 import { svg } from "../cmps/Svgs";
 import { Gallery } from "../cmps/Gallery"
+import { Loader } from "../cmps/Loader"
 
 export function UserDetails() {
   const params = useParams();
@@ -46,7 +47,7 @@ export function UserDetails() {
     );
     store.dispatch({ type: "SET_WATCHED_USER", user });
   }
-  if (!user) return <div>Wait</div>;
+  if (!user) return <Loader/>;
   return (
     <section className="user-details">
       <section className="user-header">
@@ -68,9 +69,10 @@ export function UserDetails() {
           <span className="bold">{user.following?.length}</span>
           <span className="gray"> Following</span>
         </div>
-        {/* <span>{user.bio}</span> */}
       </section>
+        {/* <span>{user.bio}</span> */}
       <Gallery stories={stories}/>
+      <Loader/>
     </section>
   );
 }

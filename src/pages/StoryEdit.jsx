@@ -1,82 +1,75 @@
-import { useEffect, useRef, useState } from "react";
-import { storyService } from "../services/story/index.js";
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
-import { addStory } from "../store/actions/story.actions.js";
-import { useNavigate, useParams } from "react-router-dom";
-import { uploadService } from "../services/upload.service.js";
-import { svg } from "../cmps/Svgs.jsx";
-import { ImgUploader } from "../cmps/ImgUploader.jsx";
-import { useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react"
+import { storyService } from "../services/story/index.js"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
+import { addStory } from "../store/actions/story.actions.js"
+import { useNavigate, useParams } from "react-router-dom"
+import { uploadService } from "../services/upload.service.js"
+import { svg } from "../cmps/Svgs.jsx"
+import { ImgUploader } from "../cmps/ImgUploader.jsx"
+import { useSelector } from "react-redux"
 
 export function StoryEdit() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [storyToEdit, setStoryToEdit] = useState({
     txt: "",
     loc: { name: "" },
     imgUrl: "",
-  });
-  const [createStage, setCreateStage] = useState(0);
-  const user = useSelector((storeState) => storeState.userModule.user);
+  })
+  const [createStage, setCreateStage] = useState(0)
+  const user = useSelector((storeState) => storeState.userModule.user)
 
-  const { storyId } = useParams();
+  const { storyId } = useParams()
 
   useEffect(() => {
-    try {
-      if (storyId) loadStory();
-      else {
-        // setStoryToEdit({...storyService.getEmptyStory(),imgUrl:"http://res.cloudinary.com/vanilla-test-images/image/upload/v1756199716/pzyvqsuoahwung4arrhm.jpg"})
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+    if (storyId) loadStory()
+  }, [])
 
   async function loadStory() {
     try {
-      const story = await storyService.getById(storyId);
-      setStoryToEdit(story);
-      setCreateStage(2);
+      const story = await storyService.getById(storyId)
+      setStoryToEdit(story)
+      setCreateStage(2)
     } catch (error) {
-      console.log("Had issues in story edit", err);
-      navigate("/story");
+      console.log("Had issues in story edit", err)
+      navigate("/story")
     }
   }
 
   function handleChange(ev) {
-    const { name, value } = ev.target;
+    const { name, value } = ev.target
     if (name === "txt") {
-      setStoryToEdit({ ...storyToEdit, txt: value });
+      setStoryToEdit({ ...storyToEdit, txt: value })
     }
     if (name === "loc") {
       setStoryToEdit({
         ...storyToEdit,
         loc: { ...storyToEdit.loc, name: value },
-      });
+      })
     }
   }
 
   function onClose() {
-    navigate("/story");
+    navigate("/story")
   }
   function onUploaded(imgUrl) {
-    setStoryToEdit({ ...storyToEdit, imgUrl });
-    setCreateStage(1);
+    setStoryToEdit({ ...storyToEdit, imgUrl })
+    setCreateStage(1)
   }
 
   async function onSaveStory(ev) {
-    ev.preventDefault();
-    storyToEdit.txt = ev.target.txt.value;
+    ev.preventDefault()
+    storyToEdit.txt = ev.target.txt.value
     try {
-      await addStory(storyToEdit);
-      showSuccessMsg("Story Saved!");
-      navigate("/story");
+      await addStory(storyToEdit)
+      showSuccessMsg("Story Saved!")
+      navigate("/story")
     } catch (error) {
-      console.log("Had issues in story details", error);
-      showErrorMsg("Had issues in story details");
+      console.log("Had issues in story details", error)
+      showErrorMsg("Had issues in story details")
     }
   }
 
-  if (!storyToEdit) return <div>Wait</div>;
+  if (!storyToEdit) return <div>Wait</div>
   return (
     <>
       <section onClick={onClose} className="modal-backdrop">
@@ -120,7 +113,7 @@ export function StoryEdit() {
                   <span className="char-count">
                     {`${storyToEdit.txt.length}/2,200`}
                   </span>
-                  
+
                   <input
                     className="loc-input"
                     type="text"
@@ -142,5 +135,5 @@ export function StoryEdit() {
         </section>
       </section>
     </>
-  );
+  )
 }

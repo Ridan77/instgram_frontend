@@ -1,0 +1,21 @@
+
+.story-header{
+    grid-column: 1/-1;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: subgrid;
+    align-items: center;
+    
+    .sub-header{
+        grid-column: 3;
+
+    }
+    .mini-user-img {
+        grid-column: 2;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+    }
+    .more {
+        grid-column: 4;
+    }
+}

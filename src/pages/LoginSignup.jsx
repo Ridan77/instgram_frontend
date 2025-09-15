@@ -26,7 +26,7 @@ export function Login() {
     password: "",
     fullname: "",
   });
-
+  const demoPassword='1234'
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export function Login() {
     const value = ev.target.value;
     setCredentials({ ...credentials, [field]: value });
   }
-
+  console.log('credtials', credentials);
   return (
     <form className="login-form" onSubmit={onLogin}>
       <select

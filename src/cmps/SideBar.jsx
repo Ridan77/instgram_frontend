@@ -5,6 +5,7 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { logout } from "../store/actions/user.actions";
 import { svg } from "./Svgs";
 import { userService } from "../services/user";
+import { openDialog } from "../store/actions/system.actions"
 
 export function SideBar() {
   const user = useSelector((storeState) => storeState.userModule.user);
@@ -42,7 +43,7 @@ export function SideBar() {
         <span>{svg.reels}</span>
         <span className="nav-title">Reels</span>
       </NavLink>
-      <NavLink to="chat">
+      <NavLink onClick={openDialog} to="#">
         <span>{svg.direct}</span>
         <span className="nav-title">Messages</span>
       </NavLink>
