@@ -25,8 +25,16 @@
 }
 
 @media (width < 750px) {
+ 
   .main-container {
+    height: 100vh;
     grid-template-columns: 20px 1fr 20px;
+    overflow-y: auto  ;
+    padding-bottom: 75px;
+   
+  }
+  .main-container::-webkit-scrollbar {
+  display: none; 
   }
   .story-index {
     grid-column: 2;
@@ -38,6 +46,7 @@
     grid-template-columns: 20px 1fr 20px;
     font-size: 0.8em;
     .user-header {
+
       .name-section {
         /* width: 80%; */
       }
@@ -114,15 +123,15 @@
       max-height: 60vh;
       object-fit: contain;
     }
-    .text-row .more{
+    .text-row .more {
       align-self: start;
     }
     .details-info {
-      height:100%;
-      
-      grid-template-rows:  1fr auto auto;
-       overflow-y:hidden; 
-       overflow-x:hidden; 
+      height: 100%;
+
+      grid-template-rows: 1fr auto auto;
+      overflow-y: hidden;
+      overflow-x: hidden;
     }
   }
   .explore {
