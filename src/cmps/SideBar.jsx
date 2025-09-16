@@ -1,23 +1,25 @@
-import { Link, NavLink } from "react-router-dom";
-import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
-import { logout } from "../store/actions/user.actions";
-import { svg } from "./Svgs";
-import { userService } from "../services/user";
+import { Link, NavLink } from "react-router-dom"
+import { useNavigate } from "react-router"
+import { useSelector } from "react-redux"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
+import { logout } from "../store/actions/user.actions"
+import { svg } from "./Svgs"
+import { userService } from "../services/user"
 import { openDialog } from "../store/actions/system.actions"
+import { useWindowWidth } from "../customHooks/useWindowWidth.js"
 
 export function SideBar() {
-  const user = useSelector((storeState) => storeState.userModule.user);
-  const navigate = useNavigate();
+  const user = useSelector((storeState) => storeState.userModule.user)
+  const navigate = useNavigate()
+  const width = useWindowWidth()
 
   async function onLogout() {
     try {
       await logout()
-      navigate("/auth");
-      showSuccessMsg(`Bye now`);
+      navigate("/auth")
+      showSuccessMsg(`Bye now`)
     } catch (err) {
-      showErrorMsg("Cannot logout");
+      showErrorMsg("Cannot logout")
     }
   }
   return (
@@ -32,7 +34,7 @@ export function SideBar() {
         <span className="nav-title">Home</span>
       </NavLink>
       <NavLink className="disappear" to="search">
-        <span >{svg.search}</span>
+        <span>{svg.search}</span>
         <span className="nav-title ">Search</span>
       </NavLink>
       <NavLink to="explore">
@@ -48,7 +50,7 @@ export function SideBar() {
         <span className="nav-title">Messages</span>
       </NavLink>
       <NavLink className="disappear" to="under">
-        <span >{svg.notification}</span>
+        <span>{svg.notification}</span>
         <span className="nav-title ">Notifications </span>
       </NavLink>
       <NavLink to="story/edit">
@@ -68,11 +70,12 @@ export function SideBar() {
         </NavLink>
       )}
 
+      {`${width}px`}
       {user && (
         <button className="logout-btn" onClick={onLogout}>
           logout
         </button>
       )}
     </nav>
-  );
+  )
 }

@@ -58,7 +58,6 @@ export function StoryEdit() {
 
   async function onSaveStory(ev) {
     ev.preventDefault()
-    storyToEdit.txt = ev.target.txt.value
     try {
       await addStory(storyToEdit)
       showSuccessMsg("Story Saved!")

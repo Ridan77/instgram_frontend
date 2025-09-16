@@ -1,90 +1,91 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { Modal } from "../cmps/Modal";
+import { useEffect, useRef, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { Modal } from "../cmps/Modal"
+import { useMediaQuery } from "react-responsive"
 
-import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service";
+import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
 import {
   loadStory,
   addStoryComment,
   removeStory,
   toggleLike,
-} from "../store/actions/story.actions";
-import { Comments } from "../cmps/Comments";
-import { LOADING_DONE, LOADING_START } from "../store/reducers/system.reducer";
-import { svg } from "../cmps/Svgs";
-import { userService } from "../services/user";
+} from "../store/actions/story.actions"
+import { Comments } from "../cmps/Comments"
+import { LOADING_DONE, LOADING_START } from "../store/reducers/system.reducer"
+import { svg } from "../cmps/Svgs"
+import { userService } from "../services/user"
 import { Loader } from "../cmps/Loader"
 import { StoryHeader } from "../cmps/StoryHeader"
 
 export function StoryDetails() {
-  const { storyId } = useParams();
-  const story = useSelector((storeState) => storeState.storyModule.story);
-  const [text, setText] = useState("");
+  const { storyId } = useParams()
+  const story = useSelector((storeState) => storeState.storyModule.story)
+  const [text, setText] = useState("")
   const isLoading = useSelector(
     (storeState) => storeState.systemModule.isLoading
-  );
-  const user = useSelector((storeState) => storeState.userModule.user);
-
-  // const user = userService.getLoggedinUser();
-  const dialogRef = useRef(null);
+  )
+  const user = useSelector((storeState) => storeState.userModule.user)
+  const dialogRef = useRef(null)
+  const isMobile = useMediaQuery({ query: "(max-width: 750px)" })
 
   function openDialog() {
-    dialogRef.current?.showModal();
+    dialogRef.current?.showModal()
   }
   function closeDialog() {
-    dialogRef.current?.close();
+    dialogRef.current?.close()
   }
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    getStory(storyId);
-  }, []);
+    getStory(storyId)
+  }, [])
 
   async function getStory(storyId) {
-    dispatch({ type: LOADING_START });
+    dispatch({ type: LOADING_START })
     try {
-      await loadStory(storyId);
+      await loadStory(storyId)
     } catch (err) {
-      console.log("Cannot load story", err);
+      console.log("Cannot load story", err)
     } finally {
-      dispatch({ type: LOADING_DONE });
+      dispatch({ type: LOADING_DONE })
     }
   }
 
   function onClose() {
-    navigate("/story");
+    navigate("/story")
   }
   function onChange({ target }) {
-    setText(target.value);
+    setText(target.value)
   }
   async function onAddComment(ev) {
-    ev.preventDefault();
-    const value = ev.target.txt.value;
-    console.log("submitted");
-    await addStoryComment(story._id, value);
-    setText("");
+    ev.preventDefault()
+    const value = ev.target.txt.value
+    console.log("submitted")
+    await addStoryComment(story._id, value)
+    setText("")
   }
 
   async function onRemoveStory() {
     try {
-      await removeStory(storyId);
-      navigate("/story");
-      showSuccessMsg("story removed");
+      await removeStory(storyId)
+      navigate("/story")
+      showSuccessMsg("story removed")
     } catch (err) {
-      showErrorMsg("Cannot remove story");
+      showErrorMsg("Cannot remove story")
     }
   }
-  if (!story || isLoading || !story.comments) return <Loader/>;
+  console.log("isMobile", isMobile)
+  if (!story || isLoading || !story.comments) return <Loader />
   return (
     <section className="story-details">
       <Modal onClose={onClose}>
         <div className="details-container">
           <img className="details-img" src={story.imgUrl} alt="" />
           <section className="details-info">
-            <StoryHeader story={story} openDialog={openDialog}/>
+            {!isMobile && <StoryHeader story={story} openDialog={openDialog} />}
             <div className="scrollable text-row">
               <img
                 className="mini-user-img mini-user"
@@ -92,11 +93,15 @@ export function StoryDetails() {
                 alt=""
               />
               <div className="name-and-text">
-              <span className="bold scroll-name">{story.by.fullname} </span>
-              <span className="verified">{svg.verified}</span>
-              <span>{story.txt}</span>
-
+                <span className="bold scroll-name">{story.by.fullname} </span>
+                <span className="verified">{svg.verified}</span>
+                <span>{story.txt}</span>
               </div>
+              {isMobile && (
+                <span className="more" onClick={openDialog}>
+                  {svg.more}
+                </span>
+              )}
               <Comments comments={story.comments} />
             </div>
             <div className="actions">
@@ -112,7 +117,7 @@ export function StoryDetails() {
               {story.likedBy?.length > 0 && (
                 <p className="likes-count">{story.likedBy.length} Likes</p>
               )}
-              <p className="gray  time">3 Hours ago</p>
+              <p className="gray  time">3 Hours ago {isMobile}</p>
             </div>
             <form className="full-grid" onSubmit={onAddComment}>
               {svg.smiley}
@@ -141,5 +146,5 @@ export function StoryDetails() {
         </div>
       </Modal>
     </section>
-  );
+  )
 }
