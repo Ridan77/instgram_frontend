@@ -18,6 +18,10 @@
   .logo {
     display: none;
   }
+
+  .user-details .user-header {
+    grid-template-columns: 100px 1fr;
+  }
 }
 
 @media (width < 750px) {
@@ -32,6 +36,27 @@
     grid-column: 2;
     width: 100%;
     grid-template-columns: 20px 1fr 20px;
+    font-size: 0.8em;
+    .user-header{
+
+      .name-section {
+        /* width: 80%; */
+      }
+      .sub-header .user-counters {
+        grid-template-columns: 50px 60px 60px;
+        grid-template-rows: 20px 20px;
+        grid-template-areas:
+        "no1 no3 no5"
+        "no2 no4 no6";
+        .no1{grid-area: no1;}
+        .no2{grid-area: no2;}
+        .no3{grid-area: no3;}
+        .no4{grid-area: no4;}
+        .no5{grid-area: no5;}
+        .no6{grid-area: no6;}
+        
+      }
+    }
 
     .gallery {
       grid-column: 1/-1;
@@ -92,7 +117,6 @@
         display: none;
       }
     }
-
   }
   .loader-wrapper {
     grid-column: 2;

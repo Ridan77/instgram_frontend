@@ -1,4 +1,5 @@
 .user-details {
+  margin-top: 10px;
   grid-column: 3;
   width: 100%;
   display: grid;
@@ -7,36 +8,36 @@
   .user-header {
     grid-column: 2;
     display: grid;
-    grid-template-columns: minmax(200px, 1fr) 1fr;
-    grid-template-rows: 50px 250px;
-    column-gap: 50px;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
     align-items: center;
+    .sub-header {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-evenly;
 
-    .user-counters {
-      display: grid;
-      grid-template-columns: 15px 1fr 15px 1fr 15px 1fr;
-    }
-    .name-section {
-      display: grid;
-      grid-template-columns: 100px auto 100px;
-      align-items: end;
-      justify-content: start;
-
-      button {
-        width: 100px;
-        background-color: var(--blue);
-        color: white;
-        border-radius: 8px;
-        margin: 0;
-        padding: 0.3em 0.8em;
+      .user-counters {
+        display: grid;
+        grid-template-columns: 20px 50px 20px 80px 20px 80px;
       }
+      .name-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-      span {
-        font-size: 1.2em;
-      }
-      .more {
-        grid-column: 3;
-        justify-self: end;
+        button {
+          width: 100px;
+          background-color: var(--blue);
+          color: white;
+          border-radius: 8px;
+          margin: 0;
+          padding: 0.3em 0.8em;
+        }
+
+        span {
+          font-size: 1.2em;
+        }
       }
     }
 
@@ -48,6 +49,4 @@
       object-fit: cover;
     }
   }
-
- 
 }
