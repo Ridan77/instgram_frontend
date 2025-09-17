@@ -20,7 +20,6 @@ import { StoryHeader } from "../cmps/StoryHeader"
 
 export function StoryDetails() {
   const { storyId } = useParams()
-  console.log('storyID', storyId);
   const story = useSelector((storeState) => storeState.storyModule.story)
   const [text, setText] = useState("")
   const isLoading = useSelector(

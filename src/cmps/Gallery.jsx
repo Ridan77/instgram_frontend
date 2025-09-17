@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom"
+import { Link,useLocation } from "react-router-dom"
+
 
 export function Gallery({ stories }) {
+  const {pathname} = useLocation()
+  console.log(pathname==='/explore');
+  
   return (
-    <section className="gallery">
+    <section className={pathname==='/explore' ? 'gallery explore' : 'gallery'} >
       {stories &&
         stories.map((story) => {
           return (
