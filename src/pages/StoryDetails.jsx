@@ -20,6 +20,7 @@ import { StoryHeader } from "../cmps/StoryHeader"
 
 export function StoryDetails() {
   const { storyId } = useParams()
+  console.log('storyID', storyId);
   const story = useSelector((storeState) => storeState.storyModule.story)
   const [text, setText] = useState("")
   const isLoading = useSelector(
@@ -77,7 +78,6 @@ export function StoryDetails() {
       showErrorMsg("Cannot remove story")
     }
   }
-  console.log("isMobile", isMobile)
   if (!story || isLoading || !story.comments) return <Loader />
   return (
     <section className="story-details">

@@ -27,7 +27,7 @@ export function StoryIndex() {
 
   useEffect(() => {
     loadStories(filterBy)
-  }, [user])
+  }, [])
 
   async function onAddComment(storyId, newComment) {
     addStoryComment(storyId, newComment)

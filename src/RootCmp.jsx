@@ -21,9 +21,9 @@ export function RootCmp() {
       <Routes>
         <Route path="/" element={<Navigate to="/story" />} />
         <Route path="/story" element={<StoryIndex />}>
+          <Route path=":storyId" element={<StoryDetails />} />
           <Route path="edit/:storyId?" element={<StoryEdit />} />
         </Route>
-        <Route path="story/:storyId" element={<StoryDetails />} />
         <Route path="user/:id" element={<UserDetails />} />
         <Route path="explore" element={<Explore />} />
         <Route path="auth" element={<LoginSignup />}>
@@ -33,7 +33,6 @@ export function RootCmp() {
       </Routes>
       <Chat />
 
-      {/* <AppFooter /> */}
     </div>
   )
 }

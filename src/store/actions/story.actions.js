@@ -4,7 +4,8 @@ import { store } from '../store'
 import { ADD_STORY, REMOVE_STORY, SET_STORIES, SET_STORY, UPDATE_STORY, ADD_STORY_COMMENT } from '../reducers/story.reducer'
 
 export async function loadStories(filterBy) {
-    try {
+    console.log('Loading stories')
+    try{
         const stories = await storyService.query(filterBy)
             ; store.dispatch(getCmdSetStories(stories))
     } catch (err) {
