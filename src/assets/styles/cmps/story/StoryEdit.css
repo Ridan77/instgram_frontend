@@ -59,6 +59,13 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    background-color: black;
+    
+
+    .edit-img {
+      
+      margin: auto;
+    }
 
     .create-details {
       font-size: 0.8em;
@@ -88,30 +95,29 @@
       overflow: auto;
       min-height: 90%;
       width: 90%;
-      font-family:inherit;
+      font-family: inherit;
       &:focus {
         outline: none;
       }
-      &::-webkit-scrollbar{
+      &::-webkit-scrollbar {
         display: none;
       }
     }
-    .char-count{
+    .char-count {
       grid-column: 4;
       grid-row: 3;
       place-self: end;
       padding-right: 10px;
       font-size: 0.8em;
     }
-     .loc-input {
+    .loc-input {
       border: none;
       grid-column: 2/-1;
       grid-row: 4;
       place-self: start;
-       &:focus{
-        outline:none;
-       }
-      
+      &:focus {
+        outline: none;
+      }
     }
 
     .share-btn {

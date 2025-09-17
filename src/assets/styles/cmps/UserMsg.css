@@ -17,6 +17,7 @@
     translate: 150%;
     transition: 600ms;
     z-index: 100;
+    border-radius: 1em;
 
     &.visible {
         opacity: 1;

@@ -68,7 +68,6 @@ export function StoryDetails() {
   }
 
   async function onRemoveStory() {
-    console.log('delete')
     try {
       await removeStory(storyId)
       navigate("/story")
