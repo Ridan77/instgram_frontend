@@ -14,7 +14,6 @@ import {
 import { Comments } from "../cmps/Comments"
 import { LOADING_DONE, LOADING_START } from "../store/reducers/system.reducer"
 import { svg } from "../cmps/Svgs"
-import { userService } from "../services/user"
 import { Loader } from "../cmps/Loader"
 import { StoryHeader } from "../cmps/StoryHeader"
 
@@ -69,12 +68,13 @@ export function StoryDetails() {
   }
 
   async function onRemoveStory() {
+    console.log('delete')
     try {
       await removeStory(storyId)
       navigate("/story")
       showSuccessMsg("story removed")
     } catch (err) {
-      showErrorMsg("Cannot remove story")
+      showErrorMsg(`Cannot remove story: ${err.response.data}`)
     }
   }
   if (!story || isLoading || !story.comments) return <Loader />

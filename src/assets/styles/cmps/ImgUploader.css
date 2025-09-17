@@ -1,7 +1,10 @@
 .upload-preview{
     display: grid;
+    gap: 20px;
     
-
+    img{
+        border-radius: 1em;
+    }
     label{
         background-color: var(--blue);
         color: white;

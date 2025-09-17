@@ -2,9 +2,10 @@ import { storyService } from '../../services/story'
 import { toggleLikeUser } from './user.actions'
 import { store } from '../store'
 import { ADD_STORY, REMOVE_STORY, SET_STORIES, SET_STORY, UPDATE_STORY, ADD_STORY_COMMENT } from '../reducers/story.reducer'
+import { showErrorMsg } from '../../services/event-bus.service'
 
 export async function loadStories(filterBy) {
-    try{
+    try {
         const stories = await storyService.query(filterBy)
             ; store.dispatch(getCmdSetStories(stories))
     } catch (err) {
@@ -19,6 +20,8 @@ export async function loadStory(storyId) {
         store.dispatch(getCmdSetStory(story))
     } catch (err) {
         console.log('Cannot load story', err)
+        showErrorMsg("Cannot remove story&&&&&")
+
         throw err
     }
 }
@@ -29,7 +32,7 @@ export async function removeStory(storyId) {
         await storyService.remove(storyId)
         store.dispatch(getCmdRemoveStory(storyId))
     } catch (err) {
-        console.log('Cannot remove story', err)
+        console.log('Cannot remove story!!!!', err.response.data)
         throw err
     }
 }

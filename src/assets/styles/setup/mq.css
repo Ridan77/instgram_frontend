@@ -25,16 +25,14 @@
 }
 
 @media (width < 750px) {
- 
   .main-container {
     height: 100vh;
     grid-template-columns: 20px 1fr 20px;
-    overflow-y: auto  ;
+    overflow-y: auto;
     padding-bottom: 75px;
-   
   }
   .main-container::-webkit-scrollbar {
-  display: none; 
+    display: none;
   }
   .story-index {
     grid-column: 2;
@@ -46,7 +44,6 @@
     grid-template-columns: 20px 1fr 20px;
     font-size: 0.8em;
     .user-header {
-
       .name-section {
         /* width: 80%; */
       }
@@ -146,5 +143,15 @@
   }
   .loader-wrapper {
     grid-column: 2;
+  }
+
+  .story-edit .edit-page2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40vh 1fr;
+    .edit-img{
+      width: 100%;
+      object-fit: contain;
+    }
   }
 }

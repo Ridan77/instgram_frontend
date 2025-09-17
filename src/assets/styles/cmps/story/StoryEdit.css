@@ -13,8 +13,8 @@
   font-size: 1.1em;
   inset: 0;
   width: 80vw;
-  height: 50vh;
-
+  height: 80vh;
+  background-color: green;
   padding-top: 15px;
   border-radius: 10px;
   margin: auto;
