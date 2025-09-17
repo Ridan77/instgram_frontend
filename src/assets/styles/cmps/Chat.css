@@ -11,7 +11,7 @@
     padding: 20px 100px 15px 20px;
     box-shadow: 0 4px 12px 0 var(--shadow);
     background-color: white;
-    transition: .5s;
+    transition: 0.5s;
 
     span {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -21,7 +21,6 @@
     }
   }
   .dialog {
-    /* background-color: pink; */
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -52,10 +51,83 @@
         padding-left: 1em;
       }
     }
-    ul {
-      li:nth-child(odd) {
-        margin: 10px 0 10px 0;
-        background-color: var(--ins-gray);
+    .chat-container {
+      display: flex;
+      flex-direction: column-reverse;
+      overflow-y: auto;
+      &&::-webkit-scrollbar {
+        display: none;
+      }
+      ul {
+        /* overflow-y: auto; */
+
+        li {
+          max-width: fit-content;
+          padding: 0.6em 1em;
+          margin: 0.3em 0;
+          border-radius: 1.2em;
+          font-size: 0.9rem;
+          line-height: 1.4;
+          word-break: break-word;
+          position: relative;
+        }
+        li.me {
+          margin-left: auto;
+          margin-right: 10px;
+          background: var(--me);
+          color: white;
+          text-align: right;
+        }
+        li.me::before,
+        li.me::after {
+          content: "";
+          position: absolute;
+          border-radius: 50%;
+        }
+
+        li.me::before {
+          bottom: 0px;
+          right: -9px; /* outside bubble */
+          width: 16px;
+          height: 16px;
+          background: var(--me);
+        }
+
+        li.me::after {
+          bottom: 5px;
+          right: -16px;
+          width: 16px;
+          height: 16px;
+          background: white;
+        }
+        li.other {
+          margin-right: auto;
+          margin-left: 10px;
+          background: var(--other);
+          color: black;
+        }
+        li.other::before,
+        li.other::after {
+          content: "";
+          position: absolute;
+          border-radius: 50%;
+        }
+
+        li.other::before {
+          bottom: 0px;
+          left: -9px;
+          width: 16px;
+          height: 16px;
+          background: var(--other);
+        }
+
+        li.other::after {
+          bottom: 5px;
+          left: -16px;
+          width: 16px;
+          height: 16px;
+          background: white;
+        }
       }
     }
     .who-is-typing {
@@ -65,7 +137,6 @@
       color: var(--gray-for-date);
       animation: flicker 1.5s infinite;
     }
-
 
     form {
       place-self: center;
@@ -115,12 +186,23 @@
   }
 }
 
-
 @keyframes flicker {
-  0%   { opacity: 1; }
-  20%  { opacity: 0.6; }
-  40%  { opacity: 0.8; }
-  60%  { opacity: 0.4; }
-  80%  { opacity: 0.9; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  40% {
+    opacity: 0.8;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+  }
 }

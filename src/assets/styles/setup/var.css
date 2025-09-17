@@ -12,20 +12,17 @@
   --gray3: #777;
   --gray4: #333;
 
-
-  --ins-gray:#F0F2F5;
-  --txt-on-gray: #0C1014;
-  --gray-for-date:#737373;
-  --gray-icons: #8E8E8E;
-  --gray5:#F5F5F5;
+  --ins-gray: #f0f2f5;
+  --txt-on-gray: #0c1014;
+  --gray-for-date: #737373;
+  --gray-icons: #8e8e8e;
+  --gray5: #f5f5f5;
   --blue: #0866ff;
-  --blue2: #0095F6;
-  --gray6:#DADDE1;
+  --blue2: #0095f6;
+  --me: #3797f0;
+  --other: #efefef;
+  --gray6: #dadde1;
   --shadow: #0003;
-;
-
-
-
   --success: rgb(41, 189, 73);
   --error: rgb(216, 59, 59);
 }

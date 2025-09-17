@@ -93,11 +93,19 @@ export function Chat() {
               </button>
             </div>
           </div>
-          <ul>
-            {msgs.map((msg, idx) => {
-              return <li key={idx}>{`${msg.from}: ${msg.txt}`}</li>
-            })}
-          </ul>
+          <div className="chat-container">
+            <ul>
+              {msgs.map((msg, idx) => {
+                return (
+                  <li
+                    key={idx}
+                    className={
+                      msg.from === user.fullname ? "me" : "other"
+                    }>{`${msg.from}: ${msg.txt}`}</li>
+                )
+              })}
+            </ul>
+          </div>
           {whoIsTyping?.sender && (
             <p
               className="who-is-typing"
