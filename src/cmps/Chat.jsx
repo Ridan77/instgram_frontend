@@ -11,8 +11,11 @@ import {
 
 import { svg } from "./Svgs.jsx"
 import { debounce } from "../services/util.service.js"
-import { openDialog, closeDialog } from "../store/actions/system.actions.js"
-import { useFormStatus } from "react-dom"
+import {
+  openDialog,
+  closeDialog,
+  notify,
+} from "../store/actions/system.actions.js"
 
 export function Chat() {
   const [msg, setMsg] = useState({ txt: "" })
@@ -23,7 +26,8 @@ export function Chat() {
   const isDialogOpen = useSelector(
     (storeState) => storeState.systemModule.isDialogOpen
   )
-
+  const isNotify = useSelector((storeState) => storeState.systemModule.isNotify)
+  const isOpenDialogOnNewMessageRef = useRef(false)
   const dialog = useRef()
   const onStopTypingDebounce = useRef(debounce(onStopTyping, 3000)).current
 
@@ -45,6 +49,14 @@ export function Chat() {
   }, [])
   function addMsg(newMsg) {
     setMsgs((prevMsgs) => [...prevMsgs, newMsg])
+
+    if (!isDialogOpen) {
+      if (isOpenDialogOnNewMessageRef.current) {
+        openDialog()
+      } else {
+        notify()
+      }
+    }
   }
 
   function onSendMessage(ev) {
@@ -74,11 +86,15 @@ export function Chat() {
     if (isDialogOpen) dialog.current.show()
     else dialog.current.close()
   }
+
+  function changeNotifyMethod(ev) {
+    isOpenDialogOnNewMessageRef.current = ev.target.checked
+  }
   return (
     <section className="chat">
       {!isDialogOpen && (
         <button onClick={openDialog} className="chat-open-btn">
-          {svg.chat}
+          {isNotify ? svg.msgAlert : svg.chat}
           <span className="chat-open-title">Messages</span>
         </button>
       )}
@@ -87,7 +103,14 @@ export function Chat() {
         <section className="dialog-container">
           <div className="chat-header">
             <span>Messages</span>
-            <div>
+            <div className="chat-btns">
+              <label title="Open chat on new message" className="switch">
+                <input
+                  onChange={(ev) => changeNotifyMethod(ev)}
+                  type="checkbox"
+                />
+                <span className="slider"></span>
+              </label>
               <button onClick={expandDialog}>{svg.expand}</button>
               <button className="chat-close-btn" onClick={closeDialog}>
                 {svg.close1}
@@ -100,9 +123,9 @@ export function Chat() {
                 return (
                   <li
                     key={idx}
-                    className={
-                      msg.from === user.fullname ? "me" : "other"
-                    }>{`${msg.from===user.fullname ? '' : msg.from + ':'} ${msg.txt}`}</li>
+                    className={msg.from === user.fullname ? "me" : "other"}>{`${
+                    msg.from === user.fullname ? "" : msg.from + ":"
+                  } ${msg.txt}`}</li>
                 )
               })}
             </ul>

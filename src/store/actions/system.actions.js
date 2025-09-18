@@ -1,21 +1,16 @@
 import { store } from '../store'
-import { OPEN_DIALOG, CLOSE_DIALOG } from '../reducers/system.reducer'
+import { OPEN_DIALOG, CLOSE_DIALOG, SET_NOTIFY, UNSET_NOTIFY } from '../reducers/system.reducer'
 
-export async function openDialog() {
+export function openDialog() {
+    store.dispatch({ type: OPEN_DIALOG })
+    store.dispatch({ type: UNSET_NOTIFY })
 
-    try {
-        store.dispatch({ type: OPEN_DIALOG })
-    } catch (err) {
-        console.log('Cannot open dialog', err)
-        throw err
-    }
 }
 
-export async function closeDialog() {
-    try {
-        store.dispatch({ type: CLOSE_DIALOG })
-    } catch (err) {
-        console.log('Cannot close dialog', err)
-        throw err
-    }
+export function closeDialog() {
+    store.dispatch({ type: CLOSE_DIALOG })
+}
+
+export function notify() {
+    store.dispatch({ type: SET_NOTIFY })
 }
