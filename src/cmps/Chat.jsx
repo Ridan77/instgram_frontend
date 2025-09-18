@@ -12,6 +12,7 @@ import {
 import { svg } from "./Svgs.jsx"
 import { debounce } from "../services/util.service.js"
 import { openDialog, closeDialog } from "../store/actions/system.actions.js"
+import { useFormStatus } from "react-dom"
 
 export function Chat() {
   const [msg, setMsg] = useState({ txt: "" })
@@ -101,7 +102,7 @@ export function Chat() {
                     key={idx}
                     className={
                       msg.from === user.fullname ? "me" : "other"
-                    }>{`${msg.from}: ${msg.txt}`}</li>
+                    }>{`${msg.from===user.fullname ? '' : msg.from + ':'} ${msg.txt}`}</li>
                 )
               })}
             </ul>

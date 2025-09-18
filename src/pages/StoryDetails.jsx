@@ -16,6 +16,7 @@ import { LOADING_DONE, LOADING_START } from "../store/reducers/system.reducer"
 import { svg } from "../cmps/Svgs"
 import { Loader } from "../cmps/Loader"
 import { StoryHeader } from "../cmps/StoryHeader"
+import EmojiPicker from "emoji-picker-react"
 
 export function StoryDetails() {
   const { storyId } = useParams()
@@ -27,6 +28,7 @@ export function StoryDetails() {
   const user = useSelector((storeState) => storeState.userModule.user)
   const dialogRef = useRef(null)
   const isMobile = useMediaQuery({ query: "(max-width: 750px)" })
+  const [showPicker, setShowPicker] = useState(false)
 
   function openDialog() {
     dialogRef.current?.showModal()
@@ -65,6 +67,11 @@ export function StoryDetails() {
     console.log("submitted")
     await addStoryComment(story._id, value)
     setText("")
+  }
+ function onEmojiClick(emojiData) {
+    const target={value:text +emojiData.emoji}
+    onChange({target})
+    setShowPicker(false)
   }
 
   async function onRemoveStory() {
@@ -118,7 +125,14 @@ export function StoryDetails() {
               <p className="gray  time">3 Hours ago {isMobile}</p>
             </div>
             <form className="full-grid" onSubmit={onAddComment}>
-              {svg.smiley}
+              <button type="button" onClick={() => setShowPicker(!showPicker)}>
+                {svg.smiley}
+              </button>
+              {showPicker && (
+                <div className="emoji-picker">
+                  <EmojiPicker onEmojiClick={onEmojiClick} />
+                </div>
+              )}
               <input
                 onChange={onChange}
                 className="comment-input preview-comments"

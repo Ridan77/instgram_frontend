@@ -1,11 +1,11 @@
-import { Outlet, useNavigate } from "react-router";
-import { NavLink } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router"
+import { NavLink } from "react-router-dom"
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
-import { userService } from "../services/user";
-import { login, signup } from "../store/actions/user.actions";
-import { ImgUploader } from "../cmps/ImgUploader";
+import { userService } from "../services/user"
+import { login, signup } from "../store/actions/user.actions"
+import { ImgUploader } from "../cmps/ImgUploader"
 
 export function LoginSignup() {
   return (
@@ -16,40 +16,46 @@ export function LoginSignup() {
       </nav>
       <Outlet />
     </div>
-  );
+  )
 }
 
 export function Login() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([])
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
     fullname: "",
-  });
-  const demoPassword='1234'
-  const navigate = useNavigate();
+  })
+  const [isFirstUser, setIsFirstUser] = useState(true)
+  const demoPassword = "1234"
+  const navigate = useNavigate()
 
   useEffect(() => {
-    loadUsers();
-  }, []);
+    loadUsers()
+  }, [])
 
   async function loadUsers() {
-    const users = await userService.getUsers();
-    setUsers(users);
+    const users = await userService.getUsers()
+    setUsers(users)
   }
 
   async function onLogin(ev = null) {
-    if (ev) ev.preventDefault();
-    if (!credentials.username) return;
-    await login(credentials);
-    navigate("/story");
+    if (ev) ev.preventDefault()
+    if (!credentials.username) return
+    await login(credentials)
+    navigate("/story")
   }
 
   function handleChange(ev) {
-    const field = ev.target.name;
-    const value = ev.target.value;
-    setCredentials({ ...credentials, [field]: value });
+    const field = ev.target.name
+    const value = ev.target.value
+    if (isFirstUser) {
+      setCredentials({ ...credentials, [field]: value, password: demoPassword })
+      setIsFirstUser(false)
+    } else setCredentials({ ...credentials, [field]: value })
   }
+
+  console.log(credentials)
   return (
     <form className="login-form" onSubmit={onLogin}>
       <select
@@ -63,7 +69,7 @@ export function Login() {
           </option>
         ))}
       </select>
-         <input
+      <input
         type="password"
         name="password"
         value={credentials.password}
@@ -73,37 +79,37 @@ export function Login() {
       />
       <button>Login</button>
     </form>
-  );
+  )
 }
 
 export function Signup() {
-  const [credentials, setCredentials] = useState(userService.getEmptyUser());
-  const navigate = useNavigate();
+  const [credentials, setCredentials] = useState(userService.getEmptyUser())
+  const navigate = useNavigate()
 
   function clearState() {
-    setCredentials({ username: "", password: "", fullname: "", imgUrl: "" });
+    setCredentials({ username: "", password: "", fullname: "", imgUrl: "" })
   }
 
   function handleChange(ev) {
-    const type = ev.target.type;
+    const type = ev.target.type
 
-    const field = ev.target.name;
-    const value = ev.target.value;
-    setCredentials({ ...credentials, [field]: value });
+    const field = ev.target.name
+    const value = ev.target.value
+    setCredentials({ ...credentials, [field]: value })
   }
 
   async function onSignup(ev = null) {
-    if (ev) ev.preventDefault();
+    if (ev) ev.preventDefault()
 
     if (!credentials.username || !credentials.password || !credentials.fullname)
-      return;
-    await signup(credentials);
-    clearState();
-    navigate("/");
+      return
+    await signup(credentials)
+    clearState()
+    navigate("/")
   }
 
   function onUploaded(imgUrl) {
-    setCredentials({ ...credentials, imgUrl });
+    setCredentials({ ...credentials, imgUrl })
   }
 
   return (
@@ -135,5 +141,5 @@ export function Signup() {
       <ImgUploader onUploaded={onUploaded} />
       <button>Signup</button>
     </form>
-  );
+  )
 }
