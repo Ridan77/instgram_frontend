@@ -55,7 +55,6 @@ export function Login() {
     } else setCredentials({ ...credentials, [field]: value })
   }
 
-  console.log(credentials)
   return (
     <form className="login-form" onSubmit={onLogin}>
       <select

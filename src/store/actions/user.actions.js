@@ -56,19 +56,7 @@ export async function updateUser(userToSave) {
     }
 }
 
-export async function toggleLikeUser(storyId) {
-    try {
-        const user = await userService.updateLike(storyId)
-        store.dispatch({
-            type: SET_USER,
-            user
-        })
-        return user
-    } catch (err) {
-        console.log('Cannot login', err)
-        throw err
-    }
-}
+
 
 export async function signup(credentials) {
     try {
@@ -118,4 +106,16 @@ export async function toggleFollow(userToFollowId) {
         console.log('Cannot load user', err)
     }
 
+}
+
+//   load User At StartUp {
+const loggedinUser = userService.getLoggedinUser()
+if (loggedinUser) {
+    try {
+        const user = await userService.getById(loggedinUser._id)
+        store.dispatch({ type: SET_USER, user })
+    } catch (err) {
+        showErrorMsg('Cannot load startup user')
+        console.log('Cannot load startup user', err)
+    }
 }

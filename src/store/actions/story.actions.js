@@ -3,6 +3,8 @@ import { toggleLikeUser } from './user.actions'
 import { store } from '../store'
 import { ADD_STORY, REMOVE_STORY, SET_STORIES, SET_STORY, UPDATE_STORY, ADD_STORY_COMMENT } from '../reducers/story.reducer'
 import { showErrorMsg } from '../../services/event-bus.service'
+import { SET_USER } from '../reducers/user.reducer'
+import { userService } from '../../services/user'
 
 export async function loadStories(filterBy) {
     try {
@@ -51,7 +53,7 @@ export async function addStory(story) {
 export async function updateStory(story) {
     try {
         const savedStory = await storyService.save(story)
-        store.dispatch(getCmdUpdateStory(savedStory))
+        store.dispatch(getCmdSetStory(savedStory))
         return savedStory
     } catch (err) {
         console.log('Cannot save story', err)
@@ -62,7 +64,7 @@ export async function updateStory(story) {
 export async function toggleLikeStory(story) {
     try {
         const savedStory = await storyService.saveLike(story)
-        store.dispatch(getCmdUpdateStory(savedStory))
+        store.dispatch(getCmdSetStory(savedStory))
         // return savedStory
     } catch (err) {
         console.log('Cannot save story', err)
@@ -82,19 +84,50 @@ export async function addStoryComment(storyId, txt) {
 }
 
 
-export async function toggleLike(story) {
+// export async function toggleLike(story) {
+//     try {
+//         const user = store.getState().userModule.user
+//         if (!user) return
+//         await toggleLikeStory(story)
+//         await toggleLikeUser(story._id)
+//     } catch (err) {
+//         console.log("Cannot toggle like", err)
+//         throw err
+//     }
+// }
+export async function optimisticToggleLike(story) {
+    const user = store.getState().userModule.user
+    if (!user) return
+    const isLiked = story.likedBy.some(u => u._id === user._id)
+    const optimisticStory = {
+        ...story,
+        likedBy: isLiked
+            ? story.likedBy.filter(u => u._id !== user._id)
+            : [...story.likedBy, { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }]
+    }
+    const optimisticUser = {
+        ...user,
+        likedStoryIds: isLiked
+            ? user.likedStoryIds.filter(storyId => storyId !== story._id)
+            : [...user.likedStoryIds, story._id]
+    }
+    store.dispatch(getCmdSetStory(optimisticStory))
+    store.dispatch(getCmdUpdateStory(optimisticStory))
+    store.dispatch({ type: SET_USER, user: optimisticUser })
     try {
-        const user = store.getState().userModule.user
-        if (!user) return
-        await toggleLikeStory(story)
-        await toggleLikeUser(story._id)
+        const savedStory = await storyService.saveLike(story)
+        const savedUser = await userService.updateLike(story._id)
+        store.dispatch(getCmdSetStory(savedStory))
+        store.dispatch(getCmdUpdateStory(savedStory))
+        store.dispatch({ type: SET_USER, user: savedUser })
     } catch (err) {
         console.log("Cannot toggle like", err)
+        store.dispatch(getCmdSetStory(story))
+        store.dispatch(getCmdUpdateStory(story))
+        store.dispatch({ type: SET_USER, user })
         throw err
     }
 }
-
-
 
 
 // Command Creators:
@@ -124,7 +157,7 @@ function getCmdAddStory(story) {
 }
 function getCmdUpdateStory(story) {
     return {
-        type: SET_STORY,
+        type: UPDATE_STORY,
         story
     }
 }

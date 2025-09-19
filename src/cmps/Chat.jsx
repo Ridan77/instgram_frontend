@@ -93,7 +93,7 @@ export function Chat() {
   return (
     <section className="chat">
       {!isDialogOpen && (
-        <button onClick={openDialog} className="chat-open-btn">
+        <button  onClick={openDialog} className="chat-open-btn">
           {isNotify ? svg.msgAlert : svg.chat}
           <span className="chat-open-title">Messages</span>
         </button>
