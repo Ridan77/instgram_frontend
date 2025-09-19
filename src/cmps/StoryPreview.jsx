@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Comments } from "./Comments";
 import { svg } from "./Svgs";
 import { useState } from "react";
-import { optimisticToggleLike, toggleLike } from "../store/actions/story.actions";
+import { optimisticToggleLike } from "../store/actions/story.actions";
 import { useSelector } from "react-redux";
 import { ReadMore } from "./ReadMore"
 export function StoryPreview({ story, onAddComment, showImage }) {

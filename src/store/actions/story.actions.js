@@ -1,5 +1,4 @@
 import { storyService } from '../../services/story'
-import { toggleLikeUser } from './user.actions'
 import { store } from '../store'
 import { ADD_STORY, REMOVE_STORY, SET_STORIES, SET_STORY, UPDATE_STORY, ADD_STORY_COMMENT } from '../reducers/story.reducer'
 import { showErrorMsg } from '../../services/event-bus.service'

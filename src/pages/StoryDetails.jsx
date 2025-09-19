@@ -9,7 +9,6 @@ import {
   loadStory,
   addStoryComment,
   removeStory,
-  toggleLike,
   optimisticToggleLike,
 } from "../store/actions/story.actions"
 import { Comments } from "../cmps/Comments"

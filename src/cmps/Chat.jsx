@@ -16,6 +16,7 @@ import {
   closeDialog,
   notify,
 } from "../store/actions/system.actions.js"
+import EmojiPicker from "emoji-picker-react"
 
 export function Chat() {
   const [msg, setMsg] = useState({ txt: "" })
@@ -30,6 +31,7 @@ export function Chat() {
   const isOpenDialogOnNewMessageRef = useRef(false)
   const dialog = useRef()
   const onStopTypingDebounce = useRef(debounce(onStopTyping, 3000)).current
+  const [showPicker, setShowPicker] = useState(false)
 
   useEffect(() => {
     socketService.on(SOCKET_EVENT_ADD_MSG, addMsg)
@@ -86,14 +88,17 @@ export function Chat() {
     if (isDialogOpen) dialog.current.show()
     else dialog.current.close()
   }
-
+  function onEmojiClick(emojiData) {
+    setMsg({...msg,txt:msg.txt +emojiData.emoji})
+    setShowPicker(false)
+  }
   function changeNotifyMethod(ev) {
     isOpenDialogOnNewMessageRef.current = ev.target.checked
   }
   return (
     <section className="chat">
       {!isDialogOpen && (
-        <button  onClick={openDialog} className="chat-open-btn">
+        <button onClick={openDialog} className="chat-open-btn">
           {isNotify ? svg.msgAlert : svg.chat}
           <span className="chat-open-title">Messages</span>
         </button>
@@ -139,7 +144,15 @@ export function Chat() {
           )}
           {/* <p className="who-is-typing">Dan is typing</p> */}
           <form onSubmit={onSendMessage}>
-            {svg.smily2}
+            <button type="button" onClick={() => setShowPicker(!showPicker)}>
+              {svg.smily2}
+            </button>
+            {showPicker && (
+              <div className="emoji-picker">
+                <EmojiPicker onEmojiClick={onEmojiClick} />
+              </div>
+            )}
+
             <input
               className="chat-input"
               placeholder="Send message..."

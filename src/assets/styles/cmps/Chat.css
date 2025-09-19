@@ -143,6 +143,14 @@
     }
 
     form {
+
+      .emoji-picker{
+        position: absolute;
+        top: -100px;
+        left: 0;
+        scale:0.8
+
+      }
       place-self: center;
       display: grid;
       grid-template-columns: 40px 1fr 100px;
