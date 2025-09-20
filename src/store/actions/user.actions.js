@@ -109,13 +109,17 @@ export async function toggleFollow(userToFollowId) {
 }
 
 //   load User At StartUp {
-const loggedinUser = userService.getLoggedinUser()
-if (loggedinUser) {
-    try {
-        const user = await userService.getById(loggedinUser._id)
-        store.dispatch({ type: SET_USER, user })
-    } catch (err) {
-        showErrorMsg('Cannot load startup user')
-        console.log('Cannot load startup user', err)
+loadUserAtStartup()
+async function loadUserAtStartup() {
+    const loggedinUser = userService.getLoggedinUser()
+    if (loggedinUser) {
+        try {
+
+            const user = await userService.getById(loggedinUser._id)
+            store.dispatch({ type: SET_USER, user })
+        } catch (err) {
+            showErrorMsg('Cannot load startup user')
+            console.log('Cannot load startup user', err)
+        }
     }
 }
