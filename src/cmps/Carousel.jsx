@@ -16,7 +16,6 @@ export function Carousel({ images }) {
 
   return (
     <section className="carousel">
-      Carousel
       <button
         className={
           currentIndex === 0

@@ -17,6 +17,7 @@ import { svg } from "../cmps/Svgs"
 import { Loader } from "../cmps/Loader"
 import { StoryHeader } from "../cmps/StoryHeader"
 import EmojiPicker from "emoji-picker-react"
+import { Carousel } from "../cmps/Carousel"
 
 export function StoryDetails() {
   const { storyId } = useParams()
@@ -88,7 +89,7 @@ export function StoryDetails() {
     <section className="story-details">
       <Modal onClose={onClose}>
         <div className="details-container">
-          <img className="details-img" src={story.imgUrl} alt="" />
+          {Array.isArray(story.imgUrl) ? <Carousel images={story.imgUrl}/> :<img className="details-img"src={story.imgUrl} alt="" />}
           <section className="details-info">
             {!isMobile && <StoryHeader story={story} openDialog={openDialog} />}
             <div className="scrollable text-row">

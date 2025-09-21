@@ -1,5 +1,9 @@
 .carousel {
   position: relative;
+  display: grid;
+  place-content: center;
+  background-color: black;
+  ;
   .img-controler {
     background-color: gray;
     position: absolute;
