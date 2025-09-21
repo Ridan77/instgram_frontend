@@ -20,7 +20,7 @@ const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
 
 const baseUrl = (process.env.NODE_ENV === 'production') ? '' : '//localhost:3030'
 
-export const socketService = (VITE_LOCAL === 'true')? createDummySocketService() : createSocketService()
+export const socketService = (VITE_LOCAL === 'true') ? createDummySocketService() : createSocketService()
 
 // for debugging from console
 if (DEV) window.socketService = socketService
@@ -32,7 +32,12 @@ function createSocketService() {
   var socket = null
   const socketService = {
     setup() {
-      socket = io(baseUrl)
+
+      socket = io(baseUrl, {
+        transports: ['websocket'],
+        withCredentials: true,
+      })
+      // socket = io(baseUrl)
       const user = userService.getLoggedinUser()
       if (user) this.login(user._id)
     },

@@ -33,6 +33,9 @@
   color: var(--gray-for-date);
 }
 
+.hide{
+  display: none;
+}
 .full {
   width: 100%;
 }

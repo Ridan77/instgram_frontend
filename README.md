@@ -1,142 +1,162 @@
-# Coding Academy React Frontend
+# 📸 InstaStam
 
-Modern React application built with Vite, featuring a complete frontend infrastructure for teaching full-stack development.
+![Node.js](https://img.shields.io/badge/node-%3E%3D16-green)
+![React](https://img.shields.io/badge/react-18-blue)
+![MongoDB](https://img.shields.io/badge/database-MongoDB-green)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-## 🚀 Quick Start
+**InstaStam** is a full-stack, pixel-perfect social media app inspired by Instagram.  
+It combines a **React + Redux frontend** with a **Node.js/Express backend**, and offers **real-time interactions** powered by **Socket.io**.
 
-1. Install dependencies:
-```bash
-npm install
+---
+
+## 🌍 Live Demo
+👉 [InstaStam on Render](https://instastam.onrender.com/story)
+
+---
+
+## 📸 Screenshots
+
+| Feed (Web) | Profile (Web) |
+|------------|---------------|
+| ![Feed Screenshot](./frontend/src/assets/screenshots/feed.png) | ![Profile Screenshot](./frontend/src/assets/screenshots/profile.png) |
+
+| Group Chat (Web) | Mobile View |
+|------------------|-------------|
+| ![Messenger Screenshot](./frontend/src/assets/screenshots/group-chat.png) | ![Mobile Screenshot](./frontend/src/assets/screenshots/mobile.png) |
+
+> ⚡ Replace with real screenshots from your `/assets/screenshots/` folder.
+
+---
+
+## 🚀 Tech Stack
+
+### Frontend
+- **React 18** (with Hooks)
+- **Redux** (state management)
+- **React Router** (routing)
+- **SCSS Modules** (styling)
+- **Vite** (build tool)
+- **Axios** (HTTP client)
+- **Socket.io-client** (real-time updates)
+- **React Dropzone** (drag & drop file upload)
+- **Emoji Picker React** (emoji support)
+- **Jest** / **React Testing Library** (testing)
+
+### Backend
+- **Node.js** & **Express.js**
+- **MongoDB** (with Mongoose ODM)
+- **Socket.io** (real-time communication)
+- **JWT** (authentication)
+- **bcrypt** (password hashing)
+- **Cloudinary** (image uploads)
+- **CORS**, **dotenv**, **morgan** (middleware & utilities)
+
+---
+
+## ✨ Features
+
+- 🔑 **User Authentication**: Sign up, log in, JWT-based sessions  
+- 👤 **User Page**: View user profiles, their posts, followers, and following  
+- 📝 **Stories & Posts**: Create, view, like, and comment (with image upload)  
+- 💬 **Real-time Group Chat**: Chat with multiple users at once via sockets  
+- 🎉 **Emoji Support**: Use emojis in posts, comments, and chat  
+- 📂 **Drag & Drop**: Upload images and files seamlessly  
+- 🔔 **Notifications**: Real-time alerts for likes, comments, follows, and messages  
+- 📰 **Feed**: Infinite scroll of stories from followed users  
+- 🔍 **Explore Page**: Discover new users and trending stories  
+- ❤️ **Like & Follow Toggle**: Instantly like/unlike posts and follow/unfollow users  
+- 📱 **Fully Responsive**: Optimized for mobile, tablet, and desktop  
+
+---
+
+## 🗂️ Project Structure
+
+```
+instaStam/
+├── backend/
+│   ├── api/           # Express route handlers (auth, user, story, comment, chat)
+│   ├── models/        # Mongoose schemas
+│   ├── services/      # Business logic
+│   ├── sockets/       # Socket.io setup (chat, notifications)
+│   ├── config/        # DB, env, and middleware config
+│   └── app.js         # Express app entry point
+│
+├── frontend/
+│   ├── src/
+│   │   ├── assets/    # Images, fonts, screenshots, styles
+│   │   ├── cmps/      # Reusable components
+│   │   ├── pages/     # Route components (Feed, Profile, Explore, StoryDetails, GroupChat, etc.)
+│   │   ├── services/  # API and utility services
+│   │   ├── store/     # Redux modules
+│   │   └── App.jsx    # Main app component
+│   └── vite.config.js
+│
+├── README.md
+└── package.json
 ```
 
-2. Start development server:
+---
+
+## 🏁 Getting Started
+
+### 1. Clone the repository
+
 ```bash
+git clone https://github.com/your-username/instaStam.git
+cd instaStam
+```
+
+### 2. Setup Backend
+
+```bash
+cd backend
+npm install
+cp .env.example .env   # Fill in your MongoDB URI, JWT secret, Cloudinary config, etc.
 npm run dev
 ```
 
-## 🏗️ Project Structure
+### 3. Setup Frontend
 
-```
-src/
-├── assets/
-│   └── styles/        # SCSS modules
-│       ├── basics/    # Core styles
-│       ├── cmps/      # Component styles
-│       ├── pages/     # Page styles
-│       └── setup/     # SCSS variables & mixins
-├── cmps/              # Reusable components
-├── pages/             # Route components
-├── services/          # API and utility services
-└── store/            # Redux state management
-    ├── actions/      # Action creators
-    └── reducers/     # State reducers
+```bash
+cd ../frontend
+npm install
+npm run dev
 ```
 
-## 🎨 Components
+### 4. Open in Browser
 
-### Core Components
-- `AppHeader` - Navigation and user menu
-- `AppFooter` - Footer with service status
-- `UserMsg` - Toast notifications
-- `CarList` - Grid display of cars with actions
-- `CarFilter` - Search and filter interface
-- `ReviewList` - User reviews with CRUD
-
-### Pages
-- `CarIndex` - Main car management
-- `ReviewIndex` - Review system
-- `UserDetails` - User profile
-- `AboutUs` - Static content with nested routes
-- `Chat` - Real-time messaging
-
-## 🔄 State Management
-
-Using Redux with the following modules:
-- `carModule` - Car CRUD operations
-- `userModule` - Authentication and user data
-- `reviewModule` - Review system
-- `systemModule` - App-wide settings
-
-### Example Usage
-```jsx
-// In component:
-const cars = useSelector(state => state.carModule.cars)
-const dispatch = useDispatch()
-
-// Action dispatch:
-dispatch(loadCars())
-```
-
-## 🎯 Services
-
-### REST API Services
-- `car.service` - Car CRUD operations
-- `user.service` - Authentication & user management
-- `review.service` - Review system
-- `upload.service` - File uploads
-
-### Utility Services
-- `event-bus.service` - Pub/sub messaging
-- `socket.service` - WebSocket connection
-- `storage.service` - Local storage wrapper
-- `util.service` - Common helpers
-
-## 🎨 Styling
-
-Using SCSS modules with:
-- CSS Grid for layouts
-- Flexbox for component alignment
-- CSS Variables for theming
-- Responsive breakpoints
-- Utility classes
-
-### Example Usage
-```scss
-.car-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: .5em;
-}
-```
-
-## 🚦 Development Guidelines
-
-1. Component Structure
-```jsx
-export function MyComponent({ prop1, prop2 }) {
-    const [state, setState] = useState(null)
-    
-    useEffect(() => {
-        // Side effects here
-    }, [])
-
-    return <section className="my-component">
-        {/* JSX */}
-    </section>
-}
-```
-
-2. State Updates
-```jsx
-// Correct:
-setData(prevData => [...prevData, newItem])
-
-// Avoid:
-setData([...data, newItem])
-```
-
-## 📝 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Production build
-- `npm run preview` - Preview production build
-- `npm run test` - Run tests
-
-
-## 📄 License
-MIT
+Visit [http://localhost:5173](http://localhost:5173) (or the port Vite shows).
 
 ---
-Coding Academy - Built with ❤️ for teaching modern fullstack development
 
+## 🧪 Running Tests
 
+```bash
+cd frontend
+npm test
+```
+
+---
+
+## 🛣️ Roadmap
+- [ ] Story highlights
+- [ ] Push notifications
+- [ ] Video stories
+- [ ] Story reactions (❤️ 😂 😮 😢)
+
+---
+
+## 🤝 Contributing
+Contributions, issues, and feature requests are welcome!  
+Check the [issues page](../../issues).
+
+---
+
+## 📄 License
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+Built with ❤️ by Coding Academy students – for learning, sharing, and connecting!

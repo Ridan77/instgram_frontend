@@ -70,7 +70,7 @@ export function SideBar() {
         </NavLink>
       )}
 
-      {`${width}px`}
+      {/* {`${width}px`} */}
       {user && (
         <button className="logout-btn" onClick={onLogout}>
           logout

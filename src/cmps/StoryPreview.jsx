@@ -5,6 +5,7 @@ import { useState } from "react";
 import { optimisticToggleLike } from "../store/actions/story.actions";
 import { useSelector } from "react-redux";
 import { ReadMore } from "./ReadMore"
+import { Carousel } from "./Carousel"
 export function StoryPreview({ story, onAddComment, showImage }) {
   const [comments, setComments] = useState([]);
   const user = useSelector((storeState) => storeState.userModule.user);
@@ -30,7 +31,7 @@ export function StoryPreview({ story, onAddComment, showImage }) {
       </div>
       {showImage && (
         <Link className="story-preview-img" to={`/story/${story._id}`}>
-          <img src={story.imgUrl} alt="" />
+          {Array.isArray(story.imgUrl) ? <Carousel images={story.imgUrl}/> :<img src={story.imgUrl} alt="" />}
         </Link>
       )}
       <div className="actions">
