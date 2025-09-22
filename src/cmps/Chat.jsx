@@ -42,11 +42,18 @@ export function Chat() {
     socketService.on(USER_STOP_TYPING, (msg) => {
       setWhoIsTyping(null)
     })
+      function handleKeyDown(e) {
+      if (e.key === "Escape") {
+        setShowPicker(false)
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown)
 
     return () => {
       socketService.off(SOCKET_EVENT_ADD_MSG, addMsg)
       socketService.off(USER_TYPING)
       socketService.off(USER_STOP_TYPING)
+      document.removeEventListener("keydown", handleKeyDown)
     }
   }, [])
   function addMsg(newMsg) {
@@ -142,13 +149,12 @@ export function Chat() {
               {`${whoIsTyping.sender} is typing`}
             </p>
           )}
-          {/* <p className="who-is-typing">Dan is typing</p> */}
           <form onSubmit={onSendMessage}>
             <button type="button" onClick={() => setShowPicker(!showPicker)}>
               {svg.smily2}
             </button>
             {showPicker && (
-              <div className="emoji-picker">
+              <div  className="emoji-picker">
                 <EmojiPicker onEmojiClick={onEmojiClick} />
               </div>
             )}

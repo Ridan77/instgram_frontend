@@ -54,6 +54,15 @@
 .file-input {
   display: none;
 }
+
+
+ .emoji-picker{
+        position: absolute;
+        top: -420px;
+        left: -30px;
+        scale:0.8
+
+      }
 /* Simple and useful CSS Debugging Technique */
 .debug * {
   outline: 1px solid gold;

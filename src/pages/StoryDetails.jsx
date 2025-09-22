@@ -43,6 +43,15 @@ export function StoryDetails() {
 
   useEffect(() => {
     getStory(storyId)
+    function handleKeyDown(e) {
+      if (e.key === "Escape") {
+        setShowPicker(false)
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown)
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown)
+    }
   }, [])
 
   async function getStory(storyId) {
@@ -69,9 +78,9 @@ export function StoryDetails() {
     await addStoryComment(story._id, value)
     setText("")
   }
- function onEmojiClick(emojiData) {
-    const target={value:text +emojiData.emoji}
-    onChange({target})
+  function onEmojiClick(emojiData) {
+    const target = { value: text + emojiData.emoji }
+    onChange({ target })
     setShowPicker(false)
   }
 
@@ -89,7 +98,11 @@ export function StoryDetails() {
     <section className="story-details">
       <Modal onClose={onClose}>
         <div className="details-container">
-          {Array.isArray(story.imgUrl) ? <Carousel images={story.imgUrl}/> :<img className="details-img"src={story.imgUrl} alt="" />}
+          {Array.isArray(story.imgUrl) ? (
+            <Carousel images={story.imgUrl} />
+          ) : (
+            <img className="details-img" src={story.imgUrl} alt="" />
+          )}
           <section className="details-info">
             {!isMobile && <StoryHeader story={story} openDialog={openDialog} />}
             <div className="scrollable text-row">
@@ -111,7 +124,9 @@ export function StoryDetails() {
               <Comments comments={story.comments} />
             </div>
             <div className="actions">
-              <span className="like-heart" onClick={() => optimisticToggleLike(story)}>
+              <span
+                className="like-heart"
+                onClick={() => optimisticToggleLike(story)}>
                 {story.likedBy?.some((like) => like._id === user._id)
                   ? svg.heart
                   : svg.notification}
@@ -131,7 +146,7 @@ export function StoryDetails() {
               </button>
               {showPicker && (
                 <div className="emoji-picker">
-                  <EmojiPicker onEmojiClick={onEmojiClick} />
+                  <EmojiPicker  onEmojiClick={onEmojiClick} />
                 </div>
               )}
               <input
