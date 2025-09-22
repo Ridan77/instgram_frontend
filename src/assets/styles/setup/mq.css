@@ -154,4 +154,14 @@
       object-fit: contain;
     }
   }
+
+  .carousel{
+    
+  .image-counter {
+    bottom: -15px;
+    .current.dot{
+      background-color: var(--blue2);
+    }
+  }
+  }
 }

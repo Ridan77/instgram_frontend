@@ -1,9 +1,11 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { svg } from "./Svgs"
+import { useSwipe } from "../customHooks/useSwipe.js"
 
 export function Carousel({ images }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const imgCount = images.length
+  const ref = useRef()
 
   function moveImg(ev, diff) {
     ev.stopPropagation()
@@ -13,7 +15,14 @@ export function Carousel({ images }) {
       return nextIndex
     })
   }
-
+  useSwipe(ref, {
+    onSwipeLeft: () => setCurrentIndex((prev) => {
+      const nextIndex = (prev + 1 + imgCount) % imgCount
+          return nextIndex}),
+    onSwipeRight: () => setCurrentIndex((prev) => {
+      const nextIndex = (prev + -1 + imgCount) % imgCount
+          return nextIndex}),
+  })
   return (
     <section className="carousel">
       <button
@@ -27,14 +36,14 @@ export function Carousel({ images }) {
       </button>
       <button
         className={
-          currentIndex === imgCount-1
+          currentIndex === imgCount - 1
             ? "next-img img-controler hide"
             : "next-img img-controler"
         }
         onClick={(ev) => moveImg(ev, 1)}>
         {svg.arrowUp}
       </button>
-      <img src={images[currentIndex]} alt="" />
+      <img ref={ref} src={images[currentIndex]} alt="" />
       <ul className="image-counter">
         {images.map((img, idx) => {
           return (
