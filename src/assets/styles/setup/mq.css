@@ -116,6 +116,7 @@
 
     .details-img {
       width: 100%;
+      max-width: unset;
       max-height: 50vh;
     }
     .text-row .more {
@@ -158,10 +159,16 @@
   .carousel{
     
   .image-counter {
-    bottom: -15px;
+    margin: 0;
     .current.dot{
       background-color: var(--blue2);
     }
   }
   }
+  .details-container .carousel
+
+  img{
+    height: 40vh;
+  }
+
 }

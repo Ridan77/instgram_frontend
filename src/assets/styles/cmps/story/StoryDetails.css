@@ -4,9 +4,9 @@
   height: 80vh;
 
   .details-img {
-    width: 50%;
+    max-width: 60%;
     height: 100%;
-    object-fit: contain;
+    object-fit:contain;
     background-color: black;
   }
   .details-info {

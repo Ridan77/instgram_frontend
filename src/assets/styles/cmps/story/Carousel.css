@@ -36,10 +36,10 @@
     gap: 5px;
 
     .dot {
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background-color:var(--gray6);
+      background-color:var(--gray3);
     }
     .current.dot{
         background-color: white;
