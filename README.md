@@ -85,3 +85,33 @@ It combines a **React + Redux frontend** with a **Node.js/Express backend**, and
 
 ## 🗂️ Project Structure
 
+```plaintext
+instaStam/
+├── backend/
+│   ├── api/           # Express route handlers (auth, user, story, comment, chat)
+│   ├── models/        # Mongoose schemas
+│   ├── services/      # Business logic
+│   ├── sockets/       # Socket.io setup (chat, notifications)
+│   ├── config/        # DB, env, and middleware config
+│   └── app.js         # Express app entry point
+│
+├── frontend/
+│   ├── public/
+│   │   └── screenshots/  # Feed, Profile, Chat, Mobile images
+│   ├── src/
+│   │   ├── assets/       
+│   │   ├── cmps/        
+│   │   ├── pages/       
+│   │   ├── services/    
+│   │   ├── store/       
+│   │   └── App.jsx      
+│   └── vite.config.js
+│
+├── README.md
+└── package.json
+
+
+
+Distributed under the MIT License. See LICENSE for more information.
+
+Built with ❤️ by Dan Ribak as a final project at Coding Academy.
