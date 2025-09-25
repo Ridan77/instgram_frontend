@@ -4,8 +4,12 @@
   place-content: center;
   background-color: black;
   ;
+
+  img{
+    width:100%;
+  }
   .img-controler {
-    background-color: gray;
+    background-color: var(--gray6);
     position: absolute;
     padding: 0px;
     width: 25px;

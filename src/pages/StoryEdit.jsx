@@ -7,6 +7,8 @@ import { uploadService } from "../services/upload.service.js"
 import { svg } from "../cmps/Svgs.jsx"
 import { ImgUploader } from "../cmps/ImgUploader.jsx"
 import { useSelector } from "react-redux"
+import { Loader } from "../cmps/Loader"
+
 
 export function StoryEdit() {
   const navigate = useNavigate()
@@ -51,14 +53,16 @@ export function StoryEdit() {
   function onClose() {
     navigate("/story")
   }
-  function onUploaded(imgUrl) {
-    setStoryToEdit({ ...storyToEdit, imgUrl })
+  function onUploaded(imgs) {
+    console.log('imgs', imgs);
+    setStoryToEdit({ ...storyToEdit, imgUrl:imgs })
     setCreateStage(1)
   }
 
   async function onSaveStory(ev) {
     ev.preventDefault()
     try {
+      if (storyToEdit.imgUrl.length===1) storyToEdit.imgUrl=storyToEdit.imgUrl[0]
       await addStory(storyToEdit)
       showSuccessMsg("Story Saved!")
       navigate("/story")
@@ -67,8 +71,8 @@ export function StoryEdit() {
       showErrorMsg("Had issues in story details")
     }
   }
-
-  if (!storyToEdit) return <div>Wait</div>
+console.log('storyToEdit', storyToEdit);
+  if (!storyToEdit) return <Loader/>
   return (
     <>
       <section onClick={onClose} className="modal-backdrop">

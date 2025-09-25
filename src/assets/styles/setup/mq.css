@@ -117,6 +117,7 @@
     .details-img {
       width: 100%;
       max-width: unset;
+      height: auto;
       max-height: 50vh;
     }
     .text-row .more {
@@ -168,7 +169,8 @@
   .details-container .carousel
 
   img{
-    height: 40vh;
+    max-height: 50vh;
+    max-width: unset;
   }
 
 }

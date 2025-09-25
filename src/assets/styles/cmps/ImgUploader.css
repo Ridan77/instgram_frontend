@@ -1,15 +1,19 @@
-.upload-preview{
+.upload-preview {
+  .upload-previre-grid {
     display: grid;
-    gap: 20px;
-    
-    img{
-        border-radius: 1em;
-    }
-    label{
-        background-color: var(--blue);
-        color: white;
-        padding: 10px 15px;
-        border-radius: 0.8em;
-        font-size: 0.8em;
-    }
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 6px;
+    place-items: center;
+    background-color: white;
+    overflow-y: scroll;
+
+   
+  }
+  label {
+    background-color: var(--blue);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 0.8em;
+    font-size: 0.8em;
+  }
 }
