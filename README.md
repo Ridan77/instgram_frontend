@@ -112,6 +112,6 @@ instaStam/
 
 
 
-Distributed under the MIT License. See LICENSE for more information.
+Distributed under the MIT License. 
 
 Built with ❤️ by Dan Ribak as a final project at Coding Academy.
