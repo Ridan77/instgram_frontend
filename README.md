@@ -27,7 +27,7 @@ It combines a **React + Redux frontend** with a **Node.js/Express backend**, and
 
 | Group Chat (Web) | Mobile View |
 |------------------|-------------|
-| ![Chat Screenshot](./public/screenshots/chat.jpg) | ![Mobile Screenshot](./public/screenshots/mobile.jpg) |
+| ![Chat Screenshot](./public/screenshots/chat.jpg) | ![Mobile Screenshot](./public/screenshots/mobile1.jpg) |
 
 ---
 
