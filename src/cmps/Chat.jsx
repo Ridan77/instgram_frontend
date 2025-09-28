@@ -84,6 +84,8 @@ export function Chat() {
 
   function handleChange(ev) {
     const value = ev.target.value
+    debugLog("input: " + value)
+
     setMsg({ from: user.fullname, txt: value })
     throttledTyping(user.fullname)
     // socketService.emit(USER_TYPING, { sender: user.fullname })
@@ -110,6 +112,11 @@ export function Chat() {
   function changeNotifyMethod(ev) {
     isOpenDialogOnNewMessageRef.current = ev.target.checked
   }
+
+  function debugLog(msg) {
+  const logEl = document.getElementById('debug-log')
+  if (logEl) logEl.innerText += msg + "\n"
+}
   return (
     <section className="chat">
       {!isDialogOpen && (
@@ -138,6 +145,8 @@ export function Chat() {
             </div>
           </div>
           <div className="chat-container">
+            <pre id="debug-log" style={{position:"fixed",bottom:0,left:0,background:"black",color:"lime",maxHeight:"30vh",overflow:"auto"}}></pre>
+
             <ul>
               {msgs.map((msg, idx) => {
                 return (
