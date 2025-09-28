@@ -25,7 +25,7 @@ export function Carousel({ images }) {
   })
   return (
     <section className="carousel">
-      <button
+     {imgCount >1 && <button
         className={
           currentIndex === 0
             ? "prev-img img-controler hide"
@@ -33,8 +33,8 @@ export function Carousel({ images }) {
         }
         onClick={(ev) => moveImg(ev, -1)}>
         {svg.arrowUp}
-      </button>
-      <button
+      </button>}
+      {imgCount > 1 &&<button
         className={
           currentIndex === imgCount - 1
             ? "next-img img-controler hide"
@@ -42,9 +42,9 @@ export function Carousel({ images }) {
         }
         onClick={(ev) => moveImg(ev, 1)}>
         {svg.arrowUp}
-      </button>
+      </button>}
       <img ref={ref} src={images[currentIndex]} alt="" />
-      <ul className="image-counter">
+      {imgCount > 1 && <ul className="image-counter">
         {images.map((img, idx) => {
           return (
             <li
@@ -52,7 +52,7 @@ export function Carousel({ images }) {
               className={idx === currentIndex ? "current dot" : "dot"}></li>
           )
         })}
-      </ul>
+      </ul>}
     </section>
   )
 }

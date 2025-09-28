@@ -1,14 +1,12 @@
 .upload-preview {
-  .upload-previre-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 6px;
-    place-items: center;
-    background-color: white;
-    overflow-y: scroll;
-
-   
+  display: grid;
+  gap: 20px;
+  .upload-preview-grid {
+    img {
+      max-height: 40vh;
+    }
   }
+
   label {
     background-color: var(--blue);
     color: white;

@@ -8,6 +8,7 @@ import { svg } from "../cmps/Svgs.jsx"
 import { ImgUploader } from "../cmps/ImgUploader.jsx"
 import { useSelector } from "react-redux"
 import { Loader } from "../cmps/Loader"
+import { Carousel } from "../cmps/Carousel.jsx"
 
 
 export function StoryEdit() {
@@ -54,7 +55,6 @@ export function StoryEdit() {
     navigate("/story")
   }
   function onUploaded(imgs) {
-    console.log('imgs', imgs);
     setStoryToEdit({ ...storyToEdit, imgUrl:imgs })
     setCreateStage(1)
   }
@@ -71,7 +71,6 @@ export function StoryEdit() {
       showErrorMsg("Had issues in story details")
     }
   }
-console.log('storyToEdit', storyToEdit);
   if (!storyToEdit) return <Loader/>
   return (
     <>
@@ -98,7 +97,8 @@ console.log('storyToEdit', storyToEdit);
             )}
             {createStage === 2 && (
               <div className="edit-page2">
-                <img className="edit-img" src={storyToEdit.imgUrl} alt="" />
+                {/* <img className="edit-img" src={storyToEdit.imgUrl} alt="" /> */}
+                 <Carousel images={storyToEdit.imgUrl}/>
                 <section className="create-details">
                   <div className="user-preview">
                     <img src={user.imgUrl} alt="" />

@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react"
 import { useDropzone } from "react-dropzone"
 import { uploadService } from "../services/upload.service"
+import { Carousel } from "./Carousel"
 
 export function ImgUploader({ onUploaded = null }) {
   // const [imgData, setImgData] = useState({imgUrl: null,height: 500,width: 500,})
@@ -12,12 +13,11 @@ export function ImgUploader({ onUploaded = null }) {
   }, [imgs])
 
   async function uploadImg(file) {
-    console.log("file selected:", file)
     const ev = { target: { files: [file] } }
     setIsUploading(true)
     try {
       const { secure_url, height, width } = await uploadService.uploadImg(ev)
-      setImgs((prev) => [...prev, secure_url])
+      setImgs((prev) => [ secure_url,...prev,])
       onUploaded && onUploaded(imgs)
     } finally {
       setIsUploading(false)
@@ -41,14 +41,14 @@ export function ImgUploader({ onUploaded = null }) {
       ? "Uploading...."
       : "Select from computer or drag an image here"
   }
-  console.log("imgs from upload", imgs)
   return (
     <div className="upload-preview">
-      <div className="upload-previre-grid">
-        {imgs[0]?.imgUrl &&
+      <div className="upload-preview-grid">
+        <Carousel images={imgs}/>
+        {/* {imgs[0]?.imgUrl &&
           imgs.map((img, idx) => (
             <img key={idx} src={img.imgUrl} alt={`preview-${idx}`} />
-          ))}
+          ))} */}
       </div>
 
       <div

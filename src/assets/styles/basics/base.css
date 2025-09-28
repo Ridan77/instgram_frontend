@@ -3,11 +3,9 @@
 }
 
 body {
-
   margin: 0 auto;
   color: --var(clr2);
 }
-
 
 h1,
 h2,
@@ -18,7 +16,7 @@ h6 {
   margin: 0 0 0.6em;
 }
 
-p{
+p {
   /* margin-block-end: 0em; */
   margin-block-start: 0em;
 }
@@ -35,6 +33,9 @@ a:hover {
 ul {
   list-style: none;
   padding: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: unset;
 }
 
 input {

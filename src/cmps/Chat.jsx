@@ -42,31 +42,32 @@ export function Chat() {
     socketService.on(USER_STOP_TYPING, (msg) => {
       setWhoIsTyping(null)
     })
-      function handleKeyDown(e) {
+    function handleKeyDown(e) {
       if (e.key === "Escape") {
         setShowPicker(false)
       }
     }
     document.addEventListener("keydown", handleKeyDown)
 
+ 
     return () => {
       socketService.off(SOCKET_EVENT_ADD_MSG, addMsg)
       socketService.off(USER_TYPING)
       socketService.off(USER_STOP_TYPING)
       document.removeEventListener("keydown", handleKeyDown)
     }
-  }, [])
-  function addMsg(newMsg) {
-    setMsgs((prevMsgs) => [...prevMsgs, newMsg])
-
-    if (!isDialogOpen) {
-      if (isOpenDialogOnNewMessageRef.current) {
-        openDialog()
-      } else {
-        notify()
+  }, [isDialogOpen])
+ 
+     function addMsg(newMsg) {
+      setMsgs((prevMsgs) => [...prevMsgs, newMsg])
+      if (!isDialogOpen) {
+        if (isOpenDialogOnNewMessageRef.current) {
+          openDialog()
+        } else {
+          notify()
+        }
       }
     }
-  }
 
   function onSendMessage(ev) {
     ev.preventDefault()
@@ -96,7 +97,9 @@ export function Chat() {
     else dialog.current.close()
   }
   function onEmojiClick(emojiData) {
-    setMsg({...msg,txt:msg.txt +emojiData.emoji})
+    if (!msg.from)
+      setMsg({ from: user.fullname, txt: msg.txt + emojiData.emoji })
+    else setMsg({ ...msg, txt: msg.txt + emojiData.emoji })
     setShowPicker(false)
   }
   function changeNotifyMethod(ev) {
@@ -154,7 +157,7 @@ export function Chat() {
               {svg.smily2}
             </button>
             {showPicker && (
-              <div  className="emoji-picker">
+              <div className="emoji-picker">
                 <EmojiPicker onEmojiClick={onEmojiClick} />
               </div>
             )}
