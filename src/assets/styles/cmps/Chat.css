@@ -159,6 +159,7 @@
       .chat-input {
         border: none;
         width: 150px;
+        height: 47px;
       }
       .chat-input:focus {
         outline: none;

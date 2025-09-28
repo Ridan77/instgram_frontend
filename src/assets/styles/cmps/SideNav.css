@@ -10,7 +10,7 @@ nav.side-nav {
   font-size: 1em;
   align-items: center;
 
-  a {
+  a,button {
     width: 90%;
     margin-left: 10px;
     display: flex;

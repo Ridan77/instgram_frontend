@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useSelector } from "react-redux"
 import {
   socketService,
@@ -10,7 +10,7 @@ import {
 } from "../services/socket.service.js"
 
 import { svg } from "./Svgs.jsx"
-import { debounce } from "../services/util.service.js"
+import { debounce, throttle } from "../services/util.service.js"
 import {
   openDialog,
   closeDialog,
@@ -32,6 +32,11 @@ export function Chat() {
   const dialog = useRef()
   const onStopTypingDebounce = useRef(debounce(onStopTyping, 3000)).current
   const [showPicker, setShowPicker] = useState(false)
+  const throttledTyping = useRef(
+    throttle((sender) => {
+      socketService.emit(USER_TYPING, { sender:user.fullname })
+    }, 2000)
+  ).current
 
   useEffect(() => {
     socketService.on(SOCKET_EVENT_ADD_MSG, addMsg)
@@ -49,7 +54,6 @@ export function Chat() {
     }
     document.addEventListener("keydown", handleKeyDown)
 
- 
     return () => {
       socketService.off(SOCKET_EVENT_ADD_MSG, addMsg)
       socketService.off(USER_TYPING)
@@ -57,17 +61,17 @@ export function Chat() {
       document.removeEventListener("keydown", handleKeyDown)
     }
   }, [isDialogOpen])
- 
-     function addMsg(newMsg) {
-      setMsgs((prevMsgs) => [...prevMsgs, newMsg])
-      if (!isDialogOpen) {
-        if (isOpenDialogOnNewMessageRef.current) {
-          openDialog()
-        } else {
-          notify()
-        }
+
+  function addMsg(newMsg) {
+    setMsgs((prevMsgs) => [...prevMsgs, newMsg])
+    if (!isDialogOpen) {
+      if (isOpenDialogOnNewMessageRef.current) {
+        openDialog()
+      } else {
+        notify()
       }
     }
+  }
 
   function onSendMessage(ev) {
     ev.preventDefault()
@@ -81,7 +85,8 @@ export function Chat() {
   function handleChange(ev) {
     const value = ev.target.value
     setMsg({ from: user.fullname, txt: value })
-    socketService.emit(USER_TYPING, { sender: user.fullname })
+    throttledTyping(user.fullname)
+    // socketService.emit(USER_TYPING, { sender: user.fullname })
     onStopTypingDebounce()
   }
 

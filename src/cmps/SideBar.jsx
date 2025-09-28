@@ -5,11 +5,12 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { logout } from "../store/actions/user.actions"
 import { svg } from "./Svgs"
 import { userService } from "../services/user"
-import { openDialog } from "../store/actions/system.actions"
+import { closeDialog, openDialog } from "../store/actions/system.actions"
 import { useWindowWidth } from "../customHooks/useWindowWidth.js"
 
 export function SideBar() {
   const user = useSelector((storeState) => storeState.userModule.user)
+  const isDialogOpen= useSelector((storeState) => storeState.systemModule.isDialogOpen)
   const navigate = useNavigate()
   const width = useWindowWidth()
 
@@ -45,10 +46,17 @@ export function SideBar() {
         <span>{svg.reels}</span>
         <span className="nav-title">Reels</span>
       </NavLink>
-      <NavLink onClick={openDialog} to="#">
+
+      <button
+        onClick={isDialogOpen ? closeDialog : openDialog}
+        className={`msg-btn ${isDialogOpen ? "active" : ""}`}>
         <span>{svg.direct}</span>
         <span className="nav-title">Messages</span>
-      </NavLink>
+      </button>
+      {/* <NavLink onClick={openDialog} to="#">
+        <span>{svg.direct}</span>
+        <span className="nav-title">Messages</span>
+      </NavLink> */}
       <NavLink className="disappear" to="under">
         <span>{svg.notification}</span>
         <span className="nav-title ">Notifications </span>
