@@ -17,6 +17,7 @@ import {
   notify,
 } from "../store/actions/system.actions.js"
 import EmojiPicker from "emoji-picker-react"
+import { useTypingHeartbeat } from "../customHooks/useTypingHearbeat.js"
 
 export function Chat() {
   const [msg, setMsg] = useState({ txt: "" })
@@ -34,33 +35,43 @@ export function Chat() {
   const [showPicker, setShowPicker] = useState(false)
   const throttledTyping = useRef(
     throttle((sender) => {
-      socketService.emit(USER_TYPING, { sender:user.fullname })
+      socketService.emit(USER_TYPING, { sender })
     }, 2000)
   ).current
+  const { startTyping, stopTyping } = useTypingHeartbeat(user)
+
 
   useEffect(() => {
     socketService.on(SOCKET_EVENT_ADD_MSG, addMsg)
-    socketService.emit(SOCKET_EMIT_SET_TOPIC, { topic, userId: user?._id })
-    socketService.on(USER_TYPING, (msg) => {
-      setWhoIsTyping(msg)
-    })
-    socketService.on(USER_STOP_TYPING, (msg) => {
-      setWhoIsTyping(null)
-    })
-    function handleKeyDown(e) {
-      if (e.key === "Escape") {
-        setShowPicker(false)
-      }
-    }
-    document.addEventListener("keydown", handleKeyDown)
-
     return () => {
       socketService.off(SOCKET_EVENT_ADD_MSG, addMsg)
-      socketService.off(USER_TYPING)
-      socketService.off(USER_STOP_TYPING)
-      document.removeEventListener("keydown", handleKeyDown)
     }
   }, [isDialogOpen])
+
+  useEffect(() => {
+    const handleTyping = (msg) => setWhoIsTyping(msg)
+    const handleStopTyping = () => setWhoIsTyping(null)
+    if (user?._id) {
+      socketService.emit(SOCKET_EMIT_SET_TOPIC, { topic, userId: user._id })
+      socketService.on(USER_TYPING, handleTyping)
+      socketService.on(USER_STOP_TYPING, handleStopTyping)
+    }
+    return () => {
+      socketService.off(USER_TYPING, handleTyping)
+      socketService.off(USER_STOP_TYPING, handleStopTyping)
+    }
+  }, [])
+
+  function handleKeyDown(e) {
+    if (e.key === "Escape") {
+      setShowPicker(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [])
 
   function addMsg(newMsg) {
     setMsgs((prevMsgs) => [...prevMsgs, newMsg])
@@ -79,15 +90,15 @@ export function Chat() {
     socketService.emit(SOCKET_EMIT_SEND_MSG, msg)
     setMsg({ txt: "" })
     socketService.emit(USER_STOP_TYPING, {})
+    stopTyping()
     setWhoIsTyping(null)
   }
 
   function handleChange(ev) {
     const value = ev.target.value
-    debugLog("input: " + value)
-
     setMsg({ from: user.fullname, txt: value })
     throttledTyping(user.fullname)
+    startTyping()
     // socketService.emit(USER_TYPING, { sender: user.fullname })
     onStopTypingDebounce()
   }
@@ -113,10 +124,6 @@ export function Chat() {
     isOpenDialogOnNewMessageRef.current = ev.target.checked
   }
 
-  function debugLog(msg) {
-  const logEl = document.getElementById('debug-log')
-  if (logEl) logEl.innerText += msg + "\n"
-}
   return (
     <section className="chat">
       {!isDialogOpen && (
@@ -145,8 +152,6 @@ export function Chat() {
             </div>
           </div>
           <div className="chat-container">
-            <pre id="debug-log" style={{position:"fixed",bottom:0,left:0,background:"black",color:"lime",maxHeight:"30vh",overflow:"auto"}}></pre>
-
             <ul>
               {msgs.map((msg, idx) => {
                 return (
