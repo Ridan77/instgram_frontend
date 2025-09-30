@@ -16,6 +16,8 @@ import { Gallery } from "../cmps/Gallery"
 import { Loader } from "../cmps/Loader"
 
 export function UserDetails() {
+  console.log('hi');
+  
   const params = useParams()
   const user = useSelector((storeState) => storeState.userModule.watchedUser)
   const stories = useSelector((storeState) => storeState.storyModule.stories)
@@ -75,6 +77,7 @@ export function UserDetails() {
         </section>
         {/* <span>{user.bio}</span> */}
       </section>
+      {/* {svg.saved}{svg.grid} */}
       <Gallery stories={stories} />
     </section>
   )

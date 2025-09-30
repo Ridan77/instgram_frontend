@@ -10,7 +10,9 @@ import { useWindowWidth } from "../customHooks/useWindowWidth.js"
 
 export function SideBar() {
   const user = useSelector((storeState) => storeState.userModule.user)
-  const isDialogOpen= useSelector((storeState) => storeState.systemModule.isDialogOpen)
+  const isDialogOpen = useSelector(
+    (storeState) => storeState.systemModule.isDialogOpen
+  )
   const navigate = useNavigate()
   const width = useWindowWidth()
 
@@ -23,6 +25,8 @@ export function SideBar() {
       showErrorMsg("Cannot logout")
     }
   }
+  // console.log(user._id);
+  
   return (
     <nav className="side-nav">
       <NavLink className="disappear" to="">
@@ -53,11 +57,7 @@ export function SideBar() {
         <span>{svg.direct}</span>
         <span className="nav-title">Messages</span>
       </button>
-      {/* <NavLink onClick={openDialog} to="#">
-        <span>{svg.direct}</span>
-        <span className="nav-title">Messages</span>
-      </NavLink> */}
-      <NavLink className="disappear" to="under">
+        <NavLink className="disappear" to="under">
         <span>{svg.notification}</span>
         <span className="nav-title ">Notifications </span>
       </NavLink>
@@ -66,7 +66,7 @@ export function SideBar() {
         <span className="nav-title">Create</span>
       </NavLink>
       {user && (
-        <NavLink to={`user/${user._id}`}>
+        <NavLink to={`/user/${user._id}`}>
           <span>
             {user ? (
               <img className="user-img" src={user.imgUrl} alt="" />
