@@ -773,9 +773,9 @@ export const svg = {
         strokeWidth="2px"
         d="M20 21 12 13.44 4 21 4 3 20 3 20 21z"
       />
-      </svg>
-    ),
-    // style="--x-color: rgb(var(--ig-secondary-icon));">
+    </svg>
+  ),
+  // style="--x-color: rgb(var(--ig-secondary-icon));">
   grid: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -783,15 +783,14 @@ export const svg = {
       width="24"
       height="24"
       fill="currentColor"
-      className="x14rh7hd"
-      >
+      className="x14rh7hd">
       {/* style="--x-color: rgb(var(--ig-primary-icon));" */}
       <title>Posts</title>
       <path
         fill="none"
         stroke="currentColor"
         strokeLinecap="round"
-       strokeLinejoin ="round"
+        strokeLinejoin="round"
         strokeWidth="2px"
         d="M3 3H21V21H3z"
       />
@@ -827,6 +826,20 @@ export const svg = {
         strokeWidth="2px"
         d="M21 14.98514 3 14.98514"
       />
+    </svg>
+  ),
+  saved1: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Remove"
+      className="x1lliihq x1n2onr6 xyb1xck"
+      fill="currentColor"
+      height="24"
+      role="img"
+      viewBox="0 0 24 24"
+      width="24">
+      <title>Remove</title>
+      <path d="M20 22a.999.999 0 0 1-.687-.273L12 14.815l-7.313 6.912A1 1 0 0 1 3 21V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1Z" />
     </svg>
   ),
 }

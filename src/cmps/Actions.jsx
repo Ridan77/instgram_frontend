@@ -1,9 +1,8 @@
-import { Link,  } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { optimisticToggleLike } from "../store/actions/story.actions"
 import { svg } from "./Svgs"
 
-export function Actions({ story, user,isDetails }) {
-
+export function Actions({ story, user, isDetails }) {
   return (
     <section className="actions1">
       <div className="actions">
@@ -17,8 +16,12 @@ export function Actions({ story, user,isDetails }) {
         <Link className="comment-preview" to={`/story/${story._id}`}>
           {svg.comment}
         </Link>
-
         <span onClick={() => console.log("click")}>{svg.direct}</span>
+        <span
+          className="save-story"
+          onClick={() => console.log(`saving story ${story._id}`)}>
+          {user.savedStories?.includes(story._id) ? svg.saved1 : svg.saved}
+        </span>
       </div>
       {story.likedBy.length > 0 && (
         <div className="stats">
