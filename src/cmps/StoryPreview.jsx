@@ -6,6 +6,7 @@ import { optimisticToggleLike } from "../store/actions/story.actions";
 import { useSelector } from "react-redux";
 import { ReadMore } from "./ReadMore"
 import { Carousel } from "./Carousel"
+import { Actions } from "./Actions"
 export function StoryPreview({ story, onAddComment, showImage }) {
   const [comments, setComments] = useState([]);
   const user = useSelector((storeState) => storeState.userModule.user);
@@ -34,19 +35,7 @@ export function StoryPreview({ story, onAddComment, showImage }) {
           {Array.isArray(story.imgUrl) ? <Carousel images={story.imgUrl}/> :<img src={story.imgUrl} alt="" />}
         </Link>
       )}
-      <div className="actions">
-        <span className="like-heart" onClick={() => optimisticToggleLike(story)}>
-          {user.likedStoryIds?.includes(story._id)
-            ? svg.heart
-            : svg.notification}
-        </span>
-        <Link className="comment-preview" to={`/story/${story._id}`}>
-          {svg.comment}
-        </Link>
-
-        <span onClick={() => console.log("click")}>{svg.direct}</span>
-      </div>
-      {story.likedBy.length > 0 && <p>{story.likedBy.length} Likes</p>}
+      <Actions story={story} user={user} isDetails={false}/>
       <p>
         <Link className="story-preview-img" to={`/user/${story.by._id}`}>
           <span className="bold">{story.by.fullname} </span>

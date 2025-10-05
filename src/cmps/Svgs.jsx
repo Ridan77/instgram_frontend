@@ -756,76 +756,77 @@ export const svg = {
       <path d="M21 17.502a.997.997 0 0 1-.707-.293L12 8.913l-8.293 8.296a1 1 0 1 1-1.414-1.414l9-9.004a1.03 1.03 0 0 1 1.414 0l9 9.004A1 1 0 0 1 21 17.502Z" />
     </svg>
   ),
-  // saved: (
-  //   <svg
-  //     xmlns="http://www.w3.org/2000/svg"
-  //     viewBox="0 0 24 24"
-  //     width="24"
-  //     height="24"
-  //     fill="currentColor"
-  //     className="x14rh7hd"
-  //     style="--x-color: rgb(var(--ig-secondary-icon));">
-  //     <title>Saved</title>
-  //     <path
-  //       fill="none"
-  //       stroke="currentColor"
-  //       stroke-linecap="round"
-  //       stroke-linejoin="round"
-  //       stroke-width="2px"
-  //       d="M20 21 12 13.44 4 21 4 3 20 3 20 21z"
-  //     />
-  //   </svg>
-  // ),
-  // grid: (
-  //   <svg
-  //     xmlns="http://www.w3.org/2000/svg"
-  //     viewBox="0 0 24 24"
-  //     width="24"
-  //     height="24"
-  //     fill="currentColor"
-  //     className="x14rh7hd"
-  //     style="--x-color: rgb(var(--ig-primary-icon));">
-  //     <title>Posts</title>
-  //     <path
-  //       fill="none"
-  //       stroke="currentColor"
-  //       stroke-linecap="round"
-  //       stroke-linejoin="round"
-  //       stroke-width="2px"
-  //       d="M3 3H21V21H3z"
-  //     />
-  //     <path
-  //       fill="none"
-  //       stroke="currentColor"
-  //       stroke-linecap="round"
-  //       stroke-linejoin="round"
-  //       stroke-width="2px"
-  //       d="M9.01486 3 9.01486 21"
-  //     />
-  //     <path
-  //       fill="none"
-  //       stroke="currentColor"
-  //       stroke-linecap="round"
-  //       stroke-linejoin="round"
-  //       stroke-width="2px"
-  //       d="M14.98514 3 14.98514 21"
-  //     />
-  //     <path
-  //       fill="none"
-  //       stroke="currentColor"
-  //       stroke-linecap="round"
-  //       stroke-linejoin="round"
-  //       stroke-width="2px"
-  //       d="M21 9.01486 3 9.01486"
-  //     />
-  //     <path
-  //       fill="none"
-  //       stroke="currentColor"
-  //       stroke-linecap="round"
-  //       stroke-linejoin="round"
-  //       stroke-width="2px"
-  //       d="M21 14.98514 3 14.98514"
-  //     />
-  //   </svg>
-  // ),
+  saved: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="currentColor"
+      className="x14rh7hd">
+      <title>Saved</title>
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2px"
+        d="M20 21 12 13.44 4 21 4 3 20 3 20 21z"
+      />
+      </svg>
+    ),
+    // style="--x-color: rgb(var(--ig-secondary-icon));">
+  grid: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="currentColor"
+      className="x14rh7hd"
+      >
+      {/* style="--x-color: rgb(var(--ig-primary-icon));" */}
+      <title>Posts</title>
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+       strokeLinejoin ="round"
+        strokeWidth="2px"
+        d="M3 3H21V21H3z"
+      />
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2px"
+        d="M9.01486 3 9.01486 21"
+      />
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2px"
+        d="M14.98514 3 14.98514 21"
+      />
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2px"
+        d="M21 9.01486 3 9.01486"
+      />
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2px"
+        d="M21 14.98514 3 14.98514"
+      />
+    </svg>
+  ),
 }

@@ -18,6 +18,7 @@ import { Loader } from "../cmps/Loader"
 import { StoryHeader } from "../cmps/StoryHeader"
 import EmojiPicker from "emoji-picker-react"
 import { Carousel } from "../cmps/Carousel"
+import { Actions } from "../cmps/Actions"
 
 export function StoryDetails() {
   const { storyId } = useParams()
@@ -123,30 +124,14 @@ export function StoryDetails() {
               )}
               <Comments comments={story.comments} />
             </div>
-            <div className="actions">
-              <span
-                className="like-heart"
-                onClick={() => optimisticToggleLike(story)}>
-                {story.likedBy?.some((like) => like._id === user._id)
-                  ? svg.heart
-                  : svg.notification}
-              </span>
-              <span onClick={() => console.log("click")}>{svg.comment}</span>
-              <span onClick={() => console.log("click")}>{svg.direct}</span>
-            </div>
-            <div className="stats">
-              {story.likedBy?.length > 0 && (
-                <p className="likes-count">{story.likedBy.length} Likes</p>
-              )}
-              <p className="gray  time">3 Hours ago {isMobile}</p>
-            </div>
+            <Actions story={story} user={user} isDetails={true}/>
             <form className="full-grid" onSubmit={onAddComment}>
               <button type="button" onClick={() => setShowPicker(!showPicker)}>
                 {svg.smiley}
               </button>
               {showPicker && (
                 <div className="emoji-picker">
-                  <EmojiPicker  onEmojiClick={onEmojiClick} />
+                  <EmojiPicker onEmojiClick={onEmojiClick} />
                 </div>
               )}
               <input

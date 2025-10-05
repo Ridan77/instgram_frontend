@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
-import { Link, useParams } from "react-router-dom"
+import { Link, NavLink, Outlet, useParams } from "react-router-dom"
 
 import { loadUser, toggleFollow } from "../store/actions/user.actions"
 import { loadStories } from "../store/actions/story.actions"
@@ -16,13 +16,10 @@ import { Gallery } from "../cmps/Gallery"
 import { Loader } from "../cmps/Loader"
 
 export function UserDetails() {
-  console.log('hi');
-  
   const params = useParams()
   const user = useSelector((storeState) => storeState.userModule.watchedUser)
   const stories = useSelector((storeState) => storeState.storyModule.stories)
   const loggedinUser = useSelector((storeState) => storeState.userModule.user)
-
   useEffect(() => {
     loadUser(params.id)
     loadStories({ userId: params.id, random: true })
@@ -77,8 +74,12 @@ export function UserDetails() {
         </section>
         {/* <span>{user.bio}</span> */}
       </section>
-      {/* {svg.saved}{svg.grid} */}
-      <Gallery stories={stories} />
+      <section className="grid-saved-container">
+        <NavLink to="grid">{svg.grid}</NavLink>
+        <NavLink to="saved">{svg.saved}</NavLink>
+      </section>
+      <Outlet context={{ stories, user }} />
+      {/* <Gallery stories={stories} /> */}
     </section>
   )
 }

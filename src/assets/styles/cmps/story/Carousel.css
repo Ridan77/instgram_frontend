@@ -3,10 +3,10 @@
   display: grid;
   place-content: center;
   background-color: black;
-  ;
+  z-index: -1;
 
-  img{
-    width:100%;
+  img {
+    width: 100%;
   }
   .img-controler {
     background-color: var(--gray6);
@@ -16,9 +16,7 @@
     height: 25px;
     border-radius: 50%;
     top: 50%;
-    opacity: .7;
-    
-  
+    opacity: 0.7;
   }
   .prev-img {
     left: 0;
@@ -44,10 +42,10 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background-color:var(--gray3);
+      background-color: var(--gray3);
     }
-    .current.dot{
-        background-color: white;
+    .current.dot {
+      background-color: white;
     }
   }
 }

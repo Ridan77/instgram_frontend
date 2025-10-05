@@ -12,6 +12,8 @@ import { LoginSignup, Login, Signup } from "./pages/LoginSignup.jsx"
 import { StoryEdit } from "./pages/StoryEdit.jsx"
 import { Explore } from "./pages/Explore.jsx"
 import { Chat } from "./cmps/Chat.jsx"
+import { UserGrid } from "./pages/UserGrid.jsx"
+import { UserSaved } from "./pages/UserSaved.jsx"
 
 export function RootCmp() {
   return (
@@ -24,7 +26,11 @@ export function RootCmp() {
           <Route path=":storyId" element={<StoryDetails />} />
           <Route path="edit/:storyId?" element={<StoryEdit />} />
         </Route>
-        <Route path="user/:id" element={<UserDetails />} />
+        <Route path="user/:id" element={<UserDetails />}>
+          <Route index element={<Navigate to="grid" replace />} />
+          <Route path="grid" element={<UserGrid />} />
+          <Route path="saved" element={<UserSaved />} />
+        </Route>
         <Route path="explore" element={<Explore />} />
         <Route path="auth" element={<LoginSignup />}>
           <Route path="login" element={<Login />} />
@@ -32,7 +38,6 @@ export function RootCmp() {
         </Route>
       </Routes>
       <Chat />
-
     </div>
   )
 }
