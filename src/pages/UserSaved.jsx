@@ -1,6 +1,7 @@
 import { useOutletContext } from "react-router-dom"
 import { Gallery } from "../cmps/Gallery"
 import { useEffect, useState } from "react"
+import { storyService } from "../services/story"
 
 export function UserSaved() {
   const { user } = useOutletContext()

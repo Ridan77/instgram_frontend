@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 import { optimisticToggleLike } from "../store/actions/story.actions"
 import { svg } from "./Svgs"
+import { userService } from "../services/user"
+import { toggleSave } from "../store/actions/user.actions"
 
 export function Actions({ story, user, isDetails }) {
   return (
@@ -19,7 +21,7 @@ export function Actions({ story, user, isDetails }) {
         <span onClick={() => console.log("click")}>{svg.direct}</span>
         <span
           className="save-story"
-          onClick={() => console.log(`saving story ${story._id}`)}>
+          onClick={() => toggleSave(story._id)}>
           {user.savedStories?.includes(story._id) ? svg.saved1 : svg.saved}
         </span>
       </div>

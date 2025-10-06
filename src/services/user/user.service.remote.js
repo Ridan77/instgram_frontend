@@ -13,7 +13,8 @@ export const userService = {
 	getLoggedinUser,
 	saveLoggedinUser,
 	updateLike,
-	toggleFollow
+	toggleFollow,
+	toggleSave,
 }
 
 function getUsers() {
@@ -80,5 +81,10 @@ function saveLoggedinUser(user) {
 async function toggleFollow(userToFollowId) {
 	const users = await httpService.get(`user/follow/${userToFollowId}`)
 	return users
+}
+
+async function toggleSave(storyId) {
+	const user = await httpService.get(`user/save/${storyId}`)
+	return user
 }
 

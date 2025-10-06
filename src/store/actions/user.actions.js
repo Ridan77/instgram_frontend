@@ -105,9 +105,19 @@ export async function toggleFollow(userToFollowId) {
         showErrorMsg('Cannot load user')
         console.log('Cannot load user', err)
     }
-
+    
 }
 
+export async function toggleSave(storyId) {
+    try {
+        const user = await userService.toggleSave(storyId)
+        store.dispatch({ type: SET_USER, user })
+    } catch (err) {
+        showErrorMsg('Canno save story')
+        console.log('Cannot save story', err)
+    }
+
+}
 //   load User At StartUp {
 loadUserAtStartup()
 async function loadUserAtStartup() {
