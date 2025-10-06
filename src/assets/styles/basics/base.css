@@ -40,6 +40,11 @@ ul {
 
 input {
   max-width: 100%;
+  font-size: 16px; 
+}
+
+textarea{
+  font-size: 16px;
 }
 
 img,
