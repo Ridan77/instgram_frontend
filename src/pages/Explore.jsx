@@ -16,7 +16,7 @@ export function Explore() {
   if (!stories) return <div>Wait</div>
   return (
     <section className="explore">
-      <Gallery stories={stories}/>
+      {user && <Gallery stories={stories}/>}
     </section>
   )
 }

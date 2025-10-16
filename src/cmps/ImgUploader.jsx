@@ -4,8 +4,7 @@ import { uploadService } from "../services/upload.service"
 import { Carousel } from "./Carousel"
 
 export function ImgUploader({ onUploaded = null }) {
-  // const [imgData, setImgData] = useState({imgUrl: null,height: 500,width: 500,})
-  const [imgs, setImgs] = useState([]) // Store multiple images
+  const [imgs, setImgs] = useState([])
 
   const [isUploading, setIsUploading] = useState(false)
   useEffect(() => {
@@ -17,8 +16,7 @@ export function ImgUploader({ onUploaded = null }) {
     setIsUploading(true)
     try {
       const { secure_url, height, width } = await uploadService.uploadImg(ev)
-      setImgs((prev) => [ secure_url,...prev,])
-      onUploaded && onUploaded(imgs)
+      setImgs((prev) => [secure_url, ...prev])
     } finally {
       setIsUploading(false)
     }
@@ -44,14 +42,10 @@ export function ImgUploader({ onUploaded = null }) {
   return (
     <div className="upload-preview">
       <div className="upload-preview-grid">
-        <Carousel images={imgs}/>
-        {/* {imgs[0]?.imgUrl &&
-          imgs.map((img, idx) => (
-            <img key={idx} src={img.imgUrl} alt={`preview-${idx}`} />
-          ))} */}
+        <Carousel images={imgs} />
       </div>
 
-      <div
+      <div onClick={ev=>ev.stopPropagation()}
         {...getRootProps()}
         style={{
           border: "2px dashed #ccc",

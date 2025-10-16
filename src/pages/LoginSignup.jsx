@@ -10,6 +10,8 @@ import { ImgUploader } from "../cmps/ImgUploader"
 export function LoginSignup() {
   return (
     <div className="login-page">
+      <span className="logo login-logo">InstaStam</span>
+
       <nav>
         <NavLink to="login">Login</NavLink>
         <NavLink to="signup">Signup</NavLink>
@@ -20,62 +22,58 @@ export function LoginSignup() {
 }
 
 export function Login() {
-  const [users, setUsers] = useState([])
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
     fullname: "",
   })
-  const [isFirstUser, setIsFirstUser] = useState(true)
-  const demoPassword = "1234"
+  const guestCredentials = { username: "guest", password: "guest" }
   const navigate = useNavigate()
-
-  useEffect(() => {
-    loadUsers()
-  }, [])
-
-  async function loadUsers() {
-    const users = await userService.getUsers()
-    setUsers(users)
-  }
 
   async function onLogin(ev = null) {
     if (ev) ev.preventDefault()
-    if (!credentials.username) return
-    await login(credentials)
+    if (credentials.guest !== true && !credentials.username) return
+    if (credentials.guest === true) await login(guestCredentials)
+    else await login(credentials)
     navigate("/story")
   }
 
   function handleChange(ev) {
-    const field = ev.target.name
-    const value = ev.target.value
-    if (isFirstUser) {
-      setCredentials({ ...credentials, [field]: value, password: demoPassword })
-      setIsFirstUser(false)
-    } else setCredentials({ ...credentials, [field]: value })
+    const { name, type, value, checked } = ev.target
+    const fieldValue = type === "checkbox" ? checked : value
+    console.log("field,value", name, fieldValue)
+    setCredentials({ ...credentials, [name]: fieldValue })
   }
-
   return (
     <form className="login-form" onSubmit={onLogin}>
-      <select
+      <input
+        type="username"
         name="username"
         value={credentials.username}
-        onChange={handleChange}>
-        <option value="">Select User</option>
-        {users.map((user) => (
-          <option key={user._id} value={user.username}>
-            {user.fullname}
-          </option>
-        ))}
-      </select>
+        placeholder="Username"
+        onChange={handleChange}
+      />
       <input
         type="password"
         name="password"
         value={credentials.password}
         placeholder="Password"
         onChange={handleChange}
-        required
       />
+      Or
+      <div className="switch-container">
+        <label className="switch">
+          <input
+            onChange={handleChange}
+            type="checkbox"
+            id="guest"
+            name="guest"
+          />
+          <span className="slider"></span>
+        </label>
+
+        <label htmlFor="guest">Login as guest</label>
+      </div>
       <button>Login</button>
     </form>
   )
@@ -86,6 +84,8 @@ export function Signup() {
   const navigate = useNavigate()
 
   function clearState() {
+    console.log("clearing")
+
     setCredentials({ username: "", password: "", fullname: "", imgUrl: "" })
   }
 
@@ -110,7 +110,6 @@ export function Signup() {
   function onUploaded(imgUrl) {
     setCredentials({ ...credentials, imgUrl })
   }
-
   return (
     <form className="signup-form" onSubmit={onSignup}>
       <input
@@ -137,7 +136,10 @@ export function Signup() {
         onChange={handleChange}
         required
       />
-      <ImgUploader onUploaded={onUploaded} />
+      <div>
+        <ImgUploader onUploaded={onUploaded} />
+      </div>
+
       <button>Signup</button>
     </form>
   )

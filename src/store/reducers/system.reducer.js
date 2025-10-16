@@ -4,10 +4,13 @@ export const OPEN_DIALOG = 'OPEN_DIALOG'
 export const CLOSE_DIALOG = 'CLOSE_DIALOG'
 export const SET_NOTIFY = 'SET_NOTIFY'
 export const UNSET_NOTIFY = 'UNSET_NOTIFY'
+export const OPEN_SEARCH = 'OPEN_SEARCH'
+export const CLOSE_SEARCH = 'CLOSE_SEARCH'
 
 const initialState = {
   isLoading: false,
   isDialogOpen: false,
+  isSearchOpen: false,
   isNotify: false
 
 }
@@ -26,6 +29,11 @@ export function systemReducer(state = initialState, action = {}) {
       return { ...state, isNotify: true }
     case UNSET_NOTIFY:
       return { ...state, isNotify: false }
+    case OPEN_SEARCH:
+      return { ...state, isSearchOpen: true }
+    case CLOSE_SEARCH:
+      return { ...state, isSearchOpen: false }
+
     default: return state
   }
 }

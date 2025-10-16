@@ -2,14 +2,28 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  height: 300px;
-  min-width: 300px;
-  max-width: 600px; /* optional: limit max width */
+  height: auto;
+  min-height: 300px;
+  width: 300px;
   background: white;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   transform: translate(-50%, -50%);
+
+  .login-logo {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+
+  button {
+    font-size: 1em;
+    font-family: inherit;
+  }
+  button:hover {
+    color: var(--gray-icons);
+  }
 }
 
 .login-form,
@@ -17,7 +31,7 @@
   display: grid;
   width: auto;
   margin: auto;
-gap:20px;
+  gap: 20px;
   padding: 1em;
 }
 
@@ -45,16 +59,20 @@ gap:20px;
   gap: 2em;
 
   > a {
-    font-size: 0.8em;
+    /* font-size: 0.8em; */
     /* color: var(--clr4); */
 
     &:hover {
-      color: var(--clr1);
+      color: var(--gray-icons);
     }
 
     &.active {
       text-decoration: underline;
-      color: var(--clr2);
+      color: var(--txt-on-gray);
     }
   }
+}
+.switch-container {
+  display: flex;
+  gap: 10px;
 }

@@ -8,8 +8,6 @@ function getEmptyUser() {
         username: '', 
         password: '', 
         fullname: '',
-        isAdmin: false,
-        score: 100,
     }
 }
 

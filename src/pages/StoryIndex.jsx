@@ -25,6 +25,7 @@ export function StoryIndex() {
   const stories = useSelector((storeState) => storeState.storyModule.stories)
   const user = useSelector((storeState) => storeState.userModule.user)
 
+
   useEffect(() => {
     loadStories(filterBy)
   }, [])
@@ -32,7 +33,8 @@ export function StoryIndex() {
   async function onAddComment(storyId, newComment) {
     addStoryComment(storyId, newComment)
   }
-  if (!stories) return <Loader/>
+
+  if (!stories) return <Loader />
   return (
     <section className="story-index">
       {!user && <Navigate to="/auth/login" replace />}

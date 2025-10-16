@@ -5,13 +5,22 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { logout } from "../store/actions/user.actions"
 import { svg } from "./Svgs"
 import { userService } from "../services/user"
-import { closeDialog, openDialog } from "../store/actions/system.actions"
+import {
+  closeDialog,
+  openDialog,
+  openSearch,
+  closeSearch,
+} from "../store/actions/system.actions"
 import { useWindowWidth } from "../customHooks/useWindowWidth.js"
+import { StorySearch } from "../cmps/StorySearch.jsx"
 
 export function SideBar() {
   const user = useSelector((storeState) => storeState.userModule.user)
   const isDialogOpen = useSelector(
     (storeState) => storeState.systemModule.isDialogOpen
+  )
+  const isSearchOpen = useSelector(
+    (storeState) => storeState.systemModule.isSearchOpen
   )
   const navigate = useNavigate()
   const width = useWindowWidth()
@@ -25,8 +34,6 @@ export function SideBar() {
       showErrorMsg("Cannot logout")
     }
   }
-  // console.log(user._id);
-  
   return (
     <nav className="side-nav">
       <NavLink className="disappear" to="">
@@ -38,10 +45,12 @@ export function SideBar() {
         <span>{svg.home}</span>
         <span className="nav-title">Home</span>
       </NavLink>
-      <NavLink className="disappear" to="search">
+      <button
+        className={`disappear search ${isSearchOpen ? "active" : ""}`}
+        onClick={isSearchOpen ? closeSearch : openSearch}>
         <span>{svg.search}</span>
         <span className="nav-title ">Search</span>
-      </NavLink>
+      </button>
       <NavLink to="explore">
         <span>{svg.explore}</span>
         <span className="nav-title">Explore</span>
@@ -57,7 +66,7 @@ export function SideBar() {
         <span>{svg.direct}</span>
         <span className="nav-title">Messages</span>
       </button>
-        <NavLink className="disappear" to="under">
+      <NavLink className="disappear" to="under">
         <span>{svg.notification}</span>
         <span className="nav-title ">Notifications </span>
       </NavLink>
@@ -77,13 +86,12 @@ export function SideBar() {
           <span className="nav-title">Profile</span>
         </NavLink>
       )}
-
-      {/* {`${width}px`} */}
       {user && (
-        <button className="logout-btn" onClick={onLogout}>
+        <button className="logout-btn " onClick={onLogout}>
           logout
         </button>
       )}
+      {isSearchOpen && <StorySearch />}
     </nav>
   )
 }

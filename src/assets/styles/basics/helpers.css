@@ -134,3 +134,10 @@ input:checked + .slider {
 input:checked + .slider::before {
   transform: translateX(24px);
 }
+
+  .logo {
+    font-family: Billabong;
+    font-size: 2em;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
