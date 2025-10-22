@@ -18,7 +18,7 @@ window.ss = storyService
 _createStrories()
 
 async function query(filterBy = { txt: '' }) {
-    var stories = await storageService.query(STORAGE_KEY)
+    let stories = await storageService.query(STORAGE_KEY)
     const { txt, sortField, sortDir, userId } = filterBy
 
     if (txt) {
@@ -45,14 +45,14 @@ async function remove(storyId) {
 }
 
 async function save(story) {
-    var savedStory
+    let savedStory
     if (story._id) {
 
         savedStory = await storageService.put(STORAGE_KEY, story)
     } else {
         const storyToSave = { ...story, likedBy: [], comments: [], createdAt: Date.now() }
         savedStory = await storageService.post(STORAGE_KEY, storyToSave)
-        console.log('story from ssave service', savedStory);
+        console.log('story from ssave service', savedStory)
     }
     return savedStory
 }

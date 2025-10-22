@@ -29,7 +29,7 @@ socketService.setup()
 
 
 function createSocketService() {
-  var socket = null
+  let socket = null
   const socketService = {
     setup() {
 
@@ -67,7 +67,7 @@ function createSocketService() {
 }
 
 function createDummySocketService() {
-  var listenersMap = {}
+  let listenersMap = {}
   const socketService = {
     listenersMap,
     setup() {
@@ -91,7 +91,7 @@ function createDummySocketService() {
       else listenersMap[eventName] = listenersMap[eventName].filter(l => l !== cb)
     },
     emit(eventName, data) {
-      var listeners = listenersMap[eventName]
+      let listeners = listenersMap[eventName]
       if (eventName === SOCKET_EMIT_SEND_MSG) {
         listeners = listenersMap[SOCKET_EVENT_ADD_MSG]
       }

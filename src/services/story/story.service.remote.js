@@ -22,7 +22,7 @@ async function remove(storyId) {
     return httpService.delete(`story/${storyId}`)
 }
 async function save(story) {
-    var savedStory
+    let savedStory
     if (story._id) {
         savedStory = await httpService.put(`story/${story._id}`, story)
     } else {
@@ -32,8 +32,7 @@ async function save(story) {
 }
 
 async function saveLike(story) {
-    var savedStory
-    savedStory = await httpService.post(`story/like/${story._id}`)
+    let savedStory = await httpService.post(`story/like/${story._id}`)
     return savedStory
 }
 

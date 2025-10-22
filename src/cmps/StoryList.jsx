@@ -1,14 +1,7 @@
-import { userService } from "../services/user";
 import { StoryPreview } from "./StoryPreview";
 
 export function StoryList({ stories, onAddComment }) {
-  function shouldShowActionBtns(story) {
-    const user = userService.getLoggedinUser();
 
-    if (!user) return false;
-    if (user.isAdmin) return true;
-    return story.owner?._id === user._id;
-  }
 
   return (
     <section>

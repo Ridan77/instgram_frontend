@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import { optimisticToggleLike } from "../store/actions/story.actions"
 import { svg } from "./Svgs"
-import { userService } from "../services/user"
 import { toggleSave } from "../store/actions/user.actions"
 
 export function Actions({ story, user, isDetails }) {

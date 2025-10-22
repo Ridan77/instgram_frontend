@@ -22,7 +22,7 @@ import { useTypingHeartbeat } from "../customHooks/useTypingHearbeat.js"
 export function Chat() {
   const [msg, setMsg] = useState({ txt: "" })
   const [msgs, setMsgs] = useState([])
-  const [topic, setTopic] = useState("general")
+  const [topic] = useState("general")
   const user = useSelector((storeState) => storeState.userModule.user)
   const [whoIsTyping, setWhoIsTyping] = useState(null)
   const isDialogOpen = useSelector(
@@ -60,7 +60,7 @@ export function Chat() {
       socketService.off(USER_TYPING, handleTyping)
       socketService.off(USER_STOP_TYPING, handleStopTyping)
     }
-  }, [])
+  }, )
 
   function handleKeyDown(e) {
     if (e.key === "Escape") {
@@ -99,7 +99,6 @@ export function Chat() {
     setMsg({ from: user.fullname, txt: value })
     throttledTyping(user.fullname)
     startTyping()
-    // socketService.emit(USER_TYPING, { sender: user.fullname })
     onStopTypingDebounce()
   }
 
@@ -107,7 +106,7 @@ export function Chat() {
     socketService.emit(USER_STOP_TYPING, {})
     setWhoIsTyping(null)
   }
-  function expandDialog(ev) {
+  function expandDialog() {
     console.log("expanding")
   }
   if (dialog.current) {

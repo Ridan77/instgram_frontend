@@ -15,7 +15,7 @@ export function ImgUploader({ onUploaded = null }) {
     const ev = { target: { files: [file] } }
     setIsUploading(true)
     try {
-      const { secure_url, height, width } = await uploadService.uploadImg(ev)
+      const { secure_url} = await uploadService.uploadImg(ev)
       setImgs((prev) => [secure_url, ...prev])
     } finally {
       setIsUploading(false)

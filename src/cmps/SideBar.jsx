@@ -1,18 +1,15 @@
-import { Link, NavLink } from "react-router-dom"
+import {  NavLink } from "react-router-dom"
 import { useNavigate } from "react-router"
 import { useSelector } from "react-redux"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { logout } from "../store/actions/user.actions"
 import { svg } from "./Svgs"
-import { userService } from "../services/user"
 import {
   closeDialog,
   openDialog,
   openSearch,
   closeSearch,
 } from "../store/actions/system.actions"
-import { useWindowWidth } from "../customHooks/useWindowWidth.js"
-import { StorySearch } from "../cmps/StorySearch.jsx"
 
 export function SideBar() {
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -23,7 +20,6 @@ export function SideBar() {
     (storeState) => storeState.systemModule.isSearchOpen
   )
   const navigate = useNavigate()
-  const width = useWindowWidth()
 
   async function onLogout() {
     try {
@@ -87,11 +83,11 @@ export function SideBar() {
         </NavLink>
       )}
       {user && (
-        <button className="logout-btn " onClick={onLogout}>
+        <button className="logout-btn disappear" onClick={onLogout}>
           logout
         </button>
       )}
-      {isSearchOpen && <StorySearch />}
+      {/* {isSearchOpen && <StorySearch />} */}
     </nav>
   )
 }
