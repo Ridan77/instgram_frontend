@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router"
 import { NavLink } from "react-router-dom"
 
-import { useState, useEffect } from "react"
+import { useState} from "react"
 
 import { userService } from "../services/user"
 import { login, signup } from "../store/actions/user.actions"
@@ -52,6 +52,7 @@ export function Login() {
         value={credentials.username}
         placeholder="Username"
         onChange={handleChange}
+        autoComplete="off"
       />
       <input
         type="password"
@@ -90,8 +91,6 @@ export function Signup() {
   }
 
   function handleChange(ev) {
-    const type = ev.target.type
-
     const field = ev.target.name
     const value = ev.target.value
     setCredentials({ ...credentials, [field]: value })

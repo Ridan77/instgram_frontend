@@ -17,7 +17,6 @@ import {
   notify,
 } from "../store/actions/system.actions.js"
 import EmojiPicker from "emoji-picker-react"
-import { useTypingHeartbeat } from "../customHooks/useTypingHearbeat.js"
 
 export function Chat() {
   const [msg, setMsg] = useState({ txt: "" })
@@ -38,7 +37,6 @@ export function Chat() {
       socketService.emit(USER_TYPING, { sender })
     }, 2000)
   ).current
-  const { startTyping, stopTyping } = useTypingHeartbeat(user)
 
 
   useEffect(() => {
@@ -89,8 +87,9 @@ export function Chat() {
     if (!msg.txt) return
     socketService.emit(SOCKET_EMIT_SEND_MSG, msg)
     setMsg({ txt: "" })
-    socketService.emit(USER_STOP_TYPING, {})
-    stopTyping()
+    onStopTyping()
+    // socketService.emit(USER_STOP_TYPING, {})
+    // stopTyping()
     setWhoIsTyping(null)
   }
 
@@ -98,7 +97,7 @@ export function Chat() {
     const value = ev.target.value
     setMsg({ from: user.fullname, txt: value })
     throttledTyping(user.fullname)
-    startTyping()
+    // startTyping()
     onStopTypingDebounce()
   }
 
