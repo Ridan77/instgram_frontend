@@ -83,17 +83,7 @@ export async function addStoryComment(storyId, txt) {
 }
 
 
-// export async function toggleLike(story) {
-//     try {
-//         const user = store.getState().userModule.user
-//         if (!user) return
-//         await toggleLikeStory(story)
-//         await toggleLikeUser(story._id)
-//     } catch (err) {
-//         console.log("Cannot toggle like", err)
-//         throw err
-//     }
-// }
+
 export async function optimisticToggleLike(story) {
     const user = store.getState().userModule.user
     if (!user) return
@@ -113,6 +103,7 @@ export async function optimisticToggleLike(story) {
     store.dispatch(getCmdSetStory(optimisticStory))
     store.dispatch(getCmdUpdateStory(optimisticStory))
     store.dispatch({ type: SET_USER, user: optimisticUser })
+    
     try {
         const savedStory = await storyService.saveLike(story)
         const savedUser = await userService.updateLike(story._id)

@@ -10,6 +10,8 @@ export function Carousel({ images }) {
   function moveImg(ev, diff) {
     ev.stopPropagation()
     ev.preventDefault()
+    console.log('moving',diff);
+    
     setCurrentIndex((prev) => {
       const nextIndex = (prev + diff + imgCount) % imgCount
       return nextIndex
@@ -23,6 +25,7 @@ export function Carousel({ images }) {
       const nextIndex = (prev + -1 + imgCount) % imgCount
           return nextIndex}),
   })
+  
   return (
     <section className="carousel">
      {imgCount >1 && <button

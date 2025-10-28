@@ -41,7 +41,6 @@ export function Login() {
   function handleChange(ev) {
     const { name, type, value, checked } = ev.target
     const fieldValue = type === "checkbox" ? checked : value
-    console.log("field,value", name, fieldValue)
     setCredentials({ ...credentials, [name]: fieldValue })
   }
   return (

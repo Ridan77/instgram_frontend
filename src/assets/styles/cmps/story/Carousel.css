@@ -3,7 +3,6 @@
   display: grid;
   place-content: center;
   background-color: black;
-  z-index: -1;
 
   img {
     width: 100%;

@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect,  useState } from "react"
 import { storyService } from "../services/story/index.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { addStory } from "../store/actions/story.actions.js"
 import { useNavigate, useParams } from "react-router-dom"
-import { uploadService } from "../services/upload.service.js"
 import { svg } from "../cmps/Svgs.jsx"
 import { ImgUploader } from "../cmps/ImgUploader.jsx"
 import { useSelector } from "react-redux"
@@ -33,7 +32,7 @@ export function StoryEdit() {
       setStoryToEdit(story)
       setCreateStage(2)
     } catch (error) {
-      console.log("Had issues in story edit", err)
+      console.log("Had issues in story edit", error)
       navigate("/story")
     }
   }
@@ -72,6 +71,7 @@ export function StoryEdit() {
     }
   }
   if (!storyToEdit) return <Loader/>
+  
   return (
     <>
       <section onClick={onClose} className="modal-backdrop">
@@ -89,7 +89,9 @@ export function StoryEdit() {
                   <button
                     onClick={() => setCreateStage(2)}
                     className="next-btn"
-                    type="button">
+                    type="button"
+                    disabled={storyToEdit.imgUrl.length===0}>
+                  
                     Next
                   </button>
                 )}
@@ -97,7 +99,6 @@ export function StoryEdit() {
             )}
             {createStage === 2 && (
               <div className="edit-page2">
-                {/* <img className="edit-img" src={storyToEdit.imgUrl} alt="" /> */}
                  <Carousel images={storyToEdit.imgUrl}/>
                 <section className="create-details">
                   <div className="user-preview">
